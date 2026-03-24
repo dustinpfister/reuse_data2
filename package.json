@@ -1,0 +1,17 @@
+{
+  "name": "reuse_data2",
+  "version": "0.0.0",
+  "description": "Pricing System for Finger Lakes Reuse",
+  "license": "GPL-3.0",
+  "author": "Dustin Pfister",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "body-parser": "^2.2.2",
+    "express": "^5.2.1",
+    "lowdb": "^7.0.1"
+  }
+}
