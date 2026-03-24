@@ -46,7 +46,8 @@ app.get('/json', (req, res, next) => {
     if(config_mode){
         res.json({
             PRICE_OPTIONS: PRICE_OPTIONS.join(','),
-            COUNT_OPTIONS: COUNT_OPTIONS.join(',')
+            COUNT_OPTIONS: COUNT_OPTIONS.join(','),
+            DEPT_OPTIONS: DEPT_OPTIONS.join(',')
         });
     }
     

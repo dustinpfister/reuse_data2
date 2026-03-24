@@ -12,7 +12,7 @@ const update = () => {
 el_ds.addEventListener('change', update);
 el_ps.addEventListener('change', update);
 el_cs.addEventListener('change', update);
-update();
+
 
 const post_item = (depart_index=0, price_index=0, count=1)=> {
   return fetch('/json', {
@@ -29,6 +29,15 @@ const post_item = (depart_index=0, price_index=0, count=1)=> {
   })
 };
 
+const get_config = () => {
+  return fetch('/json?config=true', {
+    method: "GET"
+  })
+  .then((data)=>{ 
+    return data.json()
+  })
+};
+
 const get_items = () => {
   return fetch('/json', {
     method: "GET"
@@ -39,7 +48,6 @@ const get_items = () => {
 };
 
 const print_items = () => {
-
   return get_items()
   .then(( result ) => {
     let html = '<table>';
@@ -61,14 +69,43 @@ const print_items = () => {
 
 print_items();
 
-el_submit_item.addEventListener('click', ( ) => {
+get_config()
+.then((config)=>{
 
-el_ds.value + ' ' + el_ps.value + ' x ' + el_cs.value;
+  console.log(config)
+  
+  config.DEPT_OPTIONS.split(',').forEach( (dept_str, i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.innerText = i + ') ' + dept_str;
+    el_ds.appendChild(opt)
+  });
+  
+  config.PRICE_OPTIONS.split(',').forEach( (price_str, i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.innerText = i + ') ' + price_str;
+    el_ps.appendChild(opt)
+  });
+  
+  config.COUNT_OPTIONS.split(',').forEach( (count_str, i) => {
+    const opt = document.createElement('option');
+    opt.value = count_str;
+    opt.innerText = i + ') ' + count_str;
+    el_cs.appendChild(opt)
+  });
+  
 
-post_item(el_ds.value, el_ps.value, el_cs.value)
-.then(()=>{
-    return print_items();
-})
+update();
 
+  el_submit_item.addEventListener('click', ( ) => {
+    post_item(el_ds.value, el_ps.value, el_cs.value)
+    .then(()=>{
+      return print_items();
+    })
+  });
 });
+
+
+
 
