@@ -12,10 +12,10 @@ An additional thing that I would like to get up and running right away will be r
 * ( done ) start a client system for posting, and getting pricing data
 * ( done ) record numbers and department fields for each item
 * ( done ) can select a price and count when pricing items
+* ( done ) can use url params for /json path to change what the json response is starting with a config list option
 
 <!-- pending -->
-* (      ) can use url params for /json path to change what the json response is starting with a config list option
-* (      ) use the /json config list to get current departments and prices
+* (      ) use the /json config list to get current departments, prices, and counts in client system
 
 * (      ) post and store department index for items
 * (      ) can delete an item

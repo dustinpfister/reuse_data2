@@ -18,6 +18,15 @@ let low = require('lowdb');
 const JSONFileSyncPreset = require('./node_modules/lowdb/lib/presets/node.js').JSONFileSyncPreset;
 const db = new JSONFileSyncPreset('db.json', { rec_num: 0, items: [] })
 
+const PRICE_OPTIONS = [
+  0.05, 0.10, 0.25, 0.50, 0.75,
+  1, 2, 3, 4, 5, 6, 7, 8, 9,
+  10, 12, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95,
+  100, 125, 150, 175, 200
+];
+const COUNT_OPTIONS = [1,2,3,4,5,6,7,8,9,10];
+const DEPT_OPTIONS = ['housewares', 'electronics', 'building materials', 'furniture'];
+
 // STATIC SERVER
 const app = express()
 
@@ -29,20 +38,29 @@ app.use( bodyParser.json() )
 
 // json path for making queries to the db
 app.get('/json', (req, res, next) => {
-    res.json(db.data);
+
+    const q = req.query
+    const config_mode = (q.config === "true" || q.config == "1" ) ? true : false; 
+
+    // if /json?config=true then send config data
+    if(config_mode){
+        res.json({
+            PRICE_OPTIONS: PRICE_OPTIONS.join(','),
+            COUNT_OPTIONS: COUNT_OPTIONS.join(',')
+        });
+    }
+    
+    if(!config_mode){
+        res.json(db.data);
+    }
 });
 
-const price_options = [
-  0.05, 0.10, 0.25, 0.50, 0.75,
-  1, 2, 3, 4, 5, 6, 7, 8, 9,
-  10, 12, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95,
-  100, 125, 150, 175, 200
-];
+
 app.post('/json', (req, res, next) => {
 
     const t = (new Date()).getTime();
     const price_index = req.body.price_index || 0;
-    const price = price_options[ price_index ];
+    const price = PRICE_OPTIONS[ price_index ];
     const count = req.body.count || 1;
     
     let item = {
