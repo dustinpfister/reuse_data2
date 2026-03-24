@@ -21,13 +21,15 @@ const db = new JSONFileSyncPreset('db.json', { rec_num: 0, items: [] })
 // STATIC SERVER
 const app = express()
 
+app.set('json spaces', 2)
+
 app.use( express.static('html') )
 app.use( bodyParser.json() )
 
 
 // json path for making queries to the db
 app.get('/json', (req, res, next) => {
-    res.send( JSON.stringify(db.data) );
+    res.json(db.data);
 });
 
 const price_options = [

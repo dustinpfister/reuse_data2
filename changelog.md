@@ -14,9 +14,11 @@ An additional thing that I would like to get up and running right away will be r
 * ( done ) can select a price and count when pricing items
 
 <!-- pending -->
-* (      ) can delete an item
-* (      ) can select what department to post data for in the client system
+* (      ) can use url params for /json path to change what the json response is starting with a config list option
+* (      ) use the /json config list to get current departments and prices
 
+* (      ) post and store department index for items
+* (      ) can delete an item
 * (      ) Include color tag system used for Reuse Color tag Fix
 * (      ) have a conf.json for setting up departments and pricing options
 * (      ) use passport.js as way to log into data2 using a local authentication strategy.
