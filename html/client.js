@@ -1,9 +1,10 @@
-
 const el_ds = document.querySelector("#dept_select");
 const el_ps = document.querySelector("#price_select");
 const el_cs = document.querySelector("#count_select");
 const el_out = document.querySelector("#out");
 const el_submit_item = document.querySelector("#submit_item");
+
+const CONFIG = {};
 
 const update = () => {
   el_out.innerText = el_ds.value + ' ' + el_ps.value + ' x ' + el_cs.value;
@@ -51,13 +52,17 @@ const print_items = () => {
   return get_items()
   .then(( result ) => {
     let html = '<table>';
-    html += '<tr><th>i</th><th>price</th><th>count</th><th>total price</th></tr>';
+    html += '<tr><th>rec#</th><th>department</th><th>price</th><th>count</th><th>total price</th></tr>';
     let total_grand = 0;
     result.items.forEach( (item, i) => {
       const total_price = item.count * item.price;
       total_grand += total_price;
+      
+      const dept = CONFIG.DEPT_OPTIONS.split(',')
+      
       html += '<tr>'+
-        '<td>' + item.rec_num + '</td><td>' + item.price.toFixed(2) + '</td><td>' + item.count + '</td>'+
+        '<td>' + item.rec_num + '</td><td>' + dept[item.depart_index] + '</td>'+
+        '<td>' + item.price.toFixed(2) + '</td><td>' + item.count + '</td>'+
         '<td>' + total_price.toFixed(2) + '</td>'+
       '</tr>';
     });
@@ -67,28 +72,29 @@ const print_items = () => {
   });
 };
 
-print_items();
 
 get_config()
 .then((config)=>{
 
   console.log(config)
   
-  config.DEPT_OPTIONS.split(',').forEach( (dept_str, i) => {
+  Object.assign(CONFIG, config);
+  
+  CONFIG.DEPT_OPTIONS.split(',').forEach( (dept_str, i) => {
     const opt = document.createElement('option');
     opt.value = i;
     opt.innerText = i + ') ' + dept_str;
     el_ds.appendChild(opt)
   });
   
-  config.PRICE_OPTIONS.split(',').forEach( (price_str, i) => {
+  CONFIG.PRICE_OPTIONS.split(',').forEach( (price_str, i) => {
     const opt = document.createElement('option');
     opt.value = i;
     opt.innerText = i + ') ' + price_str;
     el_ps.appendChild(opt)
   });
   
-  config.COUNT_OPTIONS.split(',').forEach( (count_str, i) => {
+  CONFIG.COUNT_OPTIONS.split(',').forEach( (count_str, i) => {
     const opt = document.createElement('option');
     opt.value = count_str;
     opt.innerText = i + ') ' + count_str;
@@ -96,7 +102,7 @@ get_config()
   });
   
 
-update();
+  update();
 
   el_submit_item.addEventListener('click', ( ) => {
     post_item(el_ds.value, el_ps.value, el_cs.value)
@@ -104,6 +110,10 @@ update();
       return print_items();
     })
   });
+  
+  
+  print_items();
+  
 });
 
 

@@ -60,12 +60,16 @@ app.get('/json', (req, res, next) => {
 app.post('/json', (req, res, next) => {
 
     const t = (new Date()).getTime();
+    const depart_index = req.body.depart_index || 0;
     const price_index = req.body.price_index || 0;
     const price = PRICE_OPTIONS[ price_index ];
     const count = req.body.count || 1;
     
     let item = {
-        rec_num: db.data.rec_num, t: t, price: price, count: count, color: 'white', user: null
+        rec_num: db.data.rec_num, t: t, 
+        depart_index: depart_index, 
+        price: price, count: count, color: 'white', 
+        user: null
     };
     db.data.rec_num += 1;
     db.data.items.push( item );
