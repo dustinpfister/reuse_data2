@@ -11,11 +11,12 @@ An additional thing that I would like to get up and running right away will be r
 * ( done ) have a /json path that will sent the current state of the db as json, and can also be used to handle post requests as well
 * ( done ) start a client system for posting, and getting pricing data
 * ( done ) record numbers and department fields for each item
+* ( done ) can select a price and count when pricing items
 
 <!-- pending -->
 * (      ) can delete an item
 * (      ) can select what department to post data for in the client system
-* (      ) can select a price and count when pricing items
+
 * (      ) Include color tag system used for Reuse Color tag Fix
 * (      ) have a conf.json for setting up departments and pricing options
 * (      ) use passport.js as way to log into data2 using a local authentication strategy.

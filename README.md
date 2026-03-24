@@ -1,6 +1,12 @@
 # Reuse Data2 Pricing System
 
-The aim here is to create a 'data2' pricing system to replace the aging 'data1' system that is in use at Finger lakes Reuse. This new data2 system, if implemented well, can help address issues with the existing system, as well as introduce new features that might help boost production.
+The aim here is to create a 'data2' pricing system to replace the aging 'data1' system that is in use at Finger lakes Reuse. Although data1 is still working okay for what we have been using if for, there is a list of concerns. Two general ways of addressing these concerns are to refactor the data1 source code that is all ready in place, or start over from the ground up. With that said data2 is the later rather than the former.
+
+* future proofed color tag system that allows for seamless changes
+* a unit pricing database that can be updated/extended per user
+* add, remove, and update locations ( IRC, MEGA, warehouse, ect )
+* theme changes per location and department to help reduce data input errors
+* customization on per department level ( housewares unit pricing displayed when housewares selected )
 
 ## Database
 
