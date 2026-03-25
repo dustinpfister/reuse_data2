@@ -42,24 +42,38 @@ const get_items = () => {
 const print_items = () => {
   return get_items()
   .then(( result ) => {
-    let html = '<table>';
-    html += '<tr><th>rec#</th><th>department</th><th>price</th><th>count</th><th>total price</th></tr>';
+
     let total_grand = 0;
+    const dept = CONFIG.DEPT_OPTIONS.split(',');
+    
+    const table = document.createElement('table');
+    
     result.items.forEach( (item, i) => {
       const total_price = item.count * item.price;
       total_grand += total_price;
       
-      const dept = CONFIG.DEPT_OPTIONS.split(',')
+      const tr = document.createElement('tr');
       
-      html += '<tr>'+
-        '<td>' + item.rec_num + '</td><td>' + dept[item.depart_index] + '</td>'+
-        '<td>' + item.price.toFixed(2) + '</td><td>' + item.count + '</td>'+
-        '<td>' + total_price.toFixed(2) + '</td>'+
-      '</tr>';
-    });
-    html += '</table>';
-    html += '<p> grand total: ' + total_grand.toFixed(2) + '</p>';
-    document.querySelector('#disp_items').innerHTML = html;
+      Object.keys(item).forEach((key)=>{
+          const td = document.createElement('td');
+          td.innerText = item[key];
+          tr.appendChild(td);
+      });
+      
+      const td = document.createElement('td');
+      const input_del = document.createElement('input');
+      input_del.value = 'del';
+      input_del.type='button';
+      input_del.addEventListener('click', ()=>{
+          console.log(item.rec_num);
+      })
+      td.appendChild(input_del)
+      tr.appendChild(td);
+      
+      table.appendChild(tr);
+    
+      document.querySelector('#disp_items').appendChild(table);
+    
   });
 };
 
