@@ -6,15 +6,6 @@ const el_submit_item = document.querySelector("#submit_item");
 
 const CONFIG = {};
 
-const update = () => {
-  el_out.innerText = el_ds.value + ' ' + el_ps.value + ' x ' + el_cs.value;
-};
-
-el_ds.addEventListener('change', update);
-el_ps.addEventListener('change', update);
-el_cs.addEventListener('change', update);
-
-
 const post_item = (depart_index=0, price_index=0, count=1)=> {
   return fetch('/json', {
     method: "POST",
@@ -76,10 +67,8 @@ const print_items = () => {
 get_config()
 .then((config)=>{
 
-  console.log(config)
-  
   Object.assign(CONFIG, config);
-  
+
   CONFIG.DEPT_OPTIONS.split(',').forEach( (dept_str, i) => {
     const opt = document.createElement('option');
     opt.value = i;
@@ -102,7 +91,18 @@ get_config()
   });
   
 
+
+/*
+const update = () => {
+  el_out.innerText = el_ds.value + ' ' + el_ps.value + ' x ' + el_cs.value;
+};
+
+el_ds.addEventListener('change', update);
+el_ps.addEventListener('change', update);
+el_cs.addEventListener('change', update);
+
   update();
+*/
 
   el_submit_item.addEventListener('click', ( ) => {
     post_item(el_ds.value, el_ps.value, el_cs.value)
