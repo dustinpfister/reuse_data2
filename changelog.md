@@ -18,7 +18,6 @@ An additional thing that I would like to get up and running right away will be r
 
 <!-- pending -->
 
-
 * (      ) can delete an item
 * (      ) Include color tag system used for Reuse Color tag Fix
 * (      ) have a conf.json for setting up departments and pricing options
