@@ -4,6 +4,8 @@
 
 I have all ready wrote some code that works well as a way to provide a color tag system with my color tag patch that was in use for a few months to address the issue with data1 when lavender tags where removed. The first version of this patch would just set the color manually to a given color by injecting the code directly into the javaScript console, later revisions of the patch provided bookmarket and chrome extension forms of the patch that automated the process of setting the proper color. The more advanced revisions of the patch allowed for not only automation of setting the the tag color, but also configuration of the color tag system itself. Allowing for easy configuration of the system, will help to prevent future problems that have to do with changes such as the number of colors, the order of colors, the direction in which they cycle, and the start date, and frequency of change form one color to the next. 
 
+## RX - 
+
 ## RX - User Permissions
 
 There should be levels of permissions for various features of the data2 pricing system. For example most users should just have permission to post production data items to the database, but they should not be allowed preform any kind of task that has to do with backing up, or dropping the database. For now I think there should be three permission levels ( 0 - admin, 1 - manager, 2 - associate )
@@ -27,7 +29,6 @@ https://www.youtube.com/watch?v=4cWkVbC2bNE&t=137s
 * use new common database api for all back end code that makes calls to the database
 * start an experimental mondodb adapter
 * start an experimental PostgreSQL adapter
-
 
 ## RX - Authenticate with Google
 

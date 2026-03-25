@@ -16,11 +16,28 @@ An additional thing that I would like to get up and running right away will be r
 * ( done ) use the /json config list to get current departments, prices, and counts in client system
 * ( done ) post and store department index for items
 
-<!-- pending -->
-
+<!-- post item ui -->
 * (      ) can delete an item
+* (      ) can edit an item
+* (      ) item color tag type displayed in item list
 * (      ) Include color tag system used for Reuse Color tag Fix
+* (      ) can select color tag type when posting an item
+
+<!-- explore history -->
+* (      ) can use /json?sd=20260325&rows=10 to give a start date and number of items to display per page
+* () have a database file for each day of the year
+```js
+// https://stackoverflow.com/a/40975730
+function daysIntoYear(date){
+    return (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) - Date.UTC(date.getFullYear(), 0, 0)) / 24 / 60 / 60 / 1000;
+}
+```
+
+<!-- post item ui -->
+* (      ) see about converting db.json files to db.csv files
 * (      ) have a conf.json for setting up departments and pricing options
+
+<!-- user auth -->
 * (      ) use passport.js as way to log into data2 using a local authentication strategy.
 * (      ) tag all pricing data with a user name that made the post
 
