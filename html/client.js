@@ -14,9 +14,24 @@ const post_item = (depart_index=0, price_index=0, count=1)=> {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
+        mode: 'post_item',
         depart_index: depart_index,
         price_index: price_index,
         count: count
+    })
+  })
+};
+
+const del_items = (rec_nums=[])=> {
+  return fetch('/json', {
+    method: "POST",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        mode: 'del_items',
+        rec_nums: rec_nums
     })
   })
 };
@@ -41,42 +56,42 @@ const get_items = () => {
 
 const print_items = () => {
   return get_items()
-  .then(( result ) => {
-
+  .then ( (result)=> {
     let total_grand = 0;
     const dept = CONFIG.DEPT_OPTIONS.split(',');
-    
     const table = document.createElement('table');
     
     result.items.forEach( (item, i) => {
       const total_price = item.count * item.price;
       total_grand += total_price;
-      
       const tr = document.createElement('tr');
-      
       Object.keys(item).forEach((key)=>{
           const td = document.createElement('td');
           td.innerText = item[key];
           tr.appendChild(td);
       });
-      
       const td = document.createElement('td');
       const input_del = document.createElement('input');
       input_del.value = 'del';
       input_del.type='button';
       input_del.addEventListener('click', ()=>{
           console.log(item.rec_num);
-      })
+         
+          del_items([item.rec_num])
+          .then(()=>{
+              print_items();
+          });
+          
+      });
       td.appendChild(input_del)
       tr.appendChild(td);
-      
       table.appendChild(tr);
-    
-      document.querySelector('#disp_items').appendChild(table);
-    
+    });
+    const container = document.querySelector('#disp_items');
+    container.innerHTML = '';
+    container.appendChild(table);
   });
 };
-
 
 get_config()
 .then((config)=>{

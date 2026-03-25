@@ -38,10 +38,9 @@ app.use( bodyParser.json() )
 
 // json path for making queries to the db
 app.get('/json', (req, res, next) => {
-
-    const q = req.query
-    const config_mode = (q.config === "true" || q.config == "1" ) ? true : false; 
-
+    const q = req.query;
+    const del_items = q.del === 'true' ? true : false;
+    const config_mode = (q.config === 'true' || q.config == '1' ) ? true : false; 
     // if /json?config=true then send config data
     if(config_mode){
         res.json({
@@ -50,7 +49,6 @@ app.get('/json', (req, res, next) => {
             DEPT_OPTIONS: DEPT_OPTIONS.join(',')
         });
     }
-    
     if(!config_mode){
         res.json(db.data);
     }
@@ -59,22 +57,50 @@ app.get('/json', (req, res, next) => {
 
 app.post('/json', (req, res, next) => {
 
-    const t = (new Date()).getTime();
-    const depart_index = req.body.depart_index || 0;
-    const price_index = req.body.price_index || 0;
-    const price = PRICE_OPTIONS[ price_index ];
-    const count = req.body.count || 1;
+    const mode = req.body.mode || 'null';
     
-    let item = {
-        rec_num: db.data.rec_num, t: t, 
-        depart_index: depart_index, 
-        price: price, count: count, color: 'white', 
-        user: null
-    };
-    db.data.rec_num += 1;
-    db.data.items.push( item );
-    db.write();
-    res.end();
+    
+    if(mode === 'del_items'){
+       const rec_nums = req.body.rec_nums || [];
+       db.data.items = db.data.items.filter( (item) => {
+           return !rec_nums.find((purge_num)=>{ return purge_num === item.rec_num  });
+       });
+       db.write();
+       res.json({
+          mode: mode,
+          pass: true
+       });
+    }
+    
+
+    if(mode === 'post_item'){
+        const t = (new Date()).getTime();
+        const depart_index = req.body.depart_index || 0;
+        const price_index = req.body.price_index || 0;
+        const price = PRICE_OPTIONS[ price_index ];
+        const count = req.body.count || 1;
+        let item = {
+            rec_num: db.data.rec_num, t: t, 
+            depart_index: depart_index, 
+            price: price, count: count, color: 'white', 
+            user: null
+        };
+        db.data.rec_num += 1;
+        db.data.items.push( item );
+        db.write();
+        res.json({
+            mode: mode,
+            pass: true
+        });
+    }
+    
+    if(mode === 'null'){
+        res.json({
+            mode: mode,
+            pass: false,
+            mess: 'please give a mode that is supported'
+        });
+    }
 });
 
 // 404

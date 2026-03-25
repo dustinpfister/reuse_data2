@@ -15,9 +15,9 @@ An additional thing that I would like to get up and running right away will be r
 * ( done ) can use url params for /json path to change what the json response is starting with a config list option
 * ( done ) use the /json config list to get current departments, prices, and counts in client system
 * ( done ) post and store department index for items
+* ( done ) can delete an item by posing to /json path using a new delete mode
 
 <!-- post item ui -->
-* (      ) can delete an item
 * (      ) can edit an item
 * (      ) item color tag type displayed in item list
 * (      ) Include color tag system used for Reuse Color tag Fix
