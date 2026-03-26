@@ -53,14 +53,28 @@ const get_items = () => {
     return data.json()
   })
 };
-
+/********* **********
+print_items
+********** *********/
+const create_header_tr = (item={}) => {
+    const tr = document.createElement('tr');
+    Object.keys(item).forEach((key)=>{
+        const th = document.createElement('th');
+        th.innerText = key;
+        tr.appendChild(th);
+    });
+    const th = document.createElement('th');
+    th.innerText = 'actions';
+    tr.appendChild(th);
+    return tr;
+};
 const print_items = () => {
   return get_items()
   .then ( (result)=> {
     let total_grand = 0;
     const dept = CONFIG.DEPT_OPTIONS.split(',');
     const table = document.createElement('table');
-    
+    table.appendChild( create_header_tr( result.items[0] ) );
     result.items.forEach( (item, i) => {
       const total_price = item.count * item.price;
       total_grand += total_price;
@@ -75,13 +89,10 @@ const print_items = () => {
       input_del.value = 'del';
       input_del.type='button';
       input_del.addEventListener('click', ()=>{
-          console.log(item.rec_num);
-         
           del_items([item.rec_num])
           .then(()=>{
               print_items();
           });
-          
       });
       td.appendChild(input_del)
       tr.appendChild(td);

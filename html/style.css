@@ -4,8 +4,18 @@ body{
 
 select {
   display: inline-block;
-  width:150px;
-  padding:0px;
-  margin:0px;
+  width: 150px;
+  padding: 0px;
+  margin: 0px;
   min-height: 25px;
+}
+
+th{
+  background: #afafaf;
+  padding: 10px;
+}
+
+td{
+  background: #efefef;
+  padding: 10px;
 }
