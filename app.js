@@ -105,7 +105,9 @@ const get_color_status = ( COLOR_CONF={}, now = new Date() ) => {
         }
     }
     const colorObj = COLOR_CONF.array[ i_array ];
-    const cs = {};
+    const cs = {
+       array: i_array
+    };
     cs.print = get_index_by_date( colorObj, 0, now );
     cs.disc = colorObj.discounts.map(( disc )=>{
         return get_index_by_date( colorObj, disc[1], now );

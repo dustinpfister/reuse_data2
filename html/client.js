@@ -5,9 +5,17 @@ const el_cs = document.querySelector("#count_select");
 const el_out = document.querySelector("#out");
 const el_submit_item = document.querySelector("#submit_item");
 
-const CONFIG = {};
+const CONFIG = {
+    print_color : null
+};
 
 const post_item = (depart_index=0, price_index=0, count=1)=> {
+
+  let ptype = el_ptype.value;
+  if(ptype === 'color'){
+      ptype = 'color:' + CONFIG.print_color;
+  }
+
   return fetch('/json', {
     method: "POST",
     headers: {
@@ -16,7 +24,7 @@ const post_item = (depart_index=0, price_index=0, count=1)=> {
     },
     body: JSON.stringify({
         mode: 'post_item',
-        price_type: el_ptype.value,
+        price_type: ptype,
         depart_index: depart_index,
         price_index: price_index,
         count: count
@@ -132,19 +140,13 @@ get_config()
     el_cs.appendChild(opt)
   });
   
+  const cs = CONFIG.color_status;
+  const i_array = cs.array;
+  const colorObj = CONFIG.COLOR_CONF.array[ i_array ];
+  const printColorObj = colorObj.data[cs.print];
+  const print_color = CONFIG.print_color = printColorObj.desc.toLowerCase(); 
+  el_out.innerHTML = 'printing color: <span style=\"color:' + printColorObj.web +';\">' + print_color + '</span>';
 
-
-/*
-const update = () => {
-  el_out.innerText = el_ds.value + ' ' + el_ps.value + ' x ' + el_cs.value;
-};
-
-el_ds.addEventListener('change', update);
-el_ps.addEventListener('change', update);
-el_cs.addEventListener('change', update);
-
-  update();
-*/
 
   el_submit_item.addEventListener('click', ( ) => {
     post_item(el_ds.value, el_ps.value, el_cs.value)

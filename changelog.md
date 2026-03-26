@@ -8,23 +8,25 @@ An additional thing that I would like to get up and running right away will be r
 
 * ( done ) - working on top of nodejs 24.x
 * ( done ) - using express.js 5.x for a sever side web app framework on top of nodejs.
-* ( done ) - using lowdb as a local nodejs only database solution
-* ( done ) - have a /json path that will send the db as json, and can also be used to handle post requests
-* ( done ) - start a client system for posting, and getting pricing data
+* ( done ) - using lowdb as a 'local only' database solution
+* ( done ) - client system started
+* ( done ) - have a /json path that will respond to GET requests for database, and config data
+* ( done ) - the /json path will also handle POST requests for sending data to the sever form the client system
 * ( done ) - record numbers and department fields for each item
 * ( done ) - can select a price and count when pricing items
-* ( done ) - can use url params for /json path to change what the json response is starting with a config list option
-* ( done ) - use the /json config list to get current departments, prices, and counts in client system
-* ( done ) - post and store department index for items
-* ( done ) - can delete an item by posing to /json path using a new delete mode
+* ( done ) - can use url params for /json path to change what the json response when using a GET request
+* ( done ) - can use /json?mode=config to get current departments, prices, and so forth
+* ( done ) - can delete an item by using a POST request to /json path using a new delete mode with proper request body format
 * ( done ) - can select color tag type when posting an item
-* ( done ) - include color tag system used for Reuse Color tag Fix in app.js
+* ( done ) - new color tag system based on source code from R7 of 'Reuse Color tag Fix' project
 * ( done ) - have a method to create and return a 'color status object'
-* ( done ) - have a json path to get the current color status
+* ( done ) - have a /json?mode=color path to get the current color status
+* ( done ) - have a /json?mode=color&y=yyyy&m=mm&d=dd path to get color status for any date
+* ( done ) - display current printing color in client, and encoding current color into price type
 
 <!-- color tag system -->
-* (      ) - have a color status json path mode to get a status for any date
-* (      ) - encode current color into price type
+* (      ) - display discount and cull colors in client
+* (      ) - have an color tag outlook view for the last month, current month, and next month
 
 <!-- passport.js user auth -->
 * (      ) - use passport.js as way to log into data2 using a local authentication strategy.
@@ -36,6 +38,18 @@ An additional thing that I would like to get up and running right away will be r
 * (      ) - the json response should contain a mess the explains why sanitation fails 
 * (      ) - valid values for price_type are unit, white, and color any other posted will result in an error
 
+<!-- printing  -->
+* (     ) - when adding items to db, have the option to print
+```js
+//https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Media_queries/Printing
+document.getElementById("print_external").addEventListener("click", () => {
+  const hideFrame = document.createElement("iframe");
+  hideFrame.onload = setPrint;
+  hideFrame.style.display = "none"; // hide iframe
+  hideFrame.src = "external-page.html";
+  document.body.appendChild(hideFrame);
+});
+```
 <!-- database design -->
 * (      ) - can use /json?sd=20260325&rows=10 to give a start date and number of items to display per page
 * (      ) - have a database file for each day of the year
