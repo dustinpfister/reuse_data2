@@ -20,9 +20,10 @@ An additional thing that I would like to get up and running right away will be r
 * ( done ) - can select color tag type when posting an item
 * ( done ) - include color tag system used for Reuse Color tag Fix in app.js
 * ( done ) - have a method to create and return a 'color status object'
+* ( done ) - have a json path to get the current color status
 
 <!-- color tag system -->
-* (      ) - have a json path to get the current color status
+* (      ) - have a color status json path mode to get a status for any date
 * (      ) - encode current color into price type
 
 <!-- passport.js user auth -->

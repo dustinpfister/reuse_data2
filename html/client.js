@@ -39,7 +39,7 @@ const del_items = (rec_nums=[])=> {
 };
 
 const get_config = () => {
-  return fetch('/json?config=true', {
+  return fetch('/json?mode=config', {
     method: "GET"
   })
   .then((data)=>{ 

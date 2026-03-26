@@ -114,9 +114,6 @@ const get_color_status = ( COLOR_CONF={}, now = new Date() ) => {
     return cs;
 };
 
-
-console.log( get_color_status( COLOR_CONF, new Date() ) );
-
 // STATIC SERVER
 const app = express()
 
@@ -129,19 +126,24 @@ app.use( bodyParser.json() )
 // json path for making queries to the db
 app.get('/json', (req, res, next) => {
     const q = req.query;
-    const del_items = q.del === 'true' ? true : false;
-    const config_mode = (q.config === 'true' || q.config == '1' ) ? true : false; 
-    // if /json?config=true then send config data
-    if(config_mode){
-        res.json({
+    //const config_mode = (q.config === 'true' || q.config == '1' ) ? true : false; 
+    const mode = ( q.mode || 'db').toLowerCase();
+    
+    let obj = db.data;
+    
+    // if /json?mode=config then send config data
+    if(mode == 'config' ){
+        obj = {
+            COLOR_CONF: COLOR_CONF,
+            color_status: get_color_status( COLOR_CONF, new Date() ),
             PRICE_OPTIONS: PRICE_OPTIONS.join(','),
             COUNT_OPTIONS: COUNT_OPTIONS.join(','),
             DEPT_OPTIONS: DEPT_OPTIONS.join(',')
-        });
+        };
     }
-    if(!config_mode){
-        res.json(db.data);
-    }
+    
+    res.json( obj );
+    
 });
 
 
