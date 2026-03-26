@@ -18,9 +18,9 @@ An additional thing that I would like to get up and running right away will be r
 * ( done ) - post and store department index for items
 * ( done ) - can delete an item by posing to /json path using a new delete mode
 * ( done ) - can select color tag type when posting an item
+* ( done ) - include color tag system used for Reuse Color tag Fix in app.js
 
-<!-- price type selection -->
-* (      ) - include color tag system used for Reuse Color tag Fix
+<!-- color tag system -->
 
 <!-- passport.js user auth -->
 * (      ) - use passport.js as way to log into data2 using a local authentication strategy.

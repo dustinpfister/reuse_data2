@@ -45,6 +45,65 @@ const COUNT_OPTIONS = [
 ];
 const DEPT_OPTIONS = ['housewares', 'electronics', 'building materials', 'furniture'];
 
+/********* **********
+ COLOR SYSTEM - based on R7 of reuse color tag fix code ( https://github.com/dustinpfister/reuse_color_tag_fix/ )
+********** *********/
+const COLOR_CONF = {  // hard coded color conf default
+  array : [
+    {
+      first_tuesday: new Date(2025, 9 - 1, 9, 0, 0, 0, 0),
+      first_index: 0,
+      ascending: true,
+      discounts: [ [25, 3], [50, 2] ],
+      cull: 1,
+      data: [  
+        { i: 0, desc: 'Green',  web: '#00ff00' },
+        { i: 1, desc: 'Blue',   web: '#0000ff' },
+        { i: 2, desc: 'Yellow', web: '#ffff00' },
+        { i: 3, desc: 'Orange', web: '#ff8800' },
+        { i: 4, desc: 'Red',    web: '#ff0000' }
+      ]
+    }
+  ]
+};
+
+const parse_color_object = ( COLOR={} ) => {
+    const new_color = Object.assign({}, COLOR_CONF.array[0], COLOR);
+    new_color.color = new_color.data[ new_color.first_index ].desc;
+    return new_color;
+};
+
+const parse_color_array = ( COLOR_ARRAY=[] ) => {
+    return COLOR_ARRAY.map( (COLOR) => {
+        return parse_color_object( COLOR );
+    });
+};
+
+const mod = function(x, m) {
+    return (x % m + m) % m;
+};
+
+const get_index_by_date = (COLOR, delta = 0, DATE=new Date()) => {
+    const time = DATE.getTime();
+    const ms = Math.round( time  - COLOR.first_tuesday.getTime() );
+    const week_count = Math.floor( ms  / ( 1000  * 60 * 60 * 24 * 7) );
+    const week_delta = week_count * ( COLOR.ascending ? 1 : -1 );
+    return mod(COLOR.first_index + week_delta + delta, COLOR.data.length);
+};
+
+const now = new Date();
+const colorObj = COLOR_CONF.array[0];
+const print_index = get_index_by_date( colorObj, 0, now );
+
+console.log( 'printing : ' + colorObj.data[ print_index ].desc  );
+colorObj.discounts.forEach((disc)=>{
+    const i = get_index_by_date( colorObj, disc[1], now );
+    console.log( disc[0] + '% off : ' + colorObj.data[ i ].desc );
+});
+const i_cull = get_index_by_date( colorObj, colorObj.cull, now )
+console.log( 'cull: ' + colorObj.data[ i_cull ].desc );
+
+
 // STATIC SERVER
 const app = express()
 
