@@ -1,4 +1,5 @@
 const el_ds = document.querySelector("#dept_select");
+const el_ptype = document.getElementById('ptype_select');
 const el_ps = document.querySelector("#price_select");
 const el_cs = document.querySelector("#count_select");
 const el_out = document.querySelector("#out");
@@ -15,6 +16,7 @@ const post_item = (depart_index=0, price_index=0, count=1)=> {
     },
     body: JSON.stringify({
         mode: 'post_item',
+        price_type: el_ptype.value,
         depart_index: depart_index,
         price_index: price_index,
         count: count
