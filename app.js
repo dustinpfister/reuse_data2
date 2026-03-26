@@ -142,6 +142,22 @@ app.get('/json', (req, res, next) => {
         };
     }
     
+    if(mode == 'color' ){
+        const y = parseInt( q.y || '2026');
+        const m = parseInt( q.m || '1' );
+        const d = parseInt( q.d || '1' );
+        const h = parseInt( q.h || '0');
+        const min = parseInt( q.min || '0');
+        const s = parseInt( q.s || '0');
+        const ms = parseInt( q.ms || '0');
+        const date = new Date(y, m - 1, d, h, min, s, ms );
+        obj = {
+            date : date,
+            color_status: get_color_status( COLOR_CONF, date ),
+            COLOR_CONF: COLOR_CONF
+        }
+    }
+    
     res.json( obj );
     
 });
