@@ -91,18 +91,31 @@ const get_index_by_date = (COLOR, delta = 0, DATE=new Date()) => {
     return mod(COLOR.first_index + week_delta + delta, COLOR.data.length);
 };
 
-const now = new Date();
-const colorObj = COLOR_CONF.array[0];
-const print_index = get_index_by_date( colorObj, 0, now );
+const get_color_status = ( COLOR_CONF={}, now = new Date() ) => { 
+    let i_array = 0;
+    const ca_len = COLOR_CONF.array.length;
+    if( ca_len > 1 ){
+        let i = 0;
+        while(i < ca_len){
+            const cb = COLOR_CONF.array[ i ];
+            if( now.getTime() >= cb.first_tuesday.getTime()){
+               i_array = i;
+            }
+            i += 1;
+        }
+    }
+    const colorObj = COLOR_CONF.array[ i_array ];
+    const cs = {};
+    cs.print = get_index_by_date( colorObj, 0, now );
+    cs.disc = colorObj.discounts.map(( disc )=>{
+        return get_index_by_date( colorObj, disc[1], now );
+    });
+    cs.cull = get_index_by_date( colorObj, colorObj.cull, now );
+    return cs;
+};
 
-console.log( 'printing : ' + colorObj.data[ print_index ].desc  );
-colorObj.discounts.forEach((disc)=>{
-    const i = get_index_by_date( colorObj, disc[1], now );
-    console.log( disc[0] + '% off : ' + colorObj.data[ i ].desc );
-});
-const i_cull = get_index_by_date( colorObj, colorObj.cull, now )
-console.log( 'cull: ' + colorObj.data[ i_cull ].desc );
 
+console.log( get_color_status( COLOR_CONF, new Date() ) );
 
 // STATIC SERVER
 const app = express()

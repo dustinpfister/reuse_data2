@@ -19,8 +19,11 @@ An additional thing that I would like to get up and running right away will be r
 * ( done ) - can delete an item by posing to /json path using a new delete mode
 * ( done ) - can select color tag type when posting an item
 * ( done ) - include color tag system used for Reuse Color tag Fix in app.js
+* ( done ) - have a method to create and return a 'color status object'
 
 <!-- color tag system -->
+* (      ) - have a json path to get the current color status
+* (      ) - encode current color into price type
 
 <!-- passport.js user auth -->
 * (      ) - use passport.js as way to log into data2 using a local authentication strategy.
