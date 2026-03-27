@@ -23,6 +23,7 @@ An additional thing that I would like to get up and running right away will be r
 * ( done ) - have a /json?mode=color path to get the current color status
 * ( done ) - have a /json?mode=color&y=yyyy&m=mm&d=dd path to get color status for any date
 * ( done ) - display current printing color in client, and encoding current color into price type
+* ( done ) - use ejs for sever side rendering of login, and signup pages
 
 <!-- passport.js user auth -->
 * (      ) - use passport.js as way to log into data2 using a local authentication strategy.

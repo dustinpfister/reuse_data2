@@ -2,7 +2,8 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { parseArgs } from 'node:util';
 import { Low } from 'lowdb';
-import { JSONFileSyncPreset } from './node_modules/lowdb/lib/presets/node.js'
+import { JSONFileSyncPreset } from './node_modules/lowdb/lib/presets/node.js';
+import ejs from 'ejs';
 
 const db = new JSONFileSyncPreset('db.json', { rec_num: 0, items: [] })
 
@@ -118,11 +119,19 @@ const get_color_status = ( COLOR_CONF={}, now = new Date() ) => {
 // STATIC SERVER
 const app = express()
 
+app.set('view engine', 'ejs');
 app.set('json spaces', 2)
 
 app.use( express.static('html') )
 app.use( bodyParser.json() )
 
+app.get('/login', (req, res) => {
+  res.render('login', { });
+});
+
+app.get('/signup', (req, res) => {
+  res.render('signup', {  });
+});
 
 // json path for making queries to the db
 app.get('/json', (req, res, next) => {
