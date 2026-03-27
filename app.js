@@ -1,8 +1,12 @@
-const express = require('express');
-const bodyParser = require('body-parser')
+import express from 'express';
+import bodyParser from 'body-parser';
+import { parseArgs } from 'node:util';
+import { Low } from 'lowdb';
+import { JSONFileSyncPreset } from './node_modules/lowdb/lib/presets/node.js'
+
+const db = new JSONFileSyncPreset('db.json', { rec_num: 0, items: [] })
 
 // parse options
-const { parseArgs } = require('node:util');
 const args = parseArgs({
   options:{
     port: {
@@ -12,11 +16,6 @@ const args = parseArgs({
     }
   }
 });
-
-// local json db
-let low = require('lowdb');
-const JSONFileSyncPreset = require('./node_modules/lowdb/lib/presets/node.js').JSONFileSyncPreset;
-const db = new JSONFileSyncPreset('db.json', { rec_num: 0, items: [] })
 
 const PRICE_OPTIONS = [
   0.05, 0.10, 0.25, 0.50, 0.75,

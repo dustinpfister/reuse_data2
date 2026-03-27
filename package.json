@@ -4,7 +4,7 @@
   "description": "Pricing System for Finger Lakes Reuse",
   "license": "GPL-3.0",
   "author": "Dustin Pfister",
-  "type": "commonjs",
+  "type": "module",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"

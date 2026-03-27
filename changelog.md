@@ -38,6 +38,11 @@ An additional thing that I would like to get up and running right away will be r
 * (      ) - the json response should contain a mess the explains why sanitation fails 
 * (      ) - valid values for price_type are unit, white, and color any other posted will result in an error
 
+<!-- qr codes -->
+```
+https://github.com/soldair/node-qrcode/tree/master
+```
+
 <!-- printing  -->
 * (     ) - when adding items to db, have the option to print
 ```js
