@@ -24,10 +24,6 @@ An additional thing that I would like to get up and running right away will be r
 * ( done ) - have a /json?mode=color&y=yyyy&m=mm&d=dd path to get color status for any date
 * ( done ) - display current printing color in client, and encoding current color into price type
 
-<!-- color tag system -->
-* (      ) - display discount and cull colors in client
-* (      ) - have an color tag outlook view for the last month, current month, and next month
-
 <!-- passport.js user auth -->
 * (      ) - use passport.js as way to log into data2 using a local authentication strategy.
 * (      ) - tag all pricing data with a user name that made the post
@@ -55,7 +51,7 @@ document.getElementById("print_external").addEventListener("click", () => {
   document.body.appendChild(hideFrame);
 });
 ```
-<!-- database design -->
+<!-- database design / explore all data -->
 * (      ) - can use /json?sd=20260325&rows=10 to give a start date and number of items to display per page
 * (      ) - have a database file for each day of the year
 ```js
@@ -67,4 +63,7 @@ function daysIntoYear(date){
 * (      ) - see about converting db.json files to db.csv files
 * (      ) - have a conf.json for setting up departments and pricing options
 
+<!-- color tag system -->
+* (      ) - display discount and cull colors in client
+* (      ) - have a color tag outlook view for the last month, current month, and next month
 

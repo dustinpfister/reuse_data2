@@ -16,6 +16,7 @@ th{
 }
 
 td{
+  font-family: monospace;
   background: #efefef;
   padding: 10px;
 }

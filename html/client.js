@@ -91,7 +91,22 @@ const print_items = () => {
       const tr = document.createElement('tr');
       Object.keys(item).forEach((key)=>{
           const td = document.createElement('td');
-          td.innerText = item[key];
+          
+          let text = item[key];
+          
+          if(key === 't'){
+              const d = new Date( parseInt(item[key]) );
+              const wd = d.toLocaleString('en-US', { weekday: 'short'  });
+              const month = d.toLocaleString('en-US', { month: 'short'  });
+              const time = d.toLocaleString('en-US', {
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
+              }).padStart(8, ' ')
+              text = wd + ' ' + month + '/' + d.getDate() + '/' + d.getFullYear() + ' ' + time;
+          }
+          
+          td.innerText = text;
           tr.appendChild(td);
       });
       const td = document.createElement('td');
