@@ -1,9 +1,13 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import { parseArgs } from 'node:util';
+import path  from 'node:path';
 import { Low } from 'lowdb';
 import { JSONFileSyncPreset } from './node_modules/lowdb/lib/presets/node.js';
 import ejs from 'ejs';
+import passport from 'passport';
+import passport_local from 'passport-local';
+const LocalStrategy = passport_local.Strategy;
 
 const db = new JSONFileSyncPreset('db.json', { rec_num: 0, items: [] })
 
@@ -119,18 +123,60 @@ const get_color_status = ( COLOR_CONF={}, now = new Date() ) => {
 // STATIC SERVER
 const app = express()
 
+app.set('views', path.join( import.meta.dirname , 'views'));
 app.set('view engine', 'ejs');
 app.set('json spaces', 2)
 
-app.use( express.static('html') )
+
+
+app.use( express.static('html') );
+
 app.use( bodyParser.json() )
+
+/*
+passport.use(new LocalStrategy(
+  (username, password, done) => {
+  
+    // use lowdb to look up user
+  
+    // done(err ); // fail    
+    // done(null, user); // Success
+    
+  }
+));
+*/
 
 app.get('/login', (req, res) => {
   res.render('login', { });
 });
+app.post('/login',
+  passport.authenticate('local', { 
+    successRedirect: '/',
+    failureRedirect: '/login',
+    failureFlash: true 
+  })
+);
 
 app.get('/signup', (req, res) => {
   res.render('signup', {  });
+});
+
+
+// check if the user is logged in
+// and redirect if needed
+app.get(/.*/, (req, res, next) => {
+
+  console.log('get request for: ' + req.url);
+  /*
+  if(!req.user){
+     console.log('the user is not logged in!');
+     //res.redirect('/login');
+  }else{
+      next()
+  }
+  */
+  
+  next();
 });
 
 // json path for making queries to the db
