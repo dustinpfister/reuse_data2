@@ -29,6 +29,8 @@ After that additional goals with R0 is to just have a crude, yet functional star
 * ( done ) - the main root an ejs file
 * ( done ) - redirect to login page if not signed in
 * ( done ) - check username and password when logging in
+* ( done ) - display user name on index
+* ( done ) - have a logout option on the index page
 
 <!-- passport.js user auth -->
 * (      ) - displaying error messages on login page if there is a problem

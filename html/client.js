@@ -175,6 +175,20 @@ get_config()
   
 });
 
+/*
+document.getElementById('logout_link').addEventListener('click', ()=>{
+    console.log('logout request');
 
+  fetch('/logout', {
+    method: "POST",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({})
+  })
+
+});
+*/
 
 

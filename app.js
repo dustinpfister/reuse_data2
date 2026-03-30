@@ -200,11 +200,16 @@ app.get('/signup', (req, res) => {
   res.render('signup', {  });
 });
 
+app.post('/logout', (req, res, next) => {
+  req.logout( (err) => {
+    if (err) { return next(err); }
+    res.redirect('/login');
+  });
+});
 
 // check if the user is logged in and redirect if needed
 app.get(/.*/, (req, res, next) => {
   if(!req.user){
-     console.log('the user is not logged in!');
      res.redirect('/login');
   }else{
       next();
@@ -212,7 +217,7 @@ app.get(/.*/, (req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-  res.render('index', {  });
+  res.render('index', { username: req.user.username });
 });
 
 // json path for making queries to the db
