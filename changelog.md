@@ -28,9 +28,10 @@ After that additional goals with R0 is to just have a crude, yet functional star
 * ( done ) - have a user database
 * ( done ) - the main root an ejs file
 * ( done ) - redirect to login page if not signed in
+* ( done ) - check username and password when logging in
 
 <!-- passport.js user auth -->
-* (      ) - check username and password when logging in
+* (      ) - displaying error messages on login page if there is a problem
 * (      ) - only display items for the current user that is logged in
 * (      ) - can create a new user for the user database
 * (      ) - using crypto.pbkdf2Sync with 64-bit sha-512 digest for hashing passwords

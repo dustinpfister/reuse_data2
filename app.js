@@ -158,18 +158,18 @@ app.use( bodyParser.json() )
 
 passport.use(new LocalStrategy(
   (username, password, done) => {
-  
-    console.log('This has fired at least');
-    console.log(username, password);
-    
-    console.log('so just calling done with null for error');
-    done(null, { username: 'dustin', id: 0, password: 'letmein' })
-    
-    // use lowdb to look up user
-  
-    // done(err ); // fail    
-    // done(null, user); // Success
-    
+    const user = db_users.data.users.find( (user) => {
+        return user.username === username;
+    } );
+    if(!user){
+        done(null, false, { message: 'the given user was not found.' } );
+    }else{
+        if(user.password === password){
+            done(null, user, { message: 'login successful.' } );
+        }else{
+            done(null, false, { message: 'The given user was found, but the password does not match.' });
+        }
+    }    
   }
 ));
 
@@ -189,18 +189,11 @@ passport.deserializeUser(function(user, cb) {
 app.get('/login', (req, res) => {
   res.render('login', { });
 });
-app.post('/login',
-  passport.authenticate('local', { 
-    successRedirect: '/',
-    failureRedirect: '/login',
-    failureFlash: true 
-  })
-);
 
-app.post('/login/password', passport.authenticate('local', {
+app.post('/login', passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/login',
-  failureMessage: true
+  //failureMessage: true
 }));
 
 app.get('/signup', (req, res) => {
@@ -221,8 +214,6 @@ app.get(/.*/, (req, res, next) => {
 app.get('/', (req, res) => {
   res.render('index', {  });
 });
-
-
 
 // json path for making queries to the db
 app.get('/json', (req, res, next) => {
