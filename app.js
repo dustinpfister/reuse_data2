@@ -156,7 +156,6 @@ app.use( express.static('html') );
 
 app.use( bodyParser.json() )
 
-
 passport.use(new LocalStrategy(
   (username, password, done) => {
   
@@ -208,6 +207,10 @@ app.get('/signup', (req, res) => {
   res.render('signup', {  });
 });
 
+app.get('/', (req, res) => {
+  res.render('index', {  });
+});
+
 
 // check if the user is logged in
 // and redirect if needed
@@ -215,7 +218,7 @@ app.get(/.*/, (req, res, next) => {
 
   console.log('get request for: ' + req.url);
   
-  console.log(req.user)
+  //console.log(req.user)
   
   /*
   if(!req.user){

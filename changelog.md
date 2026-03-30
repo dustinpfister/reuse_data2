@@ -25,21 +25,19 @@ After that additional goals with R0 is to just have a crude, yet functional star
 * ( done ) - have a /json?mode=color path to get the current color status
 * ( done ) - have a /json?mode=color&y=yyyy&m=mm&d=dd path to get color status for any date
 * ( done ) - display current printing color in client, and encoding current color into price type
-* ( done ) - use ejs for sever side rendering
-* ( done ) - use lowdb to create a user database
+* ( done ) - have a user database
+* ( done ) - the main root an ejs file
 
 <!-- passport.js user auth -->
-* (      ) - the main root page should now be an ejs file
+* (      ) - redirect to login page if not signed in
+* (      ) - check username and password when logging in
 * (      ) - only display items for the current user that is logged in
 * (      ) - can create a new user for the user database
+* (      ) - using crypto.pbkdf2Sync with 64-bit sha-512 digest for hashing passwords
 
 <!-- color tag system -->
 * (      ) - display discount and cull colors in client
 * (      ) - have a color tag outlook view for the last month, current month, and next month
-
-<!-- main nodejs lib folder -->
-* (      ) - start a main lib folder starting with /lib/color\_tag\_system/color.js
-* (      ) - start a /lib/db/db.js file to start writing a main base lib
 
 <!-- do not use memory store -->
 * (      ) - connect lowdb for session store https://www.npmjs.com/package/connect-lowdb
@@ -64,8 +62,11 @@ function daysIntoYear(date){
 * (      ) - have a conf.json for setting up departments and pricing options
 
 
-## () - R1 - QR codes and Printing price tags
+## () - R1 - QR codes, Printing price tags, main nodejs lib folder
 
+<!-- main nodejs lib folder -->
+* (      ) - start a main lib folder starting with /lib/color\_tag\_system/color.js
+* (      ) - start a /lib/db/db.js file to start writing a main base lib
 
 <!-- qr codes -->
 ```
