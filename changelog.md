@@ -2,17 +2,19 @@
 
 ## () - R0 - Starting with node.js, express.js, passport.js, lowdb, and R7 Color Tag Fix Code
 
-The goal with R0 is to just have a crude, yet functional start of the project. I do not intend to get everything working just the way that it should right away, but everything that needs to work should work right off the bat. For example what I mean by that is that I do not need to go with a database solution that is appropriate for a production environment, but I do still need to use a database solution of some kind at least. The same should go for things like user authentication where logging in with a google account can be a pass for now, but I will still need at least a local authentication strategy. These are the two major road blocks that I want to at least get started with in R0, and refine in later revisions.
+The main thing I would like to get up and running right away will be reusing the code that I worked out for the data1 color tag fix as the color tag system for data2. This patch has all ready proven itself in production, and as such should work well as the color tag system for the data2 backend. Additional changes can be made right off the bat to help address any future changes which was something that I was all ready working on with the latest revision of the color tag patch anyway.
 
-An additional thing that I would like to get up and running right away will be reusing the code that I worked out for the data1 color tag fix as the color tag system for data2. This hot fix has all ready proven itself in production, and as such should work well as the color tag system for the data2 backend. Additional changes can be made right off the bat to help address any future changes with the color tag system as well. This is something that I was all ready working on with the latest revision of the data1 color tag hot fix anyway.
+After that additional goals with R0 is to just have a crude, yet functional start of the project. This means for example that I do not need to go with a database solution that is appropriate for a production environment, but I do still need to use a database solution of some kind at least. The same should go for things like user authentication where logging in with a google account can be a pass for now, but I will still need at least some kind of local authentication strategy in place. These are the two major road blocks that I want to tackle right away out of the gate with R0.
 
-* ( done ) - working on top of nodejs 24.x
-* ( done ) - using express.js 5.x for a sever side web app framework on top of nodejs.
+* ( done ) - working on top of nodejs 24.x LTS
+* ( done ) - using express.js 5.x for a sever side web app framework.
 * ( done ) - using lowdb as a 'local only' database solution
-* ( done ) - client system started
-* ( done ) - have a /json path that will respond to GET requests for database, and config data
-* ( done ) - the /json path will also handle POST requests for sending data to the sever form the client system
-* ( done ) - record numbers and department fields for each item
+* ( done ) - using passport.js with passport-local authentication strategy.
+* ( done ) - using ejs for sever side rendering of HTML.
+* ( done ) - client system started using just vanilla js ( no front end framework used )
+* ( done ) - have a /json path that will respond to GET requests for database, and config data for the client system
+* ( done ) - the /json path can also handle POST requests for sending data to the sever form the client system
+* ( done ) - record numbers and department fields for each item record in the items database
 * ( done ) - can select a price and count when pricing items
 * ( done ) - can use url params for /json path to change what the json response when using a GET request
 * ( done ) - can use /json?mode=config to get current departments, prices, and so forth
@@ -25,21 +27,45 @@ An additional thing that I would like to get up and running right away will be r
 * ( done ) - display current printing color in client, and encoding current color into price type
 * ( done ) - use ejs for sever side rendering
 * ( done ) - use lowdb to create a user database
-* ( done ) - use passport.js as way to log into data2 using a local authentication strategy.
-* ( done ) - tag all pricing data with a user name that made the post
 
 <!-- passport.js user auth -->
-
 * (      ) - the main root page should now be an ejs file
 * (      ) - only display items for the current user that is logged in
+* (      ) - can create a new user for the user database
+
+<!-- color tag system -->
+* (      ) - display discount and cull colors in client
+* (      ) - have a color tag outlook view for the last month, current month, and next month
+
+<!-- main nodejs lib folder -->
+* (      ) - start a main lib folder starting with /lib/color\_tag\_system/color.js
+* (      ) - start a /lib/db/db.js file to start writing a main base lib
 
 <!-- do not use memory store -->
 * (      ) - connect lowdb for session store https://www.npmjs.com/package/connect-lowdb
+* (      ) - have a db_session.json file to store all current user sessions
 
 <!-- server side sanitation -->
 * (      ) - post request body values need to be subject to sanitation
 * (      ) - the json response should contain a mess the explains why sanitation fails 
 * (      ) - valid values for price_type are unit, white, and color any other posted will result in an error
+
+<!-- database design / explore all data -->
+* (      ) - use a /db/items/yyyy/mm/dd.json file path pattern
+* (      ) - a user id is stored for each item record
+* (      ) - can use /json?sd=20260325&rows=10 to give a start date and number of items to display per page
+```js
+// https://stackoverflow.com/a/40975730
+function daysIntoYear(date){
+    return (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) - Date.UTC(date.getFullYear(), 0, 0)) / 24 / 60 / 60 / 1000;
+}
+```
+* (      ) - see about converting db.json files to db.csv files
+* (      ) - have a conf.json for setting up departments and pricing options
+
+
+## () - R1 - QR codes and Printing price tags
+
 
 <!-- qr codes -->
 ```
@@ -58,19 +84,4 @@ document.getElementById("print_external").addEventListener("click", () => {
   document.body.appendChild(hideFrame);
 });
 ```
-<!-- database design / explore all data -->
-* (      ) - can use /json?sd=20260325&rows=10 to give a start date and number of items to display per page
-* (      ) - have a database file for each day of the year
-```js
-// https://stackoverflow.com/a/40975730
-function daysIntoYear(date){
-    return (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) - Date.UTC(date.getFullYear(), 0, 0)) / 24 / 60 / 60 / 1000;
-}
-```
-* (      ) - see about converting db.json files to db.csv files
-* (      ) - have a conf.json for setting up departments and pricing options
-
-<!-- color tag system -->
-* (      ) - display discount and cull colors in client
-* (      ) - have a color tag outlook view for the last month, current month, and next month
 
