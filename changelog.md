@@ -24,14 +24,17 @@ An additional thing that I would like to get up and running right away will be r
 * ( done ) - have a /json?mode=color&y=yyyy&m=mm&d=dd path to get color status for any date
 * ( done ) - display current printing color in client, and encoding current color into price type
 * ( done ) - use ejs for sever side rendering
+* ( done ) - use lowdb to create a user database
+* ( done ) - use passport.js as way to log into data2 using a local authentication strategy.
+* ( done ) - tag all pricing data with a user name that made the post
 
 <!-- passport.js user auth -->
+
 * (      ) - the main root page should now be an ejs file
-* (      ) - have the signup, and login pages started
-* (      ) - use lowdb to create a user database
-* (      ) - use passport.js as way to log into data2 using a local authentication strategy.
-* (      ) - tag all pricing data with a user name that made the post
 * (      ) - only display items for the current user that is logged in
+
+<!-- do not use memory store -->
+* (      ) - connect lowdb for session store https://www.npmjs.com/package/connect-lowdb
 
 <!-- server side sanitation -->
 * (      ) - post request body values need to be subject to sanitation

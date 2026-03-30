@@ -7,14 +7,19 @@ import { JSONFileSyncPreset } from './node_modules/lowdb/lib/presets/node.js';
 import ejs from 'ejs';
 import passport from 'passport';
 import passport_local from 'passport-local';
+
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
+
 const LocalStrategy = passport_local.Strategy;
 
 const db = new JSONFileSyncPreset('db.json', { rec_num: 0, items: [] });
 
 const db_users = new JSONFileSyncPreset('users.json', { users: [
     {
+        id:0,
         username: 'dustin',
-        pw: 'letmein'
+        password: 'letmein'
     }
 ] });
 db_users.write();
@@ -133,9 +138,19 @@ const app = express()
 
 app.set('views', path.join( import.meta.dirname , 'views'));
 app.set('view engine', 'ejs');
-app.set('json spaces', 2)
+app.set('json spaces', 2);
 
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false,
+  // there is a memeory store that should work for just getting started
+  //store: new SQLiteStore({ db: 'sessions.db', dir: './var/db' })
+}));
+app.use(passport.authenticate('session'));
 
 app.use( express.static('html') );
 
@@ -148,6 +163,9 @@ passport.use(new LocalStrategy(
     console.log('This has fired at least');
     console.log(username, password);
     
+    console.log('so just calling done with null for error');
+    done(null, { username: 'dustin', id: 0, password: 'letmein' })
+    
     // use lowdb to look up user
   
     // done(err ); // fail    
@@ -155,6 +173,18 @@ passport.use(new LocalStrategy(
     
   }
 ));
+
+passport.serializeUser(function(user, cb) {
+  process.nextTick(function() {
+    cb(null, { id: user.id, username: user.username });
+  });
+});
+
+passport.deserializeUser(function(user, cb) {
+  process.nextTick(function() {
+    return cb(null, user);
+  });
+});
 
 
 app.get('/login', (req, res) => {
@@ -168,6 +198,12 @@ app.post('/login',
   })
 );
 
+app.post('/login/password', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/login',
+  failureMessage: true
+}));
+
 app.get('/signup', (req, res) => {
   res.render('signup', {  });
 });
@@ -178,6 +214,9 @@ app.get('/signup', (req, res) => {
 app.get(/.*/, (req, res, next) => {
 
   console.log('get request for: ' + req.url);
+  
+  console.log(req.user)
+  
   /*
   if(!req.user){
      console.log('the user is not logged in!');
@@ -257,11 +296,18 @@ app.post('/json', (req, res, next) => {
         
         
         const count = req.body.count || 1;
+        
+        let username = null;
+        if(req.user){
+            username = req.user.username || 'foo';
+        }
+        
+        
         let item = {
             rec_num: db.data.rec_num, t: t, 
             depart_index: depart_index, 
             price: price, count: count, price_type: price_type, 
-            user: null
+            user: username
         };
         db.data.rec_num += 1;
         db.data.items.push( item );
