@@ -27,9 +27,9 @@ After that additional goals with R0 is to just have a crude, yet functional star
 * ( done ) - display current printing color in client, and encoding current color into price type
 * ( done ) - have a user database
 * ( done ) - the main root an ejs file
+* ( done ) - redirect to login page if not signed in
 
 <!-- passport.js user auth -->
-* (      ) - redirect to login page if not signed in
 * (      ) - check username and password when logging in
 * (      ) - only display items for the current user that is logged in
 * (      ) - can create a new user for the user database
