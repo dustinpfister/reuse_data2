@@ -9,7 +9,15 @@ import passport from 'passport';
 import passport_local from 'passport-local';
 const LocalStrategy = passport_local.Strategy;
 
-const db = new JSONFileSyncPreset('db.json', { rec_num: 0, items: [] })
+const db = new JSONFileSyncPreset('db.json', { rec_num: 0, items: [] });
+
+const db_users = new JSONFileSyncPreset('users.json', { users: [
+    {
+        username: 'dustin',
+        pw: 'letmein'
+    }
+] });
+db_users.write();
 
 // parse options
 const args = parseArgs({
@@ -133,10 +141,13 @@ app.use( express.static('html') );
 
 app.use( bodyParser.json() )
 
-/*
+
 passport.use(new LocalStrategy(
   (username, password, done) => {
   
+    console.log('This has fired at least');
+    console.log(username, password);
+    
     // use lowdb to look up user
   
     // done(err ); // fail    
@@ -144,7 +155,7 @@ passport.use(new LocalStrategy(
     
   }
 ));
-*/
+
 
 app.get('/login', (req, res) => {
   res.render('login', { });
