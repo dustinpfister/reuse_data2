@@ -31,9 +31,10 @@ After that additional goals with R0 is to just have a crude, yet functional star
 * ( done ) - check username and password when logging in
 * ( done ) - display user name on index
 * ( done ) - have a logout option on the index page
+* ( done ) - displaying error messages on login page if there is a problem
 
 <!-- passport.js user auth -->
-* (      ) - displaying error messages on login page if there is a problem
+
 * (      ) - can create a new user for the user database
 * (      ) - only display items for the current user that is logged in
 

@@ -1,8 +1,18 @@
 # Reuse Data2 Pricing System roadmap
 
-## RX - Color Tag System
+## RX - custom error messages for login page
 
-I have all ready wrote some code that works well as a way to provide a color tag system with my color tag patch that was in use for a few months to address the issue with data1 when lavender tags where removed. The first version of this patch would just set the color manually to a given color by injecting the code directly into the javaScript console, later revisions of the patch provided bookmarket and chrome extension forms of the patch that automated the process of setting the proper color. The more advanced revisions of the patch allowed for not only automation of setting the the tag color, but also configuration of the color tag system itself. Allowing for easy configuration of the system, will help to prevent future problems that have to do with changes such as the number of colors, the order of colors, the direction in which they cycle, and the start date, and frequency of change form one color to the next. 
+I tried to find a way to have custom error messages sent when auth does not work, but it seems like passport will always send a response that does not contain any custom data.
+
+```
+     app.get('/protected', function(req, res, next) {
+       passport.authenticate('local', function(err, user, info) {
+         if (err) { return next(err) }
+         if (!user) { return res.redirect('/signin') }
+         res.redirect('/account');
+       })(req, res, next);
+     });
+```
 
 ## RX - edit items
 

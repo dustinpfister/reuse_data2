@@ -21,13 +21,12 @@
         <button id="password_submit" type="submit">Login</button>
       </form>
 			<hr>
-			<p class="help">Don't have an account? <a href="/signup">Sign up</a></p>
+			<p id="login_error" ></p>
+			<p class="login_help">Don't have an account? <a href="/signup">Sign up</a></p>
 		</section>
 		<script>
-var element = document.getElementById("password_submit");
+const element = document.getElementById("password_submit");
 element.addEventListener('click', function(event) {
-
- 
   event.preventDefault();
   fetch("", {
     method: "POST",
@@ -39,15 +38,21 @@ element.addEventListener('click', function(event) {
         password: document.getElementById("current-password").value
       })
   }).then((res) => {
-  
     if(res.status === 200){
+        console.log('status 200 response:');
+        console.log(res)
         window.location.replace('/');
     }
-    
     if(res.status != 200){
-        console.log('there was a problem');
+        let code_message = 'Error 522: Missing post body / other Error';
+        if(res.status === 520){
+            code_message =  'Error 520: The given user was found, but the password does not match.'
+        }
+        if(res.status === 521){
+            code_message =  'Error 521: The given user was not found.'
+        }
+        document.getElementById('login_error').innerText = code_message
     }
-  
   });
 })
 

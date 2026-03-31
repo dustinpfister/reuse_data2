@@ -162,12 +162,12 @@ passport.use(new LocalStrategy(
         return user.username === username;
     } );
     if(!user){
-        done(null, false, { message: 'the given user was not found.' } );
+        done(null, false, { code: 521, message: 'the given user was not found.' } );
     }else{
         if(user.password === password){
-            done(null, user, { message: 'login successful.' } );
+            done(null, user, { code: 200, message: 'login successful.' } );
         }else{
-            done(null, false, { message: 'The given user was found, but the password does not match.' });
+            done(null, false, { code: 520,  message: 'The given user was found, but the password does not match.' });
         }
     }    
   }
@@ -190,11 +190,44 @@ app.get('/login', (req, res) => {
   res.render('login', { });
 });
 
+/*
 app.post('/login', passport.authenticate('local', {
+  //failureMessage: true,
   successRedirect: '/',
   //failureRedirect: '/login'
 }));
+*/
 
+app.post("/login", (req, res) => {
+  passport.authenticate("local",
+      (err, user, options) => {
+        
+        if (user) {
+          // If the user exists log him in:
+          req.login(user, (error)=>{
+            if (error) {
+              res.send(522);
+            } else {
+              console.log("Successfully authenticated");
+              res.send(200);
+              // HANDLE SUCCESSFUL LOGIN 
+              // e.g. res.redirect("/home")
+            };
+          });
+        } else {
+          console.log(options.message); // Prints the reason of the failure
+          
+          const code_status = options.code || 522;
+          
+          res.status(code_status).end();
+          
+          // HANDLE FAILURE LOGGING IN 
+          // e.g. res.redirect("/login"))
+          // or
+          // res.render("/login", { message: options.message || "custom message" })
+        };
+  })(req, res)
+});
 
 app.get('/signup', (req, res) => {
   res.render('signup', {  });
