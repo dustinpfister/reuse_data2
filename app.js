@@ -192,9 +192,9 @@ app.get('/login', (req, res) => {
 
 app.post('/login', passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect: '/login',
-  //failureMessage: true
+  //failureRedirect: '/login'
 }));
+
 
 app.get('/signup', (req, res) => {
   res.render('signup', {  });

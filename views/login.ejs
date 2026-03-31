@@ -8,7 +8,8 @@
 <body>
     <section class="prompt">
       <h1>Login</h1>
-			<form action="/login" method="post">
+			<!--<form action="/login" method="post">-->
+			<form id="password_from">
         <section>
           <label for="username">Username</label>
           <input id="username" name="username" type="text" autocomplete="username" required autofocus>
@@ -17,10 +18,39 @@
           <label for="current-password">Password</label>
           <input id="current-password" name="password" type="password" autocomplete="current-password" required>
         </section>
-        <button type="submit">Login</button>
+        <button id="password_submit" type="submit">Login</button>
       </form>
 			<hr>
 			<p class="help">Don't have an account? <a href="/signup">Sign up</a></p>
 		</section>
+		<script>
+var element = document.getElementById("password_submit");
+element.addEventListener('click', function(event) {
+
+ 
+  event.preventDefault();
+  fetch("", {
+    method: "POST",
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        username: document.getElementById("username").value,
+        password: document.getElementById("current-password").value
+      })
+  }).then((res) => {
+  
+    if(res.status === 200){
+        window.location.replace('/');
+    }
+    
+    if(res.status != 200){
+        console.log('there was a problem');
+    }
+  
+  });
+})
+
+		</script>
 </body>
 </html>

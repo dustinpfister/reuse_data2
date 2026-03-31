@@ -34,22 +34,12 @@ After that additional goals with R0 is to just have a crude, yet functional star
 
 <!-- passport.js user auth -->
 * (      ) - displaying error messages on login page if there is a problem
-* (      ) - only display items for the current user that is logged in
 * (      ) - can create a new user for the user database
-* (      ) - using crypto.pbkdf2Sync with 64-bit sha-512 digest for hashing passwords
+* (      ) - only display items for the current user that is logged in
 
 <!-- color tag system -->
 * (      ) - display discount and cull colors in client
 * (      ) - have a color tag outlook view for the last month, current month, and next month
-
-<!-- do not use memory store -->
-* (      ) - connect lowdb for session store https://www.npmjs.com/package/connect-lowdb
-* (      ) - have a db_session.json file to store all current user sessions
-
-<!-- server side sanitation -->
-* (      ) - post request body values need to be subject to sanitation
-* (      ) - the json response should contain a mess the explains why sanitation fails 
-* (      ) - valid values for price_type are unit, white, and color any other posted will result in an error
 
 <!-- database design / explore all data -->
 * (      ) - use a /db/items/yyyy/mm/dd.json file path pattern
@@ -66,6 +56,18 @@ function daysIntoYear(date){
 
 
 ## () - R1 - QR codes, Printing price tags, main nodejs lib folder
+
+<!-- do not use memory store -->
+* (      ) - connect lowdb for session store https://www.npmjs.com/package/connect-lowdb
+* (      ) - have a db_session.json file to store all current user sessions
+
+<!-- hash passwords -->
+* (      ) - using crypto.pbkdf2Sync with 64-bit sha-512 digest for hashing passwords
+
+<!-- server side sanitation -->
+* (      ) - post request body values need to be subject to sanitation
+* (      ) - the json response should contain a mess the explains why sanitation fails 
+* (      ) - valid values for price_type are unit, white, and color any other posted will result in an error
 
 <!-- main nodejs lib folder -->
 * (      ) - start a main lib folder starting with /lib/color\_tag\_system/color.js

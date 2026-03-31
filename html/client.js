@@ -175,6 +175,7 @@ get_config()
   
 });
 
+
 /*
 document.getElementById('logout_link').addEventListener('click', ()=>{
     console.log('logout request');
