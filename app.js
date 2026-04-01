@@ -247,7 +247,15 @@ app.post('/signup', (req, res) => {
         res.statusMessage = 'one or more server side tests failed';
         return res.status(500).end();
     }
-
+    
+    const t3 = db_users.data.users.filter((user)=>{
+        return user.username === username;
+    });
+    if(t3.length >= 1){
+        res.statusMessage = 'The username is all ready in the database';
+        return res.status(500).end();
+    }
+    
     db_users.data.users.push({
         id: id,
         username: username,
@@ -260,7 +268,6 @@ app.post('/signup', (req, res) => {
 });
 
 app.post('/logout', (req, res, next) => {
-
   req.logout( (err) => {
     if (err) { return next(err); }
     res.redirect('/login');

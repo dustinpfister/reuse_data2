@@ -33,14 +33,19 @@ After that additional goals with R0 is to just have a crude, yet functional star
 * ( done ) - have a logout option on the index page
 * ( done ) - displaying error messages on login page if there is a problem
 * ( done ) - can create a new user for the user database
+* ( done ) - added a user name check as one of the tests when signing up
 
 <!-- passport.js user auth -->
-* (      ) - add a user name check as one of the tests when signing up
+
 * (      ) - only display items for the current user that is logged in
 
 <!-- color tag system -->
+* (      ) - start a conf.json that will contain the current settings for the color tag system
 * (      ) - display discount and cull colors in client
-* (      ) - have a color tag outlook view for the last month, current month, and next month
+* (      ) - start a /conf path that can be used to configure the color tag system
+* (      ) - can update color tag settings for conf.json
+* (      ) - have a color tag outlook view for the last month, current month, and next month in root
+
 
 <!-- database design / explore all data -->
 * (      ) - use a /db/items/yyyy/mm/dd.json file path pattern
