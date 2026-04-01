@@ -235,7 +235,6 @@ app.get('/signup', (req, res) => {
 
 app.post('/signup', (req, res) => {
 
-
     const id = db_users.data.id_num += 1;
     const username = req.body.username || '';
     const password = req.body.password || '';
@@ -289,14 +288,23 @@ app.get('/', (req, res) => {
 
 // json path for making queries to the db
 app.get('/json', (req, res, next) => {
+
     const q = req.query;
-    //const config_mode = (q.config === 'true' || q.config == '1' ) ? true : false; 
     const mode = ( q.mode || 'db').toLowerCase();
     
     let obj = db.data;
     
+    // only for current logged in user
+    if( mode === "db" && req.user ){
+        obj = {
+            items: db.data.items.filter( (item) => {
+                return item.user === req.user.username;
+            })
+        }
+    }
+    
     // if /json?mode=config then send config data
-    if(mode == 'config' ){
+    if( mode == 'config' ){
         obj = {
             COLOR_CONF: COLOR_CONF,
             color_status: get_color_status( COLOR_CONF, new Date() ),
@@ -306,7 +314,7 @@ app.get('/json', (req, res, next) => {
         };
     }
     
-    if(mode == 'color' ){
+    if( mode == 'color' ){
         const y = parseInt( q.y || '2026');
         const m = parseInt( q.m || '1' );
         const d = parseInt( q.d || '1' );
