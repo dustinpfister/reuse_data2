@@ -7,5 +7,65 @@
 </head>
 <body>
     <h1>Signup page</h1>
+    <section class="prompt">
+			<form id="password_from">
+        <section>
+          <label for="username">Username</label>
+          <input id="username" name="username" type="text" >
+        </section>
+        <section>
+          <label for="password_enter">Password</label>
+          <input id="password_enter" name="password_enter" type="password" >
+        </section>
+        <section>
+          <label for="password_confirm">Confirm Password</label>
+          <input id="password_confirm" name="password_confirm" type="password" >
+        </section>
+        <button id="signup_submit" type="button">Signup</button>
+      </form>
+			<hr>
+			<p id="login_error" ></p>
+		</section>
+		<script>
+		
+		const el_signup = document.getElementById('signup_submit');
+		
+		el_signup.addEventListener('click', ()=>{
+		    const username = document.getElementById('username').value;
+		    const pw1 = document.getElementById('password_enter').value;
+		    const pw2 = document.getElementById('password_confirm').value;
+		    
+		    const t1 = username.length >= 1; 
+		    const t2 = ( pw1.length >= 3 && ( pw1 === pw2 ) );
+		    
+		    // loose sanitation client side for now
+		    if( t1 && t2 ){
+		        console.log('signup looks good.');
+		        
+            fetch("/signup", {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json', },
+                body: JSON.stringify({
+                    username: username,
+                    password: pw1
+                })
+            }).then((res) => {
+                console.log(res)
+                
+                if(res.status === 200){
+                    window.location.replace('/');
+                }
+                
+            });
+		        
+		    }else{
+		        console.log('looks like there is a problem here:');
+		        console.log( 'test1 pass : ' + t1 );
+		        console.log( 'test2 pass : ' + t2 );
+		    }
+		    
+		});
+		
+		</script>
 </body>
 </html>

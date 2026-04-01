@@ -1,18 +1,5 @@
 # Reuse Data2 Pricing System roadmap
 
-## RX - custom error messages for login page
-
-I tried to find a way to have custom error messages sent when auth does not work, but it seems like passport will always send a response that does not contain any custom data.
-
-```
-     app.get('/protected', function(req, res, next) {
-       passport.authenticate('local', function(err, user, info) {
-         if (err) { return next(err) }
-         if (!user) { return res.redirect('/signin') }
-         res.redirect('/account');
-       })(req, res, next);
-     });
-```
 
 ## RX - edit items
 
@@ -47,3 +34,9 @@ https://www.youtube.com/watch?v=4cWkVbC2bNE&t=137s
 ## RX - Authenticate with Google
 
 At reuse we use google accounts as a way to log into the existing data1 pricing system.
+
+## RX - custom error messages for login page
+
+I have found a way to get custom messages to work on the login page, however it involves setting custom 500 status codes as a way to inform the client. There may be another way of doing this that involves using get requests with query strings or something to that effect. However sense this is a password that is being sent that sounds like a bad idea. In any case the general idea is that I would like to find a way to have the sever send back custom human readable error messages, rather that just status codes, and having the error messages baked into the client system.
+
+

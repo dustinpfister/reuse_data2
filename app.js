@@ -15,7 +15,7 @@ const LocalStrategy = passport_local.Strategy;
 
 const db = new JSONFileSyncPreset('db.json', { rec_num: 0, items: [] });
 
-const db_users = new JSONFileSyncPreset('users.json', { users: [
+const db_users = new JSONFileSyncPreset('users.json', { id_num: 0, users: [
     {
         id:0,
         username: 'dustin',
@@ -233,7 +233,34 @@ app.get('/signup', (req, res) => {
   res.render('signup', {  });
 });
 
+app.post('/signup', (req, res) => {
+
+
+    const id = db_users.data.id_num += 1;
+    const username = req.body.username || '';
+    const password = req.body.password || '';
+  
+    const t1 = username.length >= 1; 
+    const t2 = password.length >= 3;
+    
+    if(!t1 || !t2 ){
+        res.statusMessage = 'one or more server side tests failed';
+        return res.status(500).end();
+    }
+
+    db_users.data.users.push({
+        id: id,
+        username: username,
+        password: password
+    });
+    db_users.write();
+    res.statusMessage = "new user : " + username + ' was added to the database';
+    res.status(200).end();
+    
+});
+
 app.post('/logout', (req, res, next) => {
+
   req.logout( (err) => {
     if (err) { return next(err); }
     res.redirect('/login');
@@ -304,10 +331,7 @@ app.post('/json', (req, res, next) => {
            return !rec_nums.find((purge_num)=>{ return purge_num === item.rec_num  });
        });
        db.write();
-       res.json({
-          mode: mode,
-          pass: true
-       });
+       res.end()
     }
     
     if(mode === 'post_item'){
@@ -336,18 +360,12 @@ app.post('/json', (req, res, next) => {
         db.data.rec_num += 1;
         db.data.items.push( item );
         db.write();
-        res.json({
-            mode: mode,
-            pass: true
-        });
+        res.end()
     }
     
     if(mode === 'null'){
-        res.json({
-            mode: mode,
-            pass: false,
-            mess: 'please give a mode that is supported'
-        });
+        res.statusMessage = "no mode given/ unknown mode";
+        res.status(500).end();
     }
 });
 

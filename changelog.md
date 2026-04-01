@@ -32,10 +32,10 @@ After that additional goals with R0 is to just have a crude, yet functional star
 * ( done ) - display user name on index
 * ( done ) - have a logout option on the index page
 * ( done ) - displaying error messages on login page if there is a problem
+* ( done ) - can create a new user for the user database
 
 <!-- passport.js user auth -->
-
-* (      ) - can create a new user for the user database
+* (      ) - add a user name check as one of the tests when signing up
 * (      ) - only display items for the current user that is logged in
 
 <!-- color tag system -->
@@ -62,8 +62,9 @@ function daysIntoYear(date){
 * (      ) - connect lowdb for session store https://www.npmjs.com/package/connect-lowdb
 * (      ) - have a db_session.json file to store all current user sessions
 
-<!-- hash passwords -->
+<!-- login, signup, and auth -->
 * (      ) - using crypto.pbkdf2Sync with 64-bit sha-512 digest for hashing passwords
+* (      ) - inform the user as to what went wrong if a mistake is made when signing up
 
 <!-- server side sanitation -->
 * (      ) - post request body values need to be subject to sanitation
