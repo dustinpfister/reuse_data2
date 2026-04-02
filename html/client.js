@@ -9,6 +9,22 @@ const CONFIG = {
     print_color : null
 };
 
+const get_html_color_status_string = (conf, status, now = new Date() ) => {
+    const colorObj = conf.array[ status.i_array ];
+    const str_disc = status.disc.map( (disc) => {
+        const color_d = colorObj.data[ disc[1] ];
+        return '<span style=\"color:' + color_d.web + ';\">' + color_d.desc + '</span> tags are ' + disc[0] + '% off';
+    }).join(', ');
+    
+    const color_p = colorObj.data[ status.i_print ];
+    const color_c = colorObj.data[ status.i_cull ];
+    const str = 'We are printing new color tags in <span style=\"color:' + color_p.web + ';\">' + color_p.desc + '</span>.</br>' +
+        //'Color discounts are now the following... <br>' + 
+        str_disc + '. <br>' +
+        'Please cull or reprice any <span style=\"color:' + color_c.web + ';\" >' + color_c.desc + '</span> tags.'
+    return str;  
+};
+
 const post_item = (depart_index=0, price_index=0, count=1)=> {
 
   let ptype = el_ptype.value;
@@ -160,7 +176,10 @@ get_config()
   const colorObj = CONFIG.COLOR_CONF.array[ i_array ];
   const printColorObj = colorObj.data[cs.i_print];
   const print_color = CONFIG.print_color = printColorObj.desc.toLowerCase(); 
-  el_out.innerHTML = 'printing color: <span style=\"color:' + printColorObj.web +';\">' + print_color + '</span>';
+  //el_out.innerHTML = 'printing color: <span style=\"color:' + printColorObj.web +';\">' + print_color + '</span>';
+  
+  el_out.innerHTML = get_html_color_status_string(CONFIG.COLOR_CONF, cs, new Date() );
+  
   el_submit_item.addEventListener('click', ( ) => {
     post_item(el_ds.value, el_ps.value, el_cs.value)
     .then(()=>{

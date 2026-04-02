@@ -25,3 +25,12 @@ td{
   background: #efefef;
   padding: 10px;
 }
+
+#out{
+    color: #000000;
+    text-align: center;
+    font-family: monospace;
+    font-size: 12pt;
+    text-shadow: 2px 2px 3px #000000;
+}
+

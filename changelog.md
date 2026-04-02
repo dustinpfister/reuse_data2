@@ -39,10 +39,9 @@ After that additional goals with R0 is to just have a crude, yet functional star
 * start a conf.json that will contain the current settings for the color tag system
 * created a main lib folder starting with /lib/color\_cycle lib folder
 * for color conf have an automatic boolean and a manual color to use when automatic is to to false
+* display discount and cull colors in client
 
 <!-- color tag system -->
-
-* (      ) - display discount and cull colors in client
 * (      ) - start a /conf path that can be used to configure the color tag system
 * (      ) - can update color tag settings for conf.json
 * (      ) - have a color tag outlook view for the last month, current month, and next month in root
