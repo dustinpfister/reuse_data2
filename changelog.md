@@ -37,9 +37,9 @@ After that additional goals with R0 is to just have a crude, yet functional star
 * added a user name check as one of the tests when signing up
 * only display items for the current user that is logged in
 * start a conf.json that will contain the current settings for the color tag system
+* created a main lib folder starting with /lib/color\_cycle lib folder
 
 <!-- main nodejs lib folder -->
-* (      ) - start a main lib folder starting with /lib/color\_tag\_system/color.js
 * (      ) - start a /lib/db/db.js file to start writing a main base lib
 
 <!-- color tag system -->
