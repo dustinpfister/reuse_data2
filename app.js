@@ -63,7 +63,7 @@ const COUNT_OPTIONS = [
   15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95,
   100, 200, 300, 400, 500
 ];
-const DEPT_OPTIONS = ['housewares', 'electronics', 'building materials', 'furniture'];
+const DEPT_OPTIONS = ['housewares', 'electronics', 'building_materials', 'furniture'];
 
 /********* **********
  COLOR SYSTEM - based on R7 of reuse color tag fix code ( https://github.com/dustinpfister/reuse_color_tag_fix/ )
@@ -240,7 +240,7 @@ app.get('/json', (req, res, next) => {
     if( mode === "db" && req.user ){
         obj = {
             items: db.data.items.filter( (item) => {
-                return item.user === req.user.username;
+                return item.user_id === req.user.id;
             })
         }
     }
@@ -312,7 +312,7 @@ app.post('/json', (req, res, next) => {
             rec_num: db.data.rec_num, t: t, 
             depart_index: depart_index, 
             price: price, count: count, price_type: price_type, 
-            user: username
+            user_id: req.user.id
         };
         db.data.rec_num += 1;
         db.data.items.push( item );

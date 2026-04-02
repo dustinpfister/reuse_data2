@@ -117,12 +117,14 @@ const print_items = () => {
               const time = d.toLocaleString('en-US', {
                 hour: 'numeric',
                 minute: '2-digit',
+                second: '2-digit',
+                fractionalSecondDigits: 3,
                 hour12: true
               }).padStart(8, ' ')
-              text = wd + ' ' + month + '/' + d.getDate() + '/' + d.getFullYear() + ' ' + time;
+              text = wd + ' ' + month + '/' + d.getDate() + '/' + d.getFullYear() + '<br>' + time;
           }
           
-          td.innerText = text;
+          td.innerHTML = text;
           tr.appendChild(td);
       });
       const td = document.createElement('td');

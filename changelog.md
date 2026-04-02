@@ -40,26 +40,49 @@ After that additional goals with R0 is to just have a crude, yet functional star
 * created a main lib folder starting with /lib/color\_cycle lib folder
 * for color conf have an automatic boolean and a manual color to use when automatic is to to false
 * display discount and cull colors in client
-
-<!-- color tag system -->
-* (      ) - start a /conf path that can be used to configure the color tag system
-* (      ) - can update color tag settings for conf.json
-* (      ) - have a color tag outlook view for the last month, current month, and next month in root
+* a user id is stored for each item record
 
 <!-- database design / explore all data -->
-* (      ) - start a /lib/db/db.js file to start writing a main database lib
-* (      ) - use a /db/items/yyyy/mm/dd.json file path pattern
-* (      ) - a user id is stored for each item record
-* (      ) - can use /json?sd=20260325&rows=10 to give a start date and number of items to display per page
+* start a /lib/db/db.js file to start writing a main database lib
+* use a /db/items/yyyy/mm/dd/items.json file path pattern rather than just a single db.json at server root
+
+* can use /json?sd=20260325&rows=10 to give a start date and number of items to display per page
 ```js
 // https://stackoverflow.com/a/40975730
 function daysIntoYear(date){
     return (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) - Date.UTC(date.getFullYear(), 0, 0)) / 24 / 60 / 60 / 1000;
 }
 ```
-* (      ) - see about converting db.json files to db.csv files
-* (      ) - have a conf.json for setting up departments and pricing options
 
+<!-- database import and export -->
+* see about converting db.json files to db.csv files
+* have a conf.json for setting up departments and pricing options
+
+
+<!-- /conf path -->
+* start a /conf path that can be used to configure conf.json and user settings
+* can add and remove locations to the conf.json file
+* can set what a default location for a user is in the conf.json file
+* can change aspects of the theme by way of location setting
+* can update color tag settings for conf.json
+
+<!-- /conf/users?username=name -->
+* can set user settings for any user by using ?username=name query string
+* can update the password for the current user
+* can update the location for the current user
+* can get a list of all users by using ?list=true query string
+
+<!-- /users path -->
+* started a users path that can be used to explore info about users
+
+<!-- color tag outlook -->
+* have a color tag outlook view for the last month, current month, and next month in root
+
+
+<!-- nav, /, and /departments -->
+* start a nav ejs part and use that for root and pricing paths
+* /departments?current=households&mode=pricing&location=irc
+* have a /db/items/yyyy/mm/dd/donation_ticks.json file
 
 ## () - R1 - QR codes, Printing price tags, main nodejs lib folder
 
