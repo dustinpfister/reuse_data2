@@ -5,6 +5,9 @@ import path  from 'node:path';
 import { Low } from 'lowdb';
 import { JSONFileSyncPreset } from './node_modules/lowdb/lib/presets/node.js';
 import ejs from 'ejs';
+
+import { color_cycle } from './lib/color_cycle/color_cycle.js';
+
 import passport from 'passport';
 import passport_local from 'passport-local';
 
@@ -66,84 +69,11 @@ const DEPT_OPTIONS = ['housewares', 'electronics', 'building materials', 'furnit
  COLOR SYSTEM - based on R7 of reuse color tag fix code ( https://github.com/dustinpfister/reuse_color_tag_fix/ )
 ********** *********/
 const db_conf = new JSONFileSyncPreset('conf.json', { 
-    color_tags : {
-        automatic: true,
-        array : [
-            {
-                first_tuesday: new Date(2025, 9 - 1, 9, 0, 0, 0, 0),
-                first_index: 0,
-                ascending: true,
-                discounts: [ [25, 3], [50, 2] ],
-                cull: 1,
-                data: [  
-                    { i: 0, desc: 'Green',  web: '#00ff00' },
-                    { i: 1, desc: 'Blue',   web: '#0000ff' },
-                    { i: 2, desc: 'Yellow', web: '#ffff00' },
-                    { i: 3, desc: 'Orange', web: '#ff8800' },
-                    { i: 4, desc: 'Red',    web: '#ff0000' }
-                ]
-            }
-        ]
-    }
+    color_tags : color_cycle.default_conf
 });
 db_conf.write();
 
-const COLOR_CONF = db_conf.data.color_tags;
-
-
-const parse_color_object = ( COLOR = {} ) => {
-    const new_color = Object.assign({}, COLOR_CONF.array[0], COLOR);
-    
-    new_color.first_tuesday = typeof new_color.first_tuesday === 'string' ? new Date( new_color.first_tuesday ): new_color.first_tuesday;
-    
-    return new_color;
-};
-
-const parse_color_array = ( COLOR_ARRAY=[] ) => {
-    return COLOR_ARRAY.map( (COLOR) => {
-        return parse_color_object( COLOR );
-    });
-};
-
-const mod = function(x, m) {
-    return (x % m + m) % m;
-};
-
-const get_index_by_date = (COLOR, delta = 0, DATE=new Date()) => {
-    const time = DATE.getTime();
-    
-    const colorObj = parse_color_object(COLOR);
-    
-    const ms = Math.round( time  - colorObj.first_tuesday.getTime() );
-    const week_count = Math.floor( ms  / ( 1000  * 60 * 60 * 24 * 7) );
-    const week_delta = week_count * ( colorObj.ascending ? 1 : -1 );
-    return mod(colorObj.first_index + week_delta + delta, colorObj.data.length);
-};
-
-const get_color_status = ( COLOR_CONF={}, now = new Date() ) => { 
-    let i_array = 0;
-    const ca_len = COLOR_CONF.array.length;
-    if( ca_len > 1 ){
-        let i = 0;
-        while(i < ca_len){
-            const cb = COLOR_CONF.array[ i ];
-            if( now.getTime() >= cb.first_tuesday.getTime()){
-               i_array = i;
-            }
-            i += 1;
-        }
-    }
-    const colorObj = parse_color_object( COLOR_CONF.array[ i_array ] );
-    const cs = {
-       array: i_array
-    };
-    cs.print = get_index_by_date( colorObj, 0, now );
-    cs.disc = colorObj.discounts.map(( disc )=>{
-        return get_index_by_date( colorObj, disc[1], now );
-    });
-    cs.cull = get_index_by_date( colorObj, colorObj.cull, now );
-    return cs;
-};
+const COLOR_CONF = color_cycle.parse_conf( db_conf.data.color_tags );
 
 // STATIC SERVER
 const app = express()
@@ -319,7 +249,7 @@ app.get('/json', (req, res, next) => {
     if( mode == 'config' ){
         obj = {
             COLOR_CONF: COLOR_CONF,
-            color_status: get_color_status( COLOR_CONF, new Date() ),
+            color_status: color_cycle.get_status( COLOR_CONF, new Date() ),
             PRICE_OPTIONS: PRICE_OPTIONS.join(','),
             COUNT_OPTIONS: COUNT_OPTIONS.join(','),
             DEPT_OPTIONS: DEPT_OPTIONS.join(',')
@@ -337,7 +267,7 @@ app.get('/json', (req, res, next) => {
         const date = new Date(y, m - 1, d, h, min, s, ms );
         obj = {
             date : date,
-            color_status: get_color_status( COLOR_CONF, date ),
+            color_status: color_cycle.get_status( COLOR_CONF, date ),
             COLOR_CONF: COLOR_CONF
         }
     }

@@ -156,13 +156,11 @@ get_config()
   });
   
   const cs = CONFIG.color_status;
-  const i_array = cs.array;
+  const i_array = cs.i_array;
   const colorObj = CONFIG.COLOR_CONF.array[ i_array ];
-  const printColorObj = colorObj.data[cs.print];
+  const printColorObj = colorObj.data[cs.i_print];
   const print_color = CONFIG.print_color = printColorObj.desc.toLowerCase(); 
   el_out.innerHTML = 'printing color: <span style=\"color:' + printColorObj.web +';\">' + print_color + '</span>';
-
-
   el_submit_item.addEventListener('click', ( ) => {
     post_item(el_ds.value, el_ps.value, el_cs.value)
     .then(()=>{
