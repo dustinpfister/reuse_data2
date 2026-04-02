@@ -38,18 +38,17 @@ After that additional goals with R0 is to just have a crude, yet functional star
 * only display items for the current user that is logged in
 * start a conf.json that will contain the current settings for the color tag system
 * created a main lib folder starting with /lib/color\_cycle lib folder
-
-<!-- main nodejs lib folder -->
-* (      ) - start a /lib/db/db.js file to start writing a main base lib
+* for color conf have an automatic boolean and a manual color to use when automatic is to to false
 
 <!-- color tag system -->
-* (      ) - for color conf have an automatic boolean and a manual color to use when automatic is to to false
+
 * (      ) - display discount and cull colors in client
 * (      ) - start a /conf path that can be used to configure the color tag system
 * (      ) - can update color tag settings for conf.json
 * (      ) - have a color tag outlook view for the last month, current month, and next month in root
 
 <!-- database design / explore all data -->
+* (      ) - start a /lib/db/db.js file to start writing a main database lib
 * (      ) - use a /db/items/yyyy/mm/dd.json file path pattern
 * (      ) - a user id is stored for each item record
 * (      ) - can use /json?sd=20260325&rows=10 to give a start date and number of items to display per page
