@@ -36,14 +36,18 @@ After that additional goals with R0 is to just have a crude, yet functional star
 * can create a new user for the user database
 * added a user name check as one of the tests when signing up
 * only display items for the current user that is logged in
+* start a conf.json that will contain the current settings for the color tag system
+
+<!-- main nodejs lib folder -->
+* (      ) - start a main lib folder starting with /lib/color\_tag\_system/color.js
+* (      ) - start a /lib/db/db.js file to start writing a main base lib
 
 <!-- color tag system -->
-* (      ) - start a conf.json that will contain the current settings for the color tag system
+* (      ) - for color conf have an automatic boolean and a manual color to use when automatic is to to false
 * (      ) - display discount and cull colors in client
 * (      ) - start a /conf path that can be used to configure the color tag system
 * (      ) - can update color tag settings for conf.json
 * (      ) - have a color tag outlook view for the last month, current month, and next month in root
-
 
 <!-- database design / explore all data -->
 * (      ) - use a /db/items/yyyy/mm/dd.json file path pattern
@@ -73,10 +77,6 @@ function daysIntoYear(date){
 * (      ) - post request body values need to be subject to sanitation
 * (      ) - the json response should contain a mess the explains why sanitation fails 
 * (      ) - valid values for price_type are unit, white, and color any other posted will result in an error
-
-<!-- main nodejs lib folder -->
-* (      ) - start a main lib folder starting with /lib/color\_tag\_system/color.js
-* (      ) - start a /lib/db/db.js file to start writing a main base lib
 
 <!-- qr codes -->
 ```

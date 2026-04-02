@@ -65,28 +65,37 @@ const DEPT_OPTIONS = ['housewares', 'electronics', 'building materials', 'furnit
 /********* **********
  COLOR SYSTEM - based on R7 of reuse color tag fix code ( https://github.com/dustinpfister/reuse_color_tag_fix/ )
 ********** *********/
-const COLOR_CONF = {  // hard coded color conf default
-  array : [
-    {
-      first_tuesday: new Date(2025, 9 - 1, 9, 0, 0, 0, 0),
-      first_index: 0,
-      ascending: true,
-      discounts: [ [25, 3], [50, 2] ],
-      cull: 1,
-      data: [  
-        { i: 0, desc: 'Green',  web: '#00ff00' },
-        { i: 1, desc: 'Blue',   web: '#0000ff' },
-        { i: 2, desc: 'Yellow', web: '#ffff00' },
-        { i: 3, desc: 'Orange', web: '#ff8800' },
-        { i: 4, desc: 'Red',    web: '#ff0000' }
-      ]
+const db_conf = new JSONFileSyncPreset('conf.json', { 
+    color_tags : {
+        automatic: true,
+        array : [
+            {
+                first_tuesday: new Date(2025, 9 - 1, 9, 0, 0, 0, 0),
+                first_index: 0,
+                ascending: true,
+                discounts: [ [25, 3], [50, 2] ],
+                cull: 1,
+                data: [  
+                    { i: 0, desc: 'Green',  web: '#00ff00' },
+                    { i: 1, desc: 'Blue',   web: '#0000ff' },
+                    { i: 2, desc: 'Yellow', web: '#ffff00' },
+                    { i: 3, desc: 'Orange', web: '#ff8800' },
+                    { i: 4, desc: 'Red',    web: '#ff0000' }
+                ]
+            }
+        ]
     }
-  ]
-};
+});
+db_conf.write();
 
-const parse_color_object = ( COLOR={} ) => {
+const COLOR_CONF = db_conf.data.color_tags;
+
+
+const parse_color_object = ( COLOR = {} ) => {
     const new_color = Object.assign({}, COLOR_CONF.array[0], COLOR);
-    new_color.color = new_color.data[ new_color.first_index ].desc;
+    
+    new_color.first_tuesday = typeof new_color.first_tuesday === 'string' ? new Date( new_color.first_tuesday ): new_color.first_tuesday;
+    
     return new_color;
 };
 
@@ -102,10 +111,13 @@ const mod = function(x, m) {
 
 const get_index_by_date = (COLOR, delta = 0, DATE=new Date()) => {
     const time = DATE.getTime();
-    const ms = Math.round( time  - COLOR.first_tuesday.getTime() );
+    
+    const colorObj = parse_color_object(COLOR);
+    
+    const ms = Math.round( time  - colorObj.first_tuesday.getTime() );
     const week_count = Math.floor( ms  / ( 1000  * 60 * 60 * 24 * 7) );
-    const week_delta = week_count * ( COLOR.ascending ? 1 : -1 );
-    return mod(COLOR.first_index + week_delta + delta, COLOR.data.length);
+    const week_delta = week_count * ( colorObj.ascending ? 1 : -1 );
+    return mod(colorObj.first_index + week_delta + delta, colorObj.data.length);
 };
 
 const get_color_status = ( COLOR_CONF={}, now = new Date() ) => { 
@@ -121,7 +133,7 @@ const get_color_status = ( COLOR_CONF={}, now = new Date() ) => {
             i += 1;
         }
     }
-    const colorObj = COLOR_CONF.array[ i_array ];
+    const colorObj = parse_color_object( COLOR_CONF.array[ i_array ] );
     const cs = {
        array: i_array
     };
