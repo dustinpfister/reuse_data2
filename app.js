@@ -16,7 +16,7 @@ import session from 'express-session';
 
 const LocalStrategy = passport_local.Strategy;
 
-const db = new JSONFileSyncPreset('db.json', { rec_num: 0, items: [] });
+const db_items = new JSONFileSyncPreset('db.json', { rec_num: 0, items: [] });
 
 const db_users = new JSONFileSyncPreset('users.json', { id_num: 0, users: [
     {
@@ -234,12 +234,12 @@ app.get('/json', (req, res, next) => {
     const q = req.query;
     const mode = ( q.mode || 'db').toLowerCase();
     
-    let obj = db.data;
+    let obj = db_items.data;
     
     // only for current logged in user
     if( mode === "db" && req.user ){
         obj = {
-            items: db.data.items.filter( (item) => {
+            items: db_items.data.items.filter( (item) => {
                 return item.user_id === req.user.id;
             })
         }
@@ -284,10 +284,10 @@ app.post('/json', (req, res, next) => {
     
     if(mode === 'del_items'){
        const rec_nums = req.body.rec_nums || [];
-       db.data.items = db.data.items.filter( (item) => {
+       db_items.data.items = db_items.data.items.filter( (item) => {
            return !rec_nums.find((purge_num)=>{ return purge_num === item.rec_num  });
        });
-       db.write();
+       db_items.write();
        res.end()
     }
     
@@ -309,14 +309,14 @@ app.post('/json', (req, res, next) => {
         
         
         let item = {
-            rec_num: db.data.rec_num, t: t, 
+            rec_num: db_items.data.rec_num, t: t, 
             depart_index: depart_index, 
             price: price, count: count, price_type: price_type, 
             user_id: req.user.id
         };
-        db.data.rec_num += 1;
-        db.data.items.push( item );
-        db.write();
+        db_items.data.rec_num += 1;
+        db_items.data.items.push( item );
+        db_items.write();
         res.end()
     }
     

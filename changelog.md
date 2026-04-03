@@ -41,23 +41,22 @@ After that additional goals with R0 is to just have a crude, yet functional star
 * for color conf have an automatic boolean and a manual color to use when automatic is to to false
 * display discount and cull colors in client
 * a user id is stored for each item record
-
-<!-- database design / explore all data -->
 * start a /lib/db/db.js file to start writing a main database lib
-* use a /db/items/yyyy/mm/dd/items.json file path pattern rather than just a single db.json at server root
 
-* can use /json?sd=20260325&rows=10 to give a start date and number of items to display per page
-```js
-// https://stackoverflow.com/a/40975730
-function daysIntoYear(date){
-    return (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) - Date.UTC(date.getFullYear(), 0, 0)) / 24 / 60 / 60 / 1000;
-}
-```
+<!-- database lib and db folder -->
+
+* use mkdirp to create a /db/yyyy/mm/ on server start if it is not there to begin with
+* use a /db/yyyy/mm/dd_items.json file path pattern rather than just a single db.json at server root
+* use new db folder to hold users at /db/users.conf
+* use new db folder to hold users at /db/conf.conf
+
+<!-- /json path -->
+* can use /json?mode=items&sd=20260325&&sd=20260325&rows=10 to give a start date, end date, and item count per page
+* can use /json?mode=users&username=username to display info about a user
 
 <!-- database import and export -->
 * see about converting db.json files to db.csv files
 * have a conf.json for setting up departments and pricing options
-
 
 <!-- /conf path -->
 * start a /conf path that can be used to configure conf.json and user settings

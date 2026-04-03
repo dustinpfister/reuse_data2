@@ -178,9 +178,8 @@ get_config()
   const colorObj = CONFIG.COLOR_CONF.array[ i_array ];
   const printColorObj = colorObj.data[cs.i_print];
   const print_color = CONFIG.print_color = printColorObj.desc.toLowerCase(); 
-  //el_out.innerHTML = 'printing color: <span style=\"color:' + printColorObj.web +';\">' + print_color + '</span>';
   
-  el_out.innerHTML = get_html_color_status_string(CONFIG.COLOR_CONF, cs, new Date() );
+  el_out.innerHTML = get_html_color_status_string( CONFIG.COLOR_CONF, cs, new Date() );
   
   el_submit_item.addEventListener('click', ( ) => {
     post_item(el_ds.value, el_ps.value, el_cs.value)
@@ -189,26 +188,7 @@ get_config()
     })
   });
   
-  
   print_items();
   
 });
-
-
-/*
-document.getElementById('logout_link').addEventListener('click', ()=>{
-    console.log('logout request');
-
-  fetch('/logout', {
-    method: "POST",
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({})
-  })
-
-});
-*/
-
 
