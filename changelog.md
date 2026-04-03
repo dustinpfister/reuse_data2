@@ -42,10 +42,11 @@ After that additional goals with R0 is to just have a crude, yet functional star
 * display discount and cull colors in client
 * a user id is stored for each item record
 * start a /lib/db/db.js file to start writing a main database lib
+* have a db.make\_date\_dir method to create a /db/yyyy/mm/ folder
 
 <!-- database lib and db folder -->
 
-* use mkdirp to create a /db/yyyy/mm/ on server start if it is not there to begin with
+
 * use a /db/yyyy/mm/dd_items.json file path pattern rather than just a single db.json at server root
 * use new db folder to hold users at /db/users.conf
 * use new db folder to hold users at /db/conf.conf
