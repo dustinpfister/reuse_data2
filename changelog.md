@@ -7,47 +7,45 @@ The main thing I would like to get up and running right away will be reusing the
 After that additional goals with R0 is to just have a crude, yet functional start of the project. This means for example that I do not need to go with a database solution that is appropriate for a production environment, but I do still need to use a database solution of some kind at least. The same should go for things like user authentication where logging in with a google account can be a pass for now, but I will still need at least some kind of local authentication strategy in place. These are the two major road blocks that I want to tackle right away out of the gate with R0.
 
 <!-- Done -->
-* working on top of nodejs 24.x LTS
-* using express.js 5.x for a sever side web app framework.
-* using lowdb as a 'local only' database solution
-* using passport.js with passport-local authentication strategy.
-* using ejs for sever side rendering of HTML.
-* client system started using just vanilla js ( no front end framework used )
-* have a /json path that will respond to GET requests for database, and config data for the client system
-* the /json path can also handle POST requests for sending data to the sever form the client system
-* record numbers and department fields for each item record in the items database
-* can select a price and count when pricing items
-* can use url params for /json path to change what the json response when using a GET request
-* can use /json?mode=config to get current departments, prices, and so forth
-* can delete an item by using a POST request to /json path using a new delete mode with proper request body format
-* can select color tag type when posting an item
-* new color tag system based on source code from R7 of 'Reuse Color tag Fix' project
-* have a method to create and return a 'color status object'
-* have a /json?mode=color path to get the current color status
-* have a /json?mode=color&y=yyyy&m=mm&d=dd path to get color status for any date
-* display current printing color in client, and encoding current color into price type
-* have a user database
-* the main root an ejs file
-* redirect to login page if not signed in
-* check username and password when logging in
-* display user name on index
-* have a logout option on the index page
-* displaying error messages on login page if there is a problem
-* can create a new user for the user database
-* added a user name check as one of the tests when signing up
-* only display items for the current user that is logged in
-* start a conf.json that will contain the current settings for the color tag system
-* created a main lib folder starting with /lib/color\_cycle lib folder
-* for color conf have an automatic boolean and a manual color to use when automatic is to to false
-* display discount and cull colors in client
-* a user id is stored for each item record
-* start a /lib/db/db.js file to start writing a main database lib
-* have a db.make\_date\_dir method to create a /db/yyyy/mm/ folder
+* global
+  * working on top of nodejs 24.x LTS
+  * using express.js 5.x for a sever side web app framework.
+  * using lowdb as a 'local only' database solution
+  * using passport.js with passport-local authentication strategy.
+  * using ejs for sever side rendering of HTML.
+* /html, /views
+  * client system started using just vanilla js ( no front end framework used )
+  * can select a price and count when pricing items
+  * can select color tag type when posting an item
+  * display current printing color in client, and encoding current color into price type
+  * started ejs templates for root, login, and signup
+  * display user name on index
+  * have a logout option on the index page
+  * displaying error messages on login page if there is a problem
+  * display discount and cull colors in client
+* /app.js 
+  * have a /json path that will respond to GET requests for database, and config data for the client system
+  * the /json path can also handle POST requests for sending data to the sever form the client system
+  * record numbers and department fields for each item record in the items database
+  * can use url params for /json path to change what the json response when using a GET request
+  * can use /json?mode=config to get current departments, prices, and so forth
+  * can delete an item by using a POST request to /json path using a new delete mode with proper request body format
+  * have a /json?mode=color path to get the current color status
+  * have a /json?mode=color&y=yyyy&m=mm&d=dd path to get color status for any date
+  * redirect to login page if not signed in
+  * check username and password when logging in
+* /lib/color_cycle: 
+  * new color tag system based on source code from R7 of 'Reuse Color tag Fix' project
+  * have a method to create and return a 'color status object'
+  * for color conf have an automatic boolean and a manual color to use when automatic is to to false
+* /lib/db:
+  * started a /lib/db/db.js library that will serve as the current database solution
+  * have a db.make\_date\_dir method to create a /db/yyyy/mm/ folder
 
-<!-- database lib -->
-* the database lib should be used to create the start point of an items database file
+<!-- lib/db -->
 * use new db folder to hold users at /db/users.conf
 * use new db folder to hold users at /db/conf.conf
+* 
 
 <!-- /json path -->
 * can use /json?mode=items&sd=20260325&&sd=20260325&rows=10 to give a start date, end date, and item count per page
