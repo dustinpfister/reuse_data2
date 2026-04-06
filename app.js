@@ -132,41 +132,18 @@ app.get('/login', (req, res) => {
   res.render('login', { });
 });
 
-/*
-app.post('/login', passport.authenticate('local', {
-  //failureMessage: true,
-  successRedirect: '/',
-  //failureRedirect: '/login'
-}));
-*/
-
 app.post("/login", (req, res) => {
   passport.authenticate("local",
       (err, user, options) => {
-        
-        if (user) {
-          // If the user exists log him in:
+        if ( user ) {
           req.login(user, (error)=>{
-            if (error) {
-              res.send(522);
-            } else {
-              console.log("Successfully authenticated");
-              res.send(200);
-              // HANDLE SUCCESSFUL LOGIN 
-              // e.g. res.redirect("/home")
-            };
+            if( error ) { res.send(522); }
+            if( !error ){ res.send(200); }
           });
-        } else {
-          console.log(options.message); // Prints the reason of the failure
-          
+        }
+        if( !user ){
           const code_status = options.code || 522;
-          
           res.status(code_status).end();
-          
-          // HANDLE FAILURE LOGGING IN 
-          // e.g. res.redirect("/login"))
-          // or
-          // res.render("/login", { message: options.message || "custom message" })
         };
   })(req, res)
 });

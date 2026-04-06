@@ -1,10 +1,12 @@
 # Reuse Data2 Pricing System changelog
 
-## () - R0 - Starting with node.js, express.js, passport.js, lowdb, and R7 Color Tag Fix Code
+## () R0 - Starting with node.js, express.js, passport.js, lowdb, and R7 Color Tag Fix Code
 
 The main thing I would like to get up and running right away will be reusing the code that I worked out for the data1 color tag fix as the color tag system for data2. This patch has all ready proven itself in production, and as such should work well as the color tag system for the data2 backend. Additional changes can be made right off the bat to help address any future changes which was something that I was all ready working on with the latest revision of the color tag patch anyway.
 
-After that additional goals with R0 is to just have a crude, yet functional start of the project. This means for example that I do not need to go with a database solution that is appropriate for a production environment, but I do still need to use a database solution of some kind at least. The same should go for things like user authentication where logging in with a google account can be a pass for now, but I will still need at least some kind of local authentication strategy in place. These are the two major road blocks that I want to tackle right away out of the gate with R0.
+After the color tag system another important aspect is the database software and design. For now I am going to start off with a simple database solution called 'lowdb' that will just work out of the box, and not further complicate deployment. Production data, user info, and configuration settings are all stored as json files off of a '.data' folder that is stored in the home folder of the Linux system user account in which data2 runs. If this database solution works okay in production, great, otherwise a more complex solution involving mongodb, or SQL will be reserved for future revisions.
+
+As for authentication 'passport.js' is being used, however thus far only with the local authentication strategy in place. User credentials are then stored in the '.data2' home folder alone with all other user and production data. Authentication by way of a google account is reserved for future revisions.
 
 <!-- Done -->
 * global
@@ -41,44 +43,40 @@ After that additional goals with R0 is to just have a crude, yet functional star
 * /lib/db:
   * started a /lib/db/db.js library that will serve as the current database solution
   * have a db.make\_date\_dir method to create a /db/yyyy/mm/ folder
+  * create items database at ~/.data2/dates/yyyy/mm/dd/items.json
 
 <!-- lib/db -->
-* use new db folder to hold users at /db/users.conf
-* use new db folder to hold users at /db/conf.conf
-* 
+* use new db folder to hold users at db/users.conf
+* use new db folder to hold users at db/conf.conf
+* create conf at ~/.data2/conf.json
+* create users at ~/.data2/users.json
 
-<!-- /json path -->
-* can use /json?mode=items&sd=20260325&&sd=20260325&rows=10 to give a start date, end date, and item count per page
-* can use /json?mode=users&username=username to display info about a user
-
-<!-- database import and export -->
-* see about converting db.json files to db.csv files
-* have a conf.json for setting up departments and pricing options
-
-<!-- /conf path -->
-* start a /conf path that can be used to configure conf.json and user settings
-* can add and remove locations to the conf.json file
-* can set what a default location for a user is in the conf.json file
-* can change aspects of the theme by way of location setting
-* can update color tag settings for conf.json
-
-<!-- /conf/users?username=name -->
-* can set user settings for any user by using ?username=name query string
+<!-- /routes -->
+* update conf.json for setting up departments and pricing options
+* can set user settings for any user by using /users?username=name query string
 * can update the password for the current user
 * can update the location for the current user
-* can get a list of all users by using ?list=true query string
-
-<!-- /users path -->
-* started a users path that can be used to explore info about users
-
-<!-- color tag outlook -->
-* have a color tag outlook view for the last month, current month, and next month in root
-
-
-<!-- nav, /, and /departments -->
+* start a /routes folder and start pulling routes out from the main /app.js file
+* can get a list of all users by using /users?list=true query string
+* started a /users path that can be used to explore info about users
+* can use /json?mode=items&sd=20260325&&sd=20260325&rows=10 to give a start date, end date, and item count per page
+* can use /json?mode=users&username=username to display info about a user
 * start a nav ejs part and use that for root and pricing paths
 * /departments?current=households&mode=pricing&location=irc
 * have a /db/items/yyyy/mm/dd/donation_ticks.json file
+
+<!-- * /html, /views -->
+* start a /conf path that can be used to configure conf.json and user settings
+* can change aspects of the theme by way of location setting
+* can update color tag settings for conf.json
+* can add and remove locations to the conf.json file
+* can set what a default location for a user is in the conf.json file
+* have a color tag outlook view for the last month, current month, and next month in root
+
+<!-- /bin -->
+* strat a /bin folder to hold all cli tools for the data2 project
+* start a db_csv cli tool converting db.json files to db.csv files
+
 
 ## () - R1 - QR codes, Printing price tags, main nodejs lib folder
 
