@@ -2,8 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { parseArgs } from 'node:util';
 import path  from 'node:path';
-import { Low } from 'lowdb';
-import { JSONFileSyncPreset } from './node_modules/lowdb/lib/presets/node.js';
+
 import ejs from 'ejs';
 
 import { color_cycle } from './lib/color_cycle/color_cycle.js';
@@ -16,16 +15,34 @@ import session from 'express-session';
 
 const LocalStrategy = passport_local.Strategy;
 
-const db_items = new JSONFileSyncPreset('db.json', { rec_num: 0, items: [] });
+import  { db } from './lib/db/db.js';
 
-const db_users = new JSONFileSyncPreset('users.json', { id_num: 0, users: [
-    {
-        id:0,
-        username: 'dustin',
-        password: 'letmein'
+const db_items = await db.get_dates_file({
+   date: new Date(),
+   file_name: 'items.json',
+   file_data: { rec_num: 0, items: [] }
+});
+
+const db_users = await db.get_rel_file({
+    dir_rel: '',
+    file_name: 'users.json',
+    file_data: {
+        id_num: 0, 
+        users: [
+            {
+                id:0,
+                username: 'dustin',
+                password: 'letmein'
+            }
+        ]
     }
-] });
-db_users.write();
+});
+
+const db_conf = await db.get_rel_file({
+   dir_rel: '',
+   file_name: 'conf.json',
+   file_data: { color_tags : color_cycle.default_conf }
+});
 
 // parse options
 const args = parseArgs({
@@ -68,10 +85,6 @@ const DEPT_OPTIONS = ['housewares', 'electronics', 'building_materials', 'furnit
 /********* **********
  COLOR SYSTEM - based on R7 of reuse color tag fix code ( https://github.com/dustinpfister/reuse_color_tag_fix/ )
 ********** *********/
-const db_conf = new JSONFileSyncPreset('conf.json', { 
-    color_tags : color_cycle.default_conf
-});
-db_conf.write();
 
 const COLOR_CONF = color_cycle.parse_conf( db_conf.data.color_tags );
 
@@ -215,6 +228,7 @@ app.get('/json', (req, res, next) => {
     
     // only for current logged in user
     if( mode === "db" && req.user ){
+    
         obj = {
             items: db_items.data.items.filter( (item) => {
                 return item.user_id === req.user.id;
