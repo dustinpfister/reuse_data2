@@ -44,12 +44,9 @@ As for authentication 'passport.js' is being used, however thus far only with th
   * started a /lib/db/db.js library that will serve as the current database solution
   * have a db.make\_date\_dir method to create a /db/yyyy/mm/ folder
   * create items database at ~/.data2/dates/yyyy/mm/dd/items.json
+  * can create files like '~/data2/conf.json' with new db lib method
 
-<!-- lib/db -->
-* use new db folder to hold users at db/users.conf
-* use new db folder to hold users at db/conf.conf
-* create conf at ~/.data2/conf.json
-* create users at ~/.data2/users.json
+
 
 <!-- /routes -->
 * update conf.json for setting up departments and pricing options
@@ -72,6 +69,8 @@ As for authentication 'passport.js' is being used, however thus far only with th
 * can add and remove locations to the conf.json file
 * can set what a default location for a user is in the conf.json file
 * have a color tag outlook view for the last month, current month, and next month in root
+
+<!-- lib/db -->
 
 <!-- /bin -->
 * strat a /bin folder to hold all cli tools for the data2 project
