@@ -214,9 +214,15 @@ app.get(/.*/, (req, res, next) => {
   }
 });
 
+/*
 app.get('/', (req, res) => {
   res.render('index', { username: req.user.username });
 });
+*/
+
+import { router_index } from './routes/index.js';
+app.use('/', router_index );
+
 
 // json path for making queries to the db
 app.get('/json', (req, res, next) => {

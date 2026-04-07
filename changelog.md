@@ -45,15 +45,18 @@ As for authentication 'passport.js' is being used, however thus far only with th
   * have a db.make\_date\_dir method to create a /db/yyyy/mm/ folder
   * create items database at ~/.data2/dates/yyyy/mm/dd/items.json
   * can create files like '~/data2/conf.json' with new db lib method
+* /routes
+  * started a /routes folder made an index.js for it to use for root path in app.js 
 
 
+<!-- app.js -->
+* update conf.json for setting up departments and pricing options
 
 <!-- /routes -->
-* update conf.json for setting up departments and pricing options
 * can set user settings for any user by using /users?username=name query string
 * can update the password for the current user
 * can update the location for the current user
-* start a /routes folder and start pulling routes out from the main /app.js file
+
 * can get a list of all users by using /users?list=true query string
 * started a /users path that can be used to explore info about users
 * can use /json?mode=items&sd=20260325&&sd=20260325&rows=10 to give a start date, end date, and item count per page
