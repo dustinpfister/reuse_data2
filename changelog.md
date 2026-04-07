@@ -47,25 +47,28 @@ As for authentication 'passport.js' is being used, however thus far only with th
   * can create files like '~/data2/conf.json' with new db lib method
 * /routes
   * started a /routes folder made an index.js for it to use for root path in app.js 
-
+  * using /routes/auth.js for auth logic
 
 <!-- app.js -->
 * update conf.json for setting up departments and pricing options
 
 <!-- /routes -->
-* can set user settings for any user by using /users?username=name query string
-* can update the password for the current user
-* can update the location for the current user
 
-* can get a list of all users by using /users?list=true query string
-* started a /users path that can be used to explore info about users
+
+* started a /routes/json.js file
 * can use /json?mode=items&sd=20260325&&sd=20260325&rows=10 to give a start date, end date, and item count per page
+* work out a way to get item data for all users
 * can use /json?mode=users&username=username to display info about a user
-* start a nav ejs part and use that for root and pricing paths
+* can get a list of all users by using /json?mode=userlist query string
+
+* start a /routes/departments.js file
 * /departments?current=households&mode=pricing&location=irc
-* have a /db/items/yyyy/mm/dd/donation_ticks.json file
+
 
 <!-- * /html, /views -->
+* can update the password for the current user
+* can update the location for the current user
+* start a nav ejs part and use that for root and pricing paths
 * start a /conf path that can be used to configure conf.json and user settings
 * can change aspects of the theme by way of location setting
 * can update color tag settings for conf.json
@@ -74,6 +77,7 @@ As for authentication 'passport.js' is being used, however thus far only with th
 * have a color tag outlook view for the last month, current month, and next month in root
 
 <!-- lib/db -->
+* have a ~/.data2/dates/yyyy/mm/dd/donation_ticks.json file
 
 <!-- /bin -->
 * strat a /bin folder to hold all cli tools for the data2 project

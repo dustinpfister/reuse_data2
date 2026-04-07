@@ -7,13 +7,13 @@ import ejs from 'ejs';
 
 import { color_cycle } from './lib/color_cycle/color_cycle.js';
 
-import passport from 'passport';
-import passport_local from 'passport-local';
+//import passport from 'passport';
+//import passport_local from 'passport-local';
 
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 
-const LocalStrategy = passport_local.Strategy;
+//const LocalStrategy = passport_local.Strategy;
 
 import  { db } from './lib/db/db.js';
 
@@ -21,21 +21,6 @@ const db_items = await db.get_dates_file({
    date: new Date(),
    file_name: 'items.json',
    file_data: { rec_num: 0, items: [] }
-});
-
-const db_users = await db.get_rel_file({
-    dir_rel: '',
-    file_name: 'users.json',
-    file_data: {
-        id_num: 0, 
-        users: [
-            {
-                id:0,
-                username: 'dustin',
-                password: 'letmein'
-            }
-        ]
-    }
 });
 
 const db_conf = await db.get_rel_file({
@@ -105,120 +90,16 @@ app.use(session({
   // there is a memeory store that should work for just getting started
   //store: new SQLiteStore({ db: 'sessions.db', dir: './var/db' })
 }));
-app.use(passport.authenticate('session'));
+
 
 app.use( express.static('html') );
 
 app.use( bodyParser.json() )
 
-passport.use(new LocalStrategy(
-  (username, password, done) => {
-    const user = db_users.data.users.find( (user) => {
-        return user.username === username;
-    } );
-    if(!user){
-        done(null, false, { code: 521, message: 'the given user was not found.' } );
-    }else{
-        if(user.password === password){
-            done(null, user, { code: 200, message: 'login successful.' } );
-        }else{
-            done(null, false, { code: 520,  message: 'The given user was found, but the password does not match.' });
-        }
-    }    
-  }
-));
-
-passport.serializeUser(function(user, cb) {
-  process.nextTick(function() {
-    cb(null, { id: user.id, username: user.username });
-  });
-});
-
-passport.deserializeUser(function(user, cb) {
-  process.nextTick(function() {
-    return cb(null, user);
-  });
-});
+import { router_auth } from './routes/auth.js';
+app.use('/', router_auth );
 
 
-app.get('/login', (req, res) => {
-  res.render('login', { });
-});
-
-app.post("/login", (req, res) => {
-  passport.authenticate("local",
-      (err, user, options) => {
-        if ( user ) {
-          req.login(user, (error)=>{
-            if( error ) { res.send(522); }
-            if( !error ){ res.send(200); }
-          });
-        }
-        if( !user ){
-          const code_status = options.code || 522;
-          res.status(code_status).end();
-        };
-  })(req, res)
-});
-
-app.get('/signup', (req, res) => {
-  res.render('signup', {  });
-});
-
-app.post('/signup', (req, res) => {
-
-    const id = db_users.data.id_num += 1;
-    const username = req.body.username || '';
-    const password = req.body.password || '';
-  
-    const t1 = username.length >= 1; 
-    const t2 = password.length >= 3;
-    
-    if(!t1 || !t2 ){
-        res.statusMessage = 'one or more server side tests failed';
-        return res.status(500).end();
-    }
-    
-    const t3 = db_users.data.users.filter((user)=>{
-        return user.username === username;
-    });
-    if(t3.length >= 1){
-        res.statusMessage = 'The username is all ready in the database';
-        return res.status(500).end();
-    }
-    
-    db_users.data.users.push({
-        id: id,
-        username: username,
-        password: password
-    });
-    db_users.write();
-    res.statusMessage = "new user : " + username + ' was added to the database';
-    res.status(200).end();
-    
-});
-
-app.post('/logout', (req, res, next) => {
-  req.logout( (err) => {
-    if (err) { return next(err); }
-    res.redirect('/login');
-  });
-});
-
-// check if the user is logged in and redirect if needed
-app.get(/.*/, (req, res, next) => {
-  if(!req.user){
-     res.redirect('/login');
-  }else{
-      next();
-  }
-});
-
-/*
-app.get('/', (req, res) => {
-  res.render('index', { username: req.user.username });
-});
-*/
 
 import { router_index } from './routes/index.js';
 app.use('/', router_index );
