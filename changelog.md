@@ -48,21 +48,17 @@ As for authentication 'passport.js' is being used, however thus far only with th
 * /routes
   * started a /routes folder made an index.js for it to use for root path in app.js 
   * using /routes/auth.js for auth logic
-
-<!-- app.js -->
-* update conf.json for setting up departments and pricing options
+  * started a /routes/json.js file
 
 <!-- /routes -->
 
-
-* started a /routes/json.js file
 * can use /json?mode=items&sd=20260325&&sd=20260325&rows=10 to give a start date, end date, and item count per page
 * work out a way to get item data for all users
 * can use /json?mode=users&username=username to display info about a user
 * can get a list of all users by using /json?mode=userlist query string
-
 * start a /routes/departments.js file
 * /departments?current=households&mode=pricing&location=irc
+* update conf.json for setting up departments and pricing options
 
 
 <!-- * /html, /views -->
