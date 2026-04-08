@@ -51,9 +51,8 @@ As for authentication 'passport.js' is being used, however thus far only with th
   * started a /routes/json.js file
 
 <!-- /routes -->
-
 * can use /json?mode=items&sd=20260325&&sd=20260325&rows=10 to give a start date, end date, and item count per page
-* work out a way to get item data for all users
+* can use /json?mode=items&allusers=true&sd=20260325&&sd=20260325&rows=10 to get items in date range for all users
 * can use /json?mode=users&username=username to display info about a user
 * can get a list of all users by using /json?mode=userlist query string
 * start a /routes/departments.js file
