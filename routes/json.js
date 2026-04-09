@@ -54,7 +54,7 @@ router_json.get('/json', (req, res, next) => {
     const q = req.query;
     const mode = ( q.mode || 'db').toLowerCase();
     let obj = db_items.data;
-    // only for current logged in user
+    
     if( mode === "db" && req.user ){
         obj = {
             items: db_items.data.items.filter( (item) => {
@@ -62,6 +62,7 @@ router_json.get('/json', (req, res, next) => {
             })
         }
     }
+    
     // if /json?mode=config then send config data
     if( mode == 'config' ){
         obj = {

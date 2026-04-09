@@ -50,6 +50,14 @@ As for authentication 'passport.js' is being used, however thus far only with th
   * using /routes/auth.js for auth logic
   * started a /routes/json.js file
 
+<!-- lib/db -->
+* start db.build\_dates\_index method
+* have a ~/.data2/dates/yyyy/mm/dd/donation_ticks.json file
+
+<!-- /bin -->
+* start a /bin folder to hold all cli tools for the data2 project
+* start a /bin/db_csv cli tool converting db.json files to db.csv files
+
 <!-- /routes -->
 * can use /json?mode=items&sd=20260325&&sd=20260325&rows=10 to give a start date, end date, and item count per page
 * can use /json?mode=items&allusers=true&sd=20260325&&sd=20260325&rows=10 to get items in date range for all users
@@ -71,12 +79,6 @@ As for authentication 'passport.js' is being used, however thus far only with th
 * can set what a default location for a user is in the conf.json file
 * have a color tag outlook view for the last month, current month, and next month in root
 
-<!-- lib/db -->
-* have a ~/.data2/dates/yyyy/mm/dd/donation_ticks.json file
-
-<!-- /bin -->
-* strat a /bin folder to hold all cli tools for the data2 project
-* start a db_csv cli tool converting db.json files to db.csv files
 
 
 ## () - R1 - QR codes, Printing price tags, main nodejs lib folder
