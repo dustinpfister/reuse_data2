@@ -1,0 +1,3 @@
+# fs_walker
+
+This is a file system walker based off of the simple walker example that I made for my [blog post on this subject back in 2018](https://dustinpfister.github.io/2018/07/20/nodejs-ways-to-walk-a-file-system/). The example there is very basic, and does not cover things that come up such as error handing. I started to make something that is more in line with what I started working on for my [post on the fs.readdir method of the nodejs file system module specifically](https://dustinpfister.github.io/2018/07/20/nodejs-walking-a-file-system-with-fs-readdir/). However I am sure that I will want to make many additional changes on top of that in other to make at least a half way decent file system walker.

@@ -45,10 +45,15 @@ As for authentication 'passport.js' is being used, however thus far only with th
   * have a db.make\_date\_dir method to create a /db/yyyy/mm/ folder
   * create items database at ~/.data2/dates/yyyy/mm/dd/items.json
   * can create files like '~/data2/conf.json' with new db lib method
+* /lib/fs\_walker:
+  * started a new file system walker lib that I will want for walking over the .data2 folder.
 * /routes
   * started a /routes folder made an index.js for it to use for root path in app.js 
   * using /routes/auth.js for auth logic
   * started a /routes/json.js file
+
+<!-- lib/fs_walker -->
+* find a way to add an on_done function that will be called when recursive walking has ended
 
 <!-- lib/db -->
 * start db.build\_dates\_index method
