@@ -53,7 +53,8 @@ As for authentication 'passport.js' is being used, however thus far only with th
   * started a /routes/json.js file
 
 <!-- lib/fs_walker -->
-* find a way to add an on_done function that will be called when recursive walking has ended
+* have a walk.get_list method that will create a list of paths to walk
+* have a walk.run_list method
 
 <!-- lib/db -->
 * start db.build\_dates\_index method
