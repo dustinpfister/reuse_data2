@@ -48,13 +48,11 @@ As for authentication 'passport.js' is being used, however thus far only with th
 * /lib/fs\_walker:
   * started a new file system walker lib that I will want for walking over the .data2 folder.
   * default options for js walker such as recursive walking by default
+  * added time info for jskey walker that is given to the on done method
 * /routes
   * started a /routes folder made an index.js for it to use for root path in app.js 
   * using /routes/auth.js for auth logic
   * started a /routes/json.js file
-
-<!-- lib/fs_walker -->
-* added time info for jskey walker that is given to the on done method
 
 <!-- lib/db -->
 * start db.build\_dates\_index method
@@ -88,6 +86,9 @@ As for authentication 'passport.js' is being used, however thus far only with th
 
 
 ## () - R1 - QR codes, Printing price tags, main nodejs lib folder
+
+<!-- lib/fs_walker -->
+* (      ) - walk method that will return a promise
 
 <!-- do not use memory store -->
 * (      ) - connect lowdb for session store https://www.npmjs.com/package/connect-lowdb
