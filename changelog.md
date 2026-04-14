@@ -53,8 +53,8 @@ As for authentication 'passport.js' is being used, however thus far only with th
   * started a /routes/json.js file
 
 <!-- lib/fs_walker -->
-* have a walk.get_list method that will create a list of paths to walk
-* have a walk.run_list method
+* added time info for jskey walker that is given to the on done method
+* default options for jskey walker
 
 <!-- lib/db -->
 * start db.build\_dates\_index method

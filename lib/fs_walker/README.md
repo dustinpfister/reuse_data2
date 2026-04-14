@@ -2,7 +2,7 @@
 
 ## jskey_walker
 
-This code is based off of the code for my old ['jskey-walk' project]( https://github.com/dustinpfister/jskey-walk/tree/master). The file system walker that I made for that project seems to work okay at least in the sense that the basic functionality that I want is there. That is that I can give a before walk, for file, and on done methods all of which call in order as desired. For the data2 project I just made a few improvements.
+This code is based off of the code for my old ['jskey-walk' project]( https://github.com/dustinpfister/jskey-walk/tree/master). The file system walker that I made for that project seems to work okay at least in the sense that the basic functionality that I want is there. That is that I can give a before walk, for file, and on done methods all of which call in order as desired. For the data2 project I just made a few improvements for things like what is being exported, additional options, default options, and info that is given in the on done method.
 
 ## fs_walker
 
