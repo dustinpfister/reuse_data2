@@ -47,6 +47,7 @@ As for authentication 'passport.js' is being used, however thus far only with th
   * can create files like '~/data2/conf.json' with new db lib method
 * /lib/fs\_walker:
   * started a new file system walker lib that I will want for walking over the .data2 folder.
+  * default options for js walker such as recursive walking by default
 * /routes
   * started a /routes folder made an index.js for it to use for root path in app.js 
   * using /routes/auth.js for auth logic
@@ -54,7 +55,6 @@ As for authentication 'passport.js' is being used, however thus far only with th
 
 <!-- lib/fs_walker -->
 * added time info for jskey walker that is given to the on done method
-* default options for jskey walker
 
 <!-- lib/db -->
 * start db.build\_dates\_index method
