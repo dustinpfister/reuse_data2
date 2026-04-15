@@ -55,8 +55,25 @@ As for authentication 'passport.js' is being used, however thus far only with th
   * started a /routes/json.js file
 
 <!-- lib/db -->
-* start db.build\_dates\_index method
-* have a ~/.data2/dates/yyyy/mm/dd/donation_ticks.json file
+
+* started a db.tabulate method that can be used to add up the value of items
+```
+const for_each_day = ( sd, ed, func) => {
+    let day_delta = 0;
+    let d = new Date( sd.getTime() );
+    while( d.getTime() < ed.getTime()   ){
+        func(d);
+        day_delta += 1;
+        d = new Date( sd.getFullYear(), sd.getMonth(), sd.getDate() + day_delta );
+    }
+}
+```
+
+* started a db.get_pages method that uses fs walker to create a custom data collection for a date range
+
+
+<!-- bin/db_gendata -->
+* new bin root folder that starts with a tool that can be used to generate a .data2 folder with fake test data
 
 <!-- /bin -->
 * start a /bin folder to hold all cli tools for the data2 project
@@ -86,6 +103,9 @@ As for authentication 'passport.js' is being used, however thus far only with th
 
 
 ## () - R1 - QR codes, Printing price tags, main nodejs lib folder
+
+<!-- lib/db -->
+* have a ~/.data2/dates/yyyy/mm/dd/donation_ticks.json file
 
 <!-- lib/fs_walker -->
 * (      ) - walk method that will return a promise
