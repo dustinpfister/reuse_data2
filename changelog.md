@@ -45,6 +45,7 @@ As for authentication 'passport.js' is being used, however thus far only with th
   * have a db.make\_date\_dir method to create a /db/yyyy/mm/ folder
   * create items database at ~/.data2/dates/yyyy/mm/dd/items.json
   * can create files like '~/data2/conf.json' with new db lib method
+  * started a db.tabulate method that can be used to add up the value of items
 * /lib/fs\_walker:
   * started a new file system walker lib that I will want for walking over the .data2 folder.
   * default options for js walker such as recursive walking by default
@@ -55,29 +56,7 @@ As for authentication 'passport.js' is being used, however thus far only with th
   * started a /routes/json.js file
 
 <!-- lib/db -->
-
-* started a db.tabulate method that can be used to add up the value of items
-```
-const for_each_day = ( sd, ed, func) => {
-    let day_delta = 0;
-    let d = new Date( sd.getTime() );
-    while( d.getTime() < ed.getTime()   ){
-        func(d);
-        day_delta += 1;
-        d = new Date( sd.getFullYear(), sd.getMonth(), sd.getDate() + day_delta );
-    }
-}
-```
-
 * started a db.get_pages method that uses fs walker to create a custom data collection for a date range
-
-
-<!-- bin/db_gendata -->
-* new bin root folder that starts with a tool that can be used to generate a .data2 folder with fake test data
-
-<!-- /bin -->
-* start a /bin folder to hold all cli tools for the data2 project
-* start a /bin/db_csv cli tool converting db.json files to db.csv files
 
 <!-- /routes -->
 * can use /json?mode=items&sd=20260325&&sd=20260325&rows=10 to give a start date, end date, and item count per page
@@ -87,7 +66,6 @@ const for_each_day = ( sd, ed, func) => {
 * start a /routes/departments.js file
 * /departments?current=households&mode=pricing&location=irc
 * update conf.json for setting up departments and pricing options
-
 
 <!-- * /html, /views -->
 * can update the password for the current user
@@ -100,6 +78,12 @@ const for_each_day = ( sd, ed, func) => {
 * can set what a default location for a user is in the conf.json file
 * have a color tag outlook view for the last month, current month, and next month in root
 
+<!-- bin/db_gendata -->
+* new bin root folder that starts with a tool that can be used to generate a .data2 folder with fake test data
+
+<!-- /bin -->
+* start a /bin folder to hold all cli tools for the data2 project
+* start a /bin/db_csv cli tool converting db.json files to db.csv files
 
 
 ## () - R1 - QR codes, Printing price tags, main nodejs lib folder
