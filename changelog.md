@@ -78,6 +78,9 @@ As for authentication 'passport.js' is being used, however thus far only with th
 * can set what a default location for a user is in the conf.json file
 * have a color tag outlook view for the last month, current month, and next month in root
 
+<!-- lib/fs_etcher -->
+* start a new lib that has to do with creating rather than just walking a file system tree
+
 <!-- bin/db_gendata -->
 * new bin root folder that starts with a tool that can be used to generate a .data2 folder with fake test data
 
