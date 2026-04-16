@@ -61,7 +61,6 @@ As for authentication 'passport.js' is being used, however thus far only with th
   * can use /json?mode=items&au=true&ds=20260325&&de=20260325&ipp=10 to get items in date range for all users
 
 <!-- /routes -->
-
 * can use /json?mode=users&username=username to display info about a user
 * can get a list of all users by using /json?mode=userlist query string
 * start a /routes/departments.js file

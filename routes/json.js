@@ -7,21 +7,7 @@ const PRICE_OPTIONS = [
   0.05, 0.10, 0.25, 0.50, 0.75,
   1, 2, 3, 4, 5, 6, 7, 8, 9,
   10, 12, 15, 
-  20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95,
-  100, 125, 150, 175, 
-  200, 225, 250, 275,
-  300, 325, 350, 375,
-  400, 425, 450, 475,
-  500, 525, 550, 575,
-  600, 625, 650, 675,
-  700, 725, 750, 775,
-  800, 825, 850, 875,
-  900, 925, 950, 975,
-  1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900,
-  2000, 2100, 2200, 2300, 2400, 2500, 2600, 2700, 2800, 2900,
-  3000, 3100, 3200, 3300, 3400, 3500, 3600, 3700, 3800, 3900,
-  4000, 4100, 4200, 4300, 4400, 4500, 4600, 4700, 4800, 4900,
-  5000, 5100, 5200, 5300, 5400, 5500, 5600, 5700, 5800, 5900
+  20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95
 ];
 const COUNT_OPTIONS = [
   1,2,3,4,5,6,7,8,9,10,
@@ -49,22 +35,22 @@ const parse_date_str = (str='') => {
     return new Date( str.substr(0, 4), m, str.substring(6, 8) );
 }
 
-const db_conf = await db.get_rel_file({
-   dir_rel: '',
-   file_name: 'conf.json',
-   file_data: { color_tags : color_cycle.default_conf }
-});
-
-
-const COLOR_CONF = color_cycle.parse_conf( db_conf.data.color_tags );
-
+const get_db_conf = async ( ) => {
+    return db.get_rel_file({
+        dir_rel: '',
+        file_name: 'conf.json',
+        file_data: { color_tags : color_cycle.default_conf }
+    });
+};
 
 const router_json = express.Router();
 
 // json path for making queries to the db
 router_json.get('/json', async (req, res, next) => {
     const now = new Date();
+    const db_conf = await get_db_conf();
     const db_items = await get_db_items( now );
+    const COLOR_CONF = color_cycle.parse_conf( db_conf.data.color_tags );
     const q = req.query;
     const mode = ( q.mode || 'db').toLowerCase();
     let obj = {};
