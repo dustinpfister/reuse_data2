@@ -52,29 +52,42 @@ const router_json = express.Router();
 
 // json path for making queries to the db
 router_json.get('/json', async (req, res, next) => {
-    const db_items = await get_db_items( new Date() );
+    const now = new Date();
+    const db_items = await get_db_items( now );
     const q = req.query;
     const mode = ( q.mode || 'db').toLowerCase();
-    let obj = db_items.data;
-    
+    let obj = {};
+    // default 'db' mode that will return item info for the current day and user
     if( mode === "db" && req.user ){
-        obj = {
+        Object.assign(obj, {
+            date: db_items.data.date,
             items: db_items.data.items.filter( (item) => {
                 return item.user_id === req.user.id;
             })
-        }
+        });
     }
-    
+    //
+    if( mode === "items" && req.user ){
+        const pages = await db.get_pages({
+            date : now, date_start : new Date(2026, 3, 1), date_end : now,
+            file_name: 'items.json',
+            items_per_page: 3
+        });
+        Object.assign(obj, {
+            pages: pages
+        });
+    }
     // if /json?mode=config then send config data
     if( mode == 'config' ){
-        obj = {
+        Object.assign(obj, {
             COLOR_CONF: COLOR_CONF,
             color_status: color_cycle.get_status( COLOR_CONF, new Date() ),
             PRICE_OPTIONS: PRICE_OPTIONS.join(','),
             COUNT_OPTIONS: COUNT_OPTIONS.join(','),
             DEPT_OPTIONS: DEPT_OPTIONS.join(',')
-        };
+        });
     }
+    // if /json?mode=color send color cycle info
     if( mode == 'color' ){
         const y = parseInt( q.y || '2026');
         const m = parseInt( q.m || '1' );
@@ -84,11 +97,11 @@ router_json.get('/json', async (req, res, next) => {
         const s = parseInt( q.s || '0');
         const ms = parseInt( q.ms || '0');
         const date = new Date(y, m - 1, d, h, min, s, ms );
-        obj = {
+        Object.assign(obj,{
             date : date,
             color_status: color_cycle.get_status( COLOR_CONF, date ),
             COLOR_CONF: COLOR_CONF
-        }
+        })
     }
     res.json( obj );    
 });
