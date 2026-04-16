@@ -46,19 +46,23 @@ As for authentication 'passport.js' is being used, however thus far only with th
   * create items database at ~/.data2/dates/yyyy/mm/dd/items.json
   * can create files like '~/data2/conf.json' with new db lib method
   * started a db.tabulate method that can be used to add up the value of items
+  * started a db.get_pages method that uses fs walker to create a custom data collection for a date range
 * /lib/fs\_walker:
   * started a new file system walker lib that I will want for walking over the .data2 folder.
   * default options for js walker such as recursive walking by default
   * added time info for jskey walker that is given to the on done method
+  * have it so that get pages will not create new folders for dates that are not there
 * /routes
   * started a /routes folder made an index.js for it to use for root path in app.js 
   * using /routes/auth.js for auth logic
   * started a /routes/json.js file
 
 <!-- lib/db -->
-* started a db.get_pages method that uses fs walker to create a custom data collection for a date range
+* have a db method for creating new items that is called from json root, and accepts a date argument
+* the date info for an items.json file will be just year, month, and day alone
 
 <!-- /routes -->
+* call db.get dates file method on each call, rather than having a local variable
 * can use /json?mode=items&sd=20260325&&sd=20260325&rows=10 to give a start date, end date, and item count per page
 * can use /json?mode=items&allusers=true&sd=20260325&&sd=20260325&rows=10 to get items in date range for all users
 * can use /json?mode=users&username=username to display info about a user

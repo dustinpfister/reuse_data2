@@ -34,7 +34,7 @@ const DEPT_OPTIONS = ['housewares', 'electronics', 'building_materials', 'furnit
 const db_items = await db.get_dates_file({
    date: new Date(),
    file_name: 'items.json',
-   file_data: { rec_num: 0, items: [] }
+   file_data: { rec_num: 0, items: [], date: new Date() }
 });
 
 const db_conf = await db.get_rel_file({
