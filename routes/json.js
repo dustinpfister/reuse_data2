@@ -38,6 +38,17 @@ const get_db_items = async ( now = new Date() ) => {
     });
 };
 
+const parse_date_str = (str='') => {
+    if(typeof str != 'string'){
+        return false;
+    }
+    if(str.length != 8 || !str.match(/^\d+$/)){
+        return false;
+    }
+    const m = parseInt( str.substring(4, 6) ) - 1;
+    return new Date( str.substr(0, 4), m, str.substring(6, 8) );
+}
+
 const db_conf = await db.get_rel_file({
    dir_rel: '',
    file_name: 'conf.json',
@@ -68,10 +79,13 @@ router_json.get('/json', async (req, res, next) => {
     }
     //
     if( mode === "items" && req.user ){
+        const ds = parse_date_str(q.ds) || now;
+        const de = parse_date_str(q.de) || now;
+        const ipp = parseInt(q.ipp) || 3;
         const pages = await db.get_pages({
-            date : now, date_start : new Date(2026, 3, 1), date_end : now,
+            date : now, date_start : ds, date_end : de,
             file_name: 'items.json',
-            items_per_page: 3
+            items_per_page: ipp
         });
         Object.assign(obj, {
             pages: pages
