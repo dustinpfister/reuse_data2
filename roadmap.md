@@ -1,5 +1,11 @@
 # Reuse Data2 Pricing System roadmap
 
+Planned Features:
+
+* a unit pricing database that can be updated/extended per user
+* add, remove, and update locations ( IRC, MEGA, warehouse, ect )
+* theme changes per location and department to help reduce data input errors
+* customization on per department level ( housewares unit pricing displayed when housewares selected )
 
 ## RX - edit items
 

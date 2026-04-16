@@ -82,12 +82,19 @@ router_json.get('/json', async (req, res, next) => {
         const ds = parse_date_str(q.ds) || now;
         const de = parse_date_str(q.de) || now;
         const ipp = parseInt(q.ipp) || 3;
+        const au = q.au || false;
         const pages = await db.get_pages({
             date : now, date_start : ds, date_end : de,
             file_name: 'items.json',
             items_per_page: ipp
+        }, (item)=>{
+            return au === 'true' || item.user_id === req.user.id;
         });
         Object.assign(obj, {
+            all_users: au,
+            items_per_page: ipp,
+            date_start: ds,
+            date_end: de,
             pages: pages
         });
     }
