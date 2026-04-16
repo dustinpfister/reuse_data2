@@ -56,13 +56,9 @@ As for authentication 'passport.js' is being used, however thus far only with th
   * started a /routes folder made an index.js for it to use for root path in app.js 
   * using /routes/auth.js for auth logic
   * started a /routes/json.js file
-
-<!-- lib/db -->
-* have a db method for creating new items that is called from json root, and accepts a date argument
-* the date info for an items.json file will be just year, month, and day alone
+  * calling new get db items method on each call for json, rather than having a local variable
 
 <!-- /routes -->
-* call db.get dates file method on each call, rather than having a local variable
 * can use /json?mode=items&sd=20260325&&sd=20260325&rows=10 to give a start date, end date, and item count per page
 * can use /json?mode=items&allusers=true&sd=20260325&&sd=20260325&rows=10 to get items in date range for all users
 * can use /json?mode=users&username=username to display info about a user
@@ -92,6 +88,9 @@ As for authentication 'passport.js' is being used, however thus far only with th
 * start a /bin folder to hold all cli tools for the data2 project
 * start a /bin/db_csv cli tool converting db.json files to db.csv files
 
+<!-- lib/db -->
+* have a db method for creating new items that is called from json root, and accepts a date argument
+* the date info for an items.json file will be just year, month, and day alone
 
 ## () - R1 - QR codes, Printing price tags, main nodejs lib folder
 

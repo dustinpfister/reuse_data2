@@ -30,12 +30,13 @@ const COUNT_OPTIONS = [
 ];
 const DEPT_OPTIONS = ['housewares', 'electronics', 'building_materials', 'furniture'];
 
-
-const db_items = await db.get_dates_file({
-   date: new Date(),
-   file_name: 'items.json',
-   file_data: { rec_num: 0, items: [], date: new Date() }
-});
+const get_db_items = async ( now = new Date() ) => {
+    return db.get_dates_file({
+        date: now,
+        file_name: 'items.json',
+        file_data: { rec_num: 0, items: [], date: now }
+    });
+};
 
 const db_conf = await db.get_rel_file({
    dir_rel: '',
@@ -50,7 +51,8 @@ const COLOR_CONF = color_cycle.parse_conf( db_conf.data.color_tags );
 const router_json = express.Router();
 
 // json path for making queries to the db
-router_json.get('/json', (req, res, next) => {
+router_json.get('/json', async (req, res, next) => {
+    const db_items = await get_db_items( new Date() );
     const q = req.query;
     const mode = ( q.mode || 'db').toLowerCase();
     let obj = db_items.data;
@@ -91,7 +93,8 @@ router_json.get('/json', (req, res, next) => {
     res.json( obj );    
 });
 
-router_json.post('/json', (req, res, next) => {
+router_json.post('/json', async (req, res, next) => {
+    const db_items = await get_db_items( new Date() );
     const mode = req.body.mode || 'null';
     if(mode === 'del_items'){
        const rec_nums = req.body.rec_nums || [];
