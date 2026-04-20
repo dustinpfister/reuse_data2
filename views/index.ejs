@@ -7,10 +7,8 @@
     <link rel="icon" href="./favicon.ico" type="image/x-icon">
   </head>
   <body>
-    <h1>Reuse DATA2</h1>
-    
-    <div>
-        
+     <%- include('parts/header', {}); %>
+    <div>  
         <form action="/logout" method="post">
             <span> <%= username %> : </span>
 				    <button class="logout" type="submit">Sign out</button>

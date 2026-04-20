@@ -25,6 +25,7 @@ As for authentication 'passport.js' is being used, however thus far only with th
   * have a logout option on the index page
   * displaying error messages on login page if there is a problem
   * display discount and cull colors in client
+  * started a part view folder and a header ejs part
 * /app.js 
   * have a /json path that will respond to GET requests for database, and config data for the client system
   * the /json path can also handle POST requests for sending data to the sever form the client system
@@ -68,10 +69,10 @@ As for authentication 'passport.js' is being used, however thus far only with th
 * update conf.json for setting up departments and pricing options
 
 <!-- * /html, /views -->
-* can update the password for the current user
-* can update the location for the current user
-* start a nav ejs part and use that for root and pricing paths
+* break views down into sub folders to support more than one view by calling the current view 'vanilla'
+* start a nav ejs part and use that for root and department paths
 * start a /conf path that can be used to configure conf.json and user settings
+* can update user settings such as password, and location for the current user
 * can change aspects of the theme by way of location setting
 * can update color tag settings for conf.json
 * can add and remove locations to the conf.json file

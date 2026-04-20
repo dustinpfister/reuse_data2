@@ -1,5 +1,11 @@
 body{
+  padding: 0px;
+  margin: 0px;
   background: #cfcfcf;
+}
+
+h1,h2,h3,h4,p{
+  margin: 0px;
 }
 
 select {
@@ -24,6 +30,13 @@ td{
   font-family: monospace;
   background: #efefef;
   padding: 10px;
+}
+
+#header{
+  padding: 0px;
+  margin: 0px;
+  height: 100px;
+  background: #ff0000;
 }
 
 #out{
