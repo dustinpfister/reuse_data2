@@ -40,11 +40,20 @@ td{
 }
 
 #user_wrap{
-
+    width: 20%;
 }
 
 #nav_wrap{
+    width: 20%;
+    background:red;
+}
 
+#pricing_wrap{
+    background:red;
+}
+
+#items_wrap{
+    background:red;
 }
 
 #out{
@@ -55,3 +64,9 @@ td{
     text-shadow: 2px 2px 3px #000000;
 }
 
+.float_right{
+   float: right;
+}
+.float_left{
+   float: left;
+}

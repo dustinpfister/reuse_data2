@@ -141,7 +141,7 @@ const print_items = () => {
       tr.appendChild(td);
       table.appendChild(tr);
     });
-    const container = document.querySelector('#disp_items');
+    const container = document.querySelector('#items_wrap');
     container.innerHTML = '';
     container.appendChild(table);
   });
