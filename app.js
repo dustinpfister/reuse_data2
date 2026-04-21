@@ -39,7 +39,7 @@ app.use(session({
   //store: new SQLiteStore({ db: 'sessions.db', dir: './var/db' })
 }));
 
-app.use( express.static('html') );
+app.use( express.static('public') );
 app.use( bodyParser.json() )
 
 app.use('/', router_auth );
