@@ -7,14 +7,10 @@
     <link rel="icon" href="./favicon.ico" type="image/x-icon">
   </head>
   <body>
-     <%- include('parts/header', {}); %>
-    <div>  
-        <form action="/logout" method="post">
-            <span> <%= username %> : </span>
-				    <button class="logout" type="submit">Sign out</button>
-				</form>
-				<br><br>
-    </div>
+    <%- include('parts/header', {}); %>
+    <%- include('parts/user', {}); %>
+    <%- include('parts/nav', {}); %>
+    
     
     <div>
       <select id="dept_select"></select>

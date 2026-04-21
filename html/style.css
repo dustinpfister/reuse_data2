@@ -32,11 +32,19 @@ td{
   padding: 10px;
 }
 
-#header{
+#header_wrap{
   padding: 0px;
   margin: 0px;
   height: 100px;
-  background: #ff0000;
+  background: rgba(255,255,255,0.5);
+}
+
+#user_wrap{
+
+}
+
+#nav_wrap{
+
 }
 
 #out{
