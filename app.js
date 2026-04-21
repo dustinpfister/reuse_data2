@@ -24,7 +24,7 @@ const args = parseArgs({
 // STATIC SERVER
 const app = express()
 
-app.set('views', path.join( import.meta.dirname , 'views'));
+app.set('views', path.join( import.meta.dirname , 'views', 'vanilla'));
 app.set('view engine', 'ejs');
 app.set('json spaces', 2);
 

@@ -32,6 +32,11 @@ td{
   padding: 10px;
 }
 
+#main_wrap{
+    width: 90%;
+    margin-left: 5%;
+}
+
 #header_wrap{
   padding: 0px;
   margin: 0px;
@@ -40,16 +45,19 @@ td{
 }
 
 #user_wrap{
-    width: 20%;
 }
 
 #nav_wrap{
     width: 20%;
     background:red;
+    float:left;
+    text-align:center;
 }
 
-#pricing_wrap{
+#content_wrap{
+    width: 80%;
     background:red;
+    float:right;
 }
 
 #items_wrap{
