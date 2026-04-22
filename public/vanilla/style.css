@@ -21,15 +21,19 @@ label {
   width: 150px;
 }
 
+table{
+  width: 100%;
+}
+
 th{
   background: #afafaf;
-  padding: 10px;
+  padding: 0px;
 }
 
 td{
   font-family: monospace;
   background: #efefef;
-  padding: 10px;
+  padding: 0px;
 }
 
 #main_wrap{
@@ -49,19 +53,20 @@ td{
 
 #nav_wrap{
     width: 20%;
-    background:red;
     float:left;
     text-align:center;
 }
 
+#navlinks>a{
+  display: inline-block;
+}
+
 #content_wrap{
     width: 80%;
-    background:red;
     float:right;
 }
 
 #items_wrap{
-    background:red;
 }
 
 #out{
@@ -77,4 +82,67 @@ td{
 }
 .float_left{
    float: left;
+}
+
+.tag {
+  display: inline-block;
+  margin: 10px;
+  width: 125px;
+  height: 75px;
+  border-radius: 5px 5px 5px 5px;
+}
+.tag > div {
+  font-size: 8px;
+  border-radius: 5px 5px 5px 5px;
+  line-height: 10px;
+}
+.tag > div.tag_title {
+  width: 74%;
+  height: 10%;
+  left: 12%;
+  top: 3%;
+}
+.tag > div.tag_color_text {
+  width: 50%;
+  height: 20%;
+  left: 10%;
+  top: 80%;
+}
+.tag > div.tag_mess_text {
+  width: 30%;
+  height: 75%;
+  left: 60%;
+  top: 15%;
+}
+.tag > div.tag_percent {
+  width: 50%;
+  height: 50%;
+  left: 5%;
+  top: 20%;
+}
+
+.tag {
+  position: relative;
+  background: #ffffff;
+  border: 3px solid #000000;
+}
+.tag > div {
+  display: grid;
+  place-items: center;
+  position: absolute;
+  font-family: monospace;
+  font-weight: 200;
+}
+.tag > div.tag_title {
+  font-weight: 700;
+}
+.tag > div.tag_color_text {
+  font-weight: 700;
+}
+.tag > div.tag_mess_text {
+}
+.tag > div.tag_percent {
+  background: #ffffff;
+  border: 3px solid #000000;
+  font-weight: 900;
 }
