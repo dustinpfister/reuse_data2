@@ -26,6 +26,7 @@ As for authentication 'passport.js' is being used, however thus far only with th
   * displaying error messages on login page if there is a problem
   * display discount and cull colors in client
   * started a part view folder and a header ejs part
+  * start a nav ejs part and use that for root and department paths
   * sub folders in views to support more than one client system option by calling the current view 'vanilla'
 * /app.js 
   * have a /json path that will respond to GET requests for database, and config data for the client system
@@ -62,6 +63,11 @@ As for authentication 'passport.js' is being used, however thus far only with th
   * can use a /json?mode=items&ds=20260325&&de=20260325&ipp=10 to give a start date, end date, and item count per page
   * can use /json?mode=items&au=true&ds=20260325&&de=20260325&ipp=10 to get items in date range for all users
 
+<!-- /routes/settings.js -->
+* start a settings.js route path to be used to create a settings path
+* start ejs files for vanilla client system for settings path
+* can use settings path for
+
 <!-- /routes -->
 * can use /json?mode=users&username=username to display info about a user
 * can get a list of all users by using /json?mode=userlist query string
@@ -70,7 +76,6 @@ As for authentication 'passport.js' is being used, however thus far only with th
 * update conf.json for setting up departments and pricing options
 
 <!-- * /html, /views -->
-* start a nav ejs part and use that for root and department paths
 * start a /conf path that can be used to configure conf.json and user settings
 * can update user settings such as password, and location for the current user
 * can change aspects of the theme by way of location setting
