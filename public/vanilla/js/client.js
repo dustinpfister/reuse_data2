@@ -189,6 +189,7 @@ const color_setting = conf.array[ stat.i_array ];
 const color_print = color_setting.data[ stat.i_print ];
 const color_cull = color_setting.data[ stat.i_cull ];
 const color_disc = stat.disc.map( (arr)=> {  return { off: arr[0], color:  color_setting.data[ arr[1] ] } });
+CONFIG.print_color = color_print.desc.toLowerCase(); 
 
 [
   { color: color_print, off: 'PRINT', title: 'PRINT NEW ITEMS', mess: 'NEW<br> ITEMS<br> ARE<br> THIS<br> TAG' },
