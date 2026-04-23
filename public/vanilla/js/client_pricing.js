@@ -110,17 +110,15 @@ const print_items = () => {
   return get_items_page()
   .then ( ( result ) => {
     let total_grand = 0;
-    
     result.pages.forEach( (page)=> {
-    
-    const dept = CONFIG.DEPT_OPTIONS.split(',');
-    const table = document.createElement('table');
-    table.appendChild( create_header_tr( page[0] ) );
-    page.forEach( (item, i) => {
-      const total_price = item.count * item.price;
-      total_grand += total_price;
-      const tr = document.createElement('tr');
-      Object.keys(item).forEach((key)=>{
+      const dept = CONFIG.DEPT_OPTIONS.split(',');
+      const table = document.createElement('table');
+      table.appendChild( create_header_tr( page[0] ) );
+      page.forEach( (item, i) => {
+        const total_price = item.count * item.price;
+        total_grand += total_price;
+        const tr = document.createElement('tr');
+        Object.keys(item).forEach((key)=>{
           const td = document.createElement('td');
           let text = item[key];      
           if(key === 't'){
@@ -139,26 +137,25 @@ const print_items = () => {
           
           td.innerHTML = text;
           tr.appendChild(td);
-      });
-      const td = document.createElement('td');
-      const input_del = document.createElement('input');
-      input_del.value = 'del';
-      input_del.type='button';
-      input_del.addEventListener('click', ()=>{
+        });
+        const td = document.createElement('td');
+        const input_del = document.createElement('input');
+        input_del.value = 'del';
+        input_del.type='button';
+        input_del.addEventListener('click', ()=>{
           del_items([item.rec_num])
           .then(()=>{
               print_items();
           });
+        });
+        td.appendChild(input_del)
+        tr.appendChild(td);
+        table.appendChild(tr);
       });
-      td.appendChild(input_del)
-      tr.appendChild(td);
-      table.appendChild(tr);
+      const container = document.querySelector('#items_wrap');
+      container.innerHTML = '';
+      container.appendChild(table);
     });
-    const container = document.querySelector('#items_wrap');
-    container.innerHTML = '';
-    container.appendChild(table);
-    });
-  
   });
 };
 

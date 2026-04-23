@@ -121,9 +121,12 @@ router_json.get('/json', async (req, res, next) => {
 });
 
 router_json.post('/json', async (req, res, next) => {
-    const db_items = await get_db_items( new Date() );
+
     const mode = req.body.mode || 'null';
     if(mode === 'del_items'){
+       const date_str = String( req.body.date || ( new Date() ).getTime() );
+       const date = new Date( parseInt(date_str) );
+       const db_items = await get_db_items( date );
        const rec_nums = req.body.rec_nums || [];
        db_items.data.items = db_items.data.items.filter( (item) => {
            return !rec_nums.find((purge_num)=>{ return purge_num === item.rec_num  });
@@ -132,6 +135,7 @@ router_json.post('/json', async (req, res, next) => {
        res.end()
     }
     if(mode === 'post_item'){
+        const db_items = await get_db_items( new Date() );
         const t = (new Date()).getTime();
         const depart_index = req.body.depart_index || 0;
         const price_index = req.body.price_index || 0;
