@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>data2</title>
+    <link rel="stylesheet" href="./vanilla/style.css">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+  </head>
+  <body>
+  
+    <div id="main_wrap">
+      <%- include('parts/header', {}); %>
+      <%- include('parts/nav', {}); %>
+      <div id="content_wrap" class="float_right">
+      <div id="color_cycle"></div>
+        
+        <div id="pricing_input">
+          <h3>Price an item:</h3>
+          <select id="dept_select"></select>
+          <select id="ptype_select">
+            <option value="color">color</option>
+            <option value="white">white</option>
+            <option value="unit">unit</option>
+          </select>
+          <select id="price_select"></select>
+          <select id="count_select"></select>
+          <input id="submit_item" type="button" value="Submit New Item(s)" ><br><br>
+        </div>
+        
+        
+        <div id="items_wrap" class=""></div>
+      </div>
+    </div>
+    <script src="vanilla/js/client.js"></script>
+  </body>
+</html>
+

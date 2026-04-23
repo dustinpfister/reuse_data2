@@ -37,8 +37,8 @@ td{
 }
 
 #main_wrap{
-    width: 90%;
-    margin-left: 5%;
+  width: 90%;
+  margin-left: 5%;
 }
 
 #header_wrap{
@@ -52,9 +52,9 @@ td{
 }
 
 #nav_wrap{
-    width: 20%;
-    float:left;
-    text-align:center;
+  width: 20%;
+  float:left;
+  text-align:center;
 }
 
 #navlinks>a{
@@ -63,19 +63,27 @@ td{
 }
 
 #content_wrap{
-    width: 80%;
-    float:right;
+  width: 78%;
+  padding: 1%;
+  float:right;
 }
 
 #items_wrap{
+  padding: 1%;
 }
 
-#out{
-    color: #000000;
-    text-align: left;
-    font-family: monospace;
-    font-size: 12pt;
-    text-shadow: 2px 2px 3px #000000;
+#pricing_input{
+  padding:1%;
+  border: 3px solid #000000;
+  border-radius: 5px 5px 5px 5px;
+}
+
+#color_cycle{
+  color: #000000;
+  text-align: left;
+  font-family: monospace;
+  font-size: 12pt;
+  text-shadow: 2px 2px 3px #000000;
 }
 
 .float_right{

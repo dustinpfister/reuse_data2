@@ -8,6 +8,7 @@ import session from 'express-session';
 
 import { router_auth } from './routes/auth.js';
 import { router_index } from './routes/index.js';
+import { router_pricing } from './routes/pricing.js';
 import { router_json } from './routes/json.js';
 
 // parse options
@@ -44,6 +45,7 @@ app.use( bodyParser.json() )
 
 app.use('/', router_auth );
 app.use('/', router_index );
+app.use('/', router_pricing );
 app.use('/', router_json );
 
 // 404

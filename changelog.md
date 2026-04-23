@@ -15,7 +15,7 @@ As for authentication 'passport.js' is being used, however thus far only with th
   * using lowdb as a 'local only' database solution
   * using passport.js with passport-local authentication strategy.
   * using ejs for sever side rendering of HTML.
-* /html, /views
+* /public, /views
   * client system started using just vanilla js ( no front end framework used )
   * can select a price and count when pricing items
   * can select color tag type when posting an item
@@ -62,18 +62,24 @@ As for authentication 'passport.js' is being used, however thus far only with th
   * calling new get db items method on each call for json, rather than having a local variable
   * can use a /json?mode=items&ds=20260325&&de=20260325&ipp=10 to give a start date, end date, and item count per page
   * can use /json?mode=items&au=true&ds=20260325&&de=20260325&ipp=10 to get items in date range for all users
+  * started a /routes/pricing.js file, and with it separate client javascript for root and pricing paths
+
+<!-- /public, /views : pricing item pages  -->
+* update pricing client system so that pages of items can be explored
 
 <!-- /routes/settings.js -->
 * start a settings.js route path to be used to create a settings path
 * start ejs files for vanilla client system for settings path
 * can use settings path for
 
+<!-- /routes/departments.js -->
+* started a /routes/departments.js file
+* update conf.json for setting up departments and pricing options
+
 <!-- /routes -->
 * can use /json?mode=users&username=username to display info about a user
 * can get a list of all users by using /json?mode=userlist query string
-* start a /routes/departments.js file
-* /departments?current=households&mode=pricing&location=irc
-* update conf.json for setting up departments and pricing options
+
 
 <!-- * /html, /views -->
 * start a /conf path that can be used to configure conf.json and user settings
