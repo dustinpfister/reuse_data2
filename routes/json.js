@@ -69,12 +69,20 @@ router_json.get('/json', async (req, res, next) => {
         const de = parse_date_str(q.de) || now;
         const ipp = parseInt(q.ipp) || 3;
         const au = q.au || false;
+        const uid = parseInt(q.uid);
         const pages = await db.get_pages({
             date : now, date_start : ds, date_end : de,
             file_name: 'items.json',
             items_per_page: ipp
         }, (item)=>{
-            return au === 'true' || item.user_id === req.user.id;
+            if(au === 'true'){
+                return true;
+            }
+            if(String(uid) != 'NaN'){
+            console.log(uid)
+                return uid === item.user_id; 
+            }
+            return item.user_id === req.user.id;
         });
         Object.assign(obj, {
             all_users: au,
