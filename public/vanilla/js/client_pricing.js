@@ -94,7 +94,7 @@ const to_date_str = ( date = new Date() ) => {
 };
 
 const get_items_page = () => {
-  const ds = to_date_str( new Date(2026, 1, 1) );
+  const ds = to_date_str();
   const de = to_date_str();
   const au = 'false';
   const uid = ''; // leave as empty string for current user
@@ -112,6 +112,7 @@ const get_items_page = () => {
 };
 
 const print_items = () => {
+  const now = new Date();
   return get_items_page()
   .then ( ( result ) => {
     let total_grand = 0;
@@ -129,11 +130,12 @@ const print_items = () => {
         const total_price = item.count * item.price;
         total_grand += total_price;
         const tr = document.createElement('tr');
+        let d = new Date();
         Object.keys(item).forEach((key)=>{
           const td = document.createElement('td');
           let text = item[key];      
           if(key === 't'){
-              const d = new Date( parseInt(item[key]) );
+              d = new Date( parseInt(item[key]) );
               const wd = d.toLocaleString('en-US', { weekday: 'short'  });
               const month = d.toLocaleString('en-US', { month: 'short'  });
               const time = d.toLocaleString('en-US', {
@@ -150,16 +152,18 @@ const print_items = () => {
           tr.appendChild(td);
         });
         const td = document.createElement('td');
-        const input_del = document.createElement('input');
-        input_del.value = 'del';
-        input_del.type='button';
-        input_del.addEventListener('click', ()=>{
-          del_items([item.rec_num])
-          .then(()=>{
-              print_items();
-          });
-        });
-        td.appendChild(input_del)
+        if( d.getDate() === now.getDate() ){
+            const input_del = document.createElement('input');
+            input_del.value = 'del';
+            input_del.type='button';
+            input_del.addEventListener('click', ()=>{
+                del_items([item.rec_num])
+                .then(()=>{
+                    print_items();
+                });
+            });
+            td.appendChild(input_del)
+        }
         tr.appendChild(td);
         table.appendChild(tr);
       });

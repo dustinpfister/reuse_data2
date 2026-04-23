@@ -64,8 +64,10 @@ As for authentication 'passport.js' is being used, however thus far only with th
   * can use /json?mode=items&au=true&ds=20260325&&de=20260325&ipp=10 to get items in date range for all users
   * started a /routes/pricing.js file, and with it separate client javascript for root and pricing paths
   * updated pricing client system so that pages of items can be explored
-<!-- /public, /views : pricing item pages  -->
 
+<!-- /public, /views : pricing item pages  -->
+* can set the date range for a pages in pricing
+* delete items from older dates
 
 <!-- /routes/settings.js -->
 * start a settings.js route path to be used to create a settings path
