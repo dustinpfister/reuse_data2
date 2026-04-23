@@ -71,17 +71,6 @@ const get_config = () => {
   })
 };
 
-const get_items = () => {
-  return fetch('/json', {
-    method: "GET"
-  })
-  .then((data)=>{ 
-    return data.json()
-  })
-};
-/********* **********
-print_items
-********** *********/
 const create_header_tr = (item={}) => {
     const tr = document.createElement('tr');
     const item_keys = Object.keys(item);
@@ -97,22 +86,43 @@ const create_header_tr = (item={}) => {
     }
     return tr;
 };
+
+const to_date_str = ( date = new Date() ) => {
+    const m = String( date.getMonth() + 1).padStart(2,'0');
+    const d = String( date.getDate()).padStart(2, '0');
+    return date.getFullYear() + m + d;
+};
+
+const get_items_page = () => {
+  const ds = '20260423', de = '20260423';
+  const au = 'false';
+  const uid = ''; // leave as empty string for current user
+  const ipp = 10;
+  return fetch('/json?mode=items&ds=' + ds + '&de=' + de + '&au=' + au + '&uid=' + uid + '&ipp=' + ipp, {
+    method: "GET"
+  })
+  .then((data)=>{ 
+    return data.json()
+  })
+};
+
 const print_items = () => {
-  return get_items()
-  .then ( (result)=> {
+  return get_items_page()
+  .then ( ( result ) => {
     let total_grand = 0;
+    
+    result.pages.forEach( (page)=> {
+    
     const dept = CONFIG.DEPT_OPTIONS.split(',');
     const table = document.createElement('table');
-    table.appendChild( create_header_tr( result.items[0] ) );
-    result.items.forEach( (item, i) => {
+    table.appendChild( create_header_tr( page[0] ) );
+    page.forEach( (item, i) => {
       const total_price = item.count * item.price;
       total_grand += total_price;
       const tr = document.createElement('tr');
       Object.keys(item).forEach((key)=>{
           const td = document.createElement('td');
-          
-          let text = item[key];
-          
+          let text = item[key];      
           if(key === 't'){
               const d = new Date( parseInt(item[key]) );
               const wd = d.toLocaleString('en-US', { weekday: 'short'  });
@@ -147,6 +157,8 @@ const print_items = () => {
     const container = document.querySelector('#items_wrap');
     container.innerHTML = '';
     container.appendChild(table);
+    });
+  
   });
 };
 

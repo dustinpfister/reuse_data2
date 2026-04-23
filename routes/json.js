@@ -79,7 +79,6 @@ router_json.get('/json', async (req, res, next) => {
                 return true;
             }
             if(String(uid) != 'NaN'){
-            console.log(uid)
                 return uid === item.user_id; 
             }
             return item.user_id === req.user.id;
