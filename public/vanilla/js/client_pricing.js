@@ -94,7 +94,8 @@ const to_date_str = ( date = new Date() ) => {
 };
 
 const get_items_page = () => {
-  const ds = '20260423', de = '20260423';
+  const ds = to_date_str( new Date(2026, 1, 1) );
+  const de = to_date_str();
   const au = 'false';
   const uid = ''; // leave as empty string for current user
   const ipp = 10;
@@ -104,16 +105,26 @@ const get_items_page = () => {
   .then((data)=>{ 
     return data.json()
   })
+  .then((obj)=>{
+  console.log(obj)
+      return obj;
+  })
 };
 
 const print_items = () => {
   return get_items_page()
   .then ( ( result ) => {
     let total_grand = 0;
-    result.pages.forEach( (page)=> {
+    
+    
       const dept = CONFIG.DEPT_OPTIONS.split(',');
       const table = document.createElement('table');
-      table.appendChild( create_header_tr( page[0] ) );
+      table.appendChild( create_header_tr( result.pages[0][0] ) );
+    
+    result.pages.forEach( (page)=> {
+      
+      console.log(page)
+      
       page.forEach( (item, i) => {
         const total_price = item.count * item.price;
         total_grand += total_price;
