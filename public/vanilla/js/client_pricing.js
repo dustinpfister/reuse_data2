@@ -112,66 +112,62 @@ const get_items_page = () => {
 };
 
 const print_items = () => {
-  const now = new Date();
-  return get_items_page()
-  .then ( ( result ) => {
-    let total_grand = 0;
-    
-    
-      const dept = CONFIG.DEPT_OPTIONS.split(',');
-      const table = document.createElement('table');
-      table.appendChild( create_header_tr( result.pages[0][0] ) );
-    
-    result.pages.forEach( (page)=> {
-      
-      console.log(page)
-      
-      page.forEach( (item, i) => {
-        const total_price = item.count * item.price;
-        total_grand += total_price;
-        const tr = document.createElement('tr');
-        let d = new Date();
-        Object.keys(item).forEach((key)=>{
-          const td = document.createElement('td');
-          let text = item[key];      
-          if(key === 't'){
-              d = new Date( parseInt(item[key]) );
-              const wd = d.toLocaleString('en-US', { weekday: 'short'  });
-              const month = d.toLocaleString('en-US', { month: 'short'  });
-              const time = d.toLocaleString('en-US', {
-                hour: 'numeric',
-                minute: '2-digit',
-                second: '2-digit',
-                fractionalSecondDigits: 3,
-                hour12: true
-              }).padStart(8, ' ')
-              text = wd + ' ' + month + '/' + d.getDate() + '/' + d.getFullYear() + '<br>' + time;
-          }
-          
-          td.innerHTML = text;
-          tr.appendChild(td);
-        });
-        const td = document.createElement('td');
-        if( d.getDate() === now.getDate() ){
-            const input_del = document.createElement('input');
-            input_del.value = 'del';
-            input_del.type='button';
-            input_del.addEventListener('click', ()=>{
-                del_items([item.rec_num])
-                .then(()=>{
-                    print_items();
-                });
-            });
-            td.appendChild(input_del)
+    const now = new Date();
+    return get_items_page()
+    .then ( ( result ) => {
+        let total_grand = 0;
+        if(result.pages.length === 0){
+            return;
         }
-        tr.appendChild(td);
-        table.appendChild(tr);
-      });
-      const container = document.querySelector('#items_wrap');
-      container.innerHTML = '';
-      container.appendChild(table);
+        const dept = CONFIG.DEPT_OPTIONS.split(',');
+        const table = document.createElement('table');
+        table.appendChild( create_header_tr( result.pages[0][0] ) );
+        result.pages.forEach( (page)=> {
+            page.forEach( (item, i) => {
+                const total_price = item.count * item.price;
+                total_grand += total_price;
+                const tr = document.createElement('tr');
+                let d = new Date();
+                Object.keys(item).forEach((key)=>{
+                    const td = document.createElement('td');
+                    let text = item[key];      
+                    if(key === 't'){
+                        d = new Date( parseInt(item[key]) );
+                        const wd = d.toLocaleString('en-US', { weekday: 'short'  });
+                        const month = d.toLocaleString('en-US', { month: 'short'  });
+                        const time = d.toLocaleString('en-US', {
+                            hour: 'numeric',
+                            minute: '2-digit',
+                            second: '2-digit',
+                            fractionalSecondDigits: 3,
+                            hour12: true
+                        }).padStart(8, ' ')
+                        text = wd + ' ' + month + '/' + d.getDate() + '/' + d.getFullYear() + '<br>' + time;
+                    }
+                    td.innerHTML = text;
+                    tr.appendChild(td);
+                });
+                const td = document.createElement('td');
+                if( d.getDate() === now.getDate() ){
+                    const input_del = document.createElement('input');
+                    input_del.value = 'del';
+                    input_del.type='button';
+                    input_del.addEventListener('click', ()=>{
+                        del_items([item.rec_num])
+                        .then(()=>{
+                            print_items();
+                        });
+                    });
+                    td.appendChild(input_del)
+                }
+                tr.appendChild(td);
+                table.appendChild(tr);
+            });
+            const container = document.querySelector('#items_wrap');
+            container.innerHTML = '';
+            container.appendChild(table);
+        });
     });
-  });
 };
 
 get_config()
