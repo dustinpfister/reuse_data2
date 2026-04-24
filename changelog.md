@@ -28,6 +28,7 @@ As for authentication 'passport.js' is being used, however thus far only with th
   * started a part view folder and a header ejs part
   * start a nav ejs part and use that for root and department paths
   * sub folders in views to support more than one client system option by calling the current view 'vanilla'
+  * started a common json_tools.js file for vanilla client system
 * /app.js 
   * have a /json path that will respond to GET requests for database, and config data for the client system
   * the /json path can also handle POST requests for sending data to the sever form the client system
@@ -66,6 +67,8 @@ As for authentication 'passport.js' is being used, however thus far only with th
   * updated pricing client system so that pages of items can be explored
 
 <!-- /public, /views : pricing item pages  -->
+
+* continue work on json tools with more methods
 * can set the date range for a pages in pricing
 * delete items from older dates
 

@@ -87,12 +87,15 @@ const create_header_tr = (item={}) => {
     return tr;
 };
 
+/*
 const to_date_str = ( date = new Date() ) => {
     const m = String( date.getMonth() + 1).padStart(2,'0');
     const d = String( date.getDate()).padStart(2, '0');
     return date.getFullYear() + m + d;
 };
+*/
 
+/*
 const get_items_page = () => {
   const ds = to_date_str();
   const de = to_date_str();
@@ -110,10 +113,11 @@ const get_items_page = () => {
       return obj;
   })
 };
+*/
 
 const print_items = () => {
     const now = new Date();
-    return get_items_page()
+    return json_tools.get_items_page()
     .then ( ( result ) => {
         let total_grand = 0;
         if(result.pages.length === 0){
