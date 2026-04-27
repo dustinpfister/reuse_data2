@@ -48,7 +48,7 @@ const post_item = (depart_index=0, price_index=0, count=1)=> {
   })
 };
 
-const del_items = (rec_nums=[])=> {
+const del_items = ( rec_nums=[] )=> {
   return fetch('/json', {
     method: "POST",
     headers: {
@@ -87,39 +87,13 @@ const create_header_tr = (item={}) => {
     return tr;
 };
 
-/*
-const to_date_str = ( date = new Date() ) => {
-    const m = String( date.getMonth() + 1).padStart(2,'0');
-    const d = String( date.getDate()).padStart(2, '0');
-    return date.getFullYear() + m + d;
-};
-*/
-
-/*
-const get_items_page = () => {
-  const ds = to_date_str();
-  const de = to_date_str();
-  const au = 'false';
-  const uid = ''; // leave as empty string for current user
-  const ipp = 10;
-  return fetch('/json?mode=items&ds=' + ds + '&de=' + de + '&au=' + au + '&uid=' + uid + '&ipp=' + ipp, {
-    method: "GET"
-  })
-  .then((data)=>{ 
-    return data.json()
-  })
-  .then((obj)=>{
-  console.log(obj)
-      return obj;
-  })
-};
-*/
-
 const print_items = () => {
     const now = new Date();
     return json_tools.get_items_page()
     .then ( ( result ) => {
         let total_grand = 0;
+            const container = document.querySelector('#items_wrap');
+            container.innerHTML = '';
         if(result.pages.length === 0){
             return;
         }
@@ -157,7 +131,7 @@ const print_items = () => {
                     input_del.value = 'del';
                     input_del.type='button';
                     input_del.addEventListener('click', ()=>{
-                        del_items([item.rec_num])
+                        del_items( [ item.rec_num ] )
                         .then(()=>{
                             print_items();
                         });
@@ -167,8 +141,7 @@ const print_items = () => {
                 tr.appendChild(td);
                 table.appendChild(tr);
             });
-            const container = document.querySelector('#items_wrap');
-            container.innerHTML = '';
+
             container.appendChild(table);
         });
     });

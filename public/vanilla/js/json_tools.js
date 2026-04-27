@@ -19,7 +19,6 @@ json_tools.get_items_page = () => {
     return data.json()
   })
   .then((obj)=>{
-  console.log(obj)
       return obj;
   })
 };

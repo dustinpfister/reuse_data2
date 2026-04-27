@@ -124,15 +124,22 @@ router_json.post('/json', async (req, res, next) => {
 
     const mode = req.body.mode || 'null';
     if(mode === 'del_items'){
-       const date_str = String( req.body.date || ( new Date() ).getTime() );
-       const date = new Date( parseInt(date_str) );
-       const db_items = await get_db_items( date );
-       const rec_nums = req.body.rec_nums || [];
-       db_items.data.items = db_items.data.items.filter( (item) => {
-           return !rec_nums.find((purge_num)=>{ return purge_num === item.rec_num  });
-       });
-       db_items.write();
-       res.end()
+        const date_str = String( req.body.date || ( new Date() ).getTime() );
+        const date = new Date( parseInt(date_str) );
+        const db_items = await get_db_items( date );
+        const rec_nums = req.body.rec_nums || [];
+        db_items.data.items = db_items.data.items.filter( ( item ) => {
+           let i_purge = 0;
+           while( i_purge < rec_nums.length ){
+               if( parseInt(rec_nums[i_purge]) === Number(item.rec_num) ){
+                   return false;
+               }
+               i_purge += 1;
+           }
+           return true;    
+        });
+        await db_items.write();
+        res.end();
     }
     if(mode === 'post_item'){
         const db_items = await get_db_items( new Date() );
