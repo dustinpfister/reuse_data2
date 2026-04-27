@@ -43,8 +43,9 @@ td{
   display: flow-root;
   width: 96%;
   margin-left: 1%;
-  background: rgba(255,255,255,1);
   border-radius: 0px 0px 30px 30px;
+  background-image: url("/vanilla/img/logo.png");
+  background-color: #dfdfdf;
 }
 
 #header_wrap{
@@ -52,7 +53,10 @@ td{
   margin: 0px;
   height: 80px;
   text-align:center;
-  background: rgba(0,128,0,1);
+  background: rgba(0,128,0,0.85);
+  border-width: 0px 10px 10px 10px;
+  border-style: double;
+  border-color: #ffffff;
   border-radius: 0px 0px 30px 30px;
 }
 
@@ -63,10 +67,11 @@ td{
   margin-top:25px;
   padding-top:25px;
   margin-bottom:25px;
-  width: 15%;
+  width: 12%;
   float:left;
   text-align:center;
-  background: rgba(0,128,0,0.75);
+  background: rgba(0,128,0,0.85);
+  border:10px double #ffffff;
   border-radius: 30px 30px 30px 30px;
 }
 
@@ -81,7 +86,8 @@ td{
   margin-top: 25px;
   margin-bottom: 25px;
   float:right;
-  background: rgba(0,128,0,0.50);
+  background: rgba(0,128,0,0.85);
+  border: 10px double #ffffff;
   border-radius: 30px 30px 30px 30px;
 }
 
