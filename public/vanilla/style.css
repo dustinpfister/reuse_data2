@@ -1,7 +1,8 @@
 body{
   padding: 0px;
   margin: 0px;
-  background: #cfcfcf;
+  background: #afafaf;
+  color: #00000;
 }
 
 h1,h2,h3,h4,p{
@@ -37,24 +38,36 @@ td{
 }
 
 #main_wrap{
-  width: 90%;
-  margin-left: 5%;
+  padding-left:1%;
+  padding-right:1%;
+  display: flow-root;
+  width: 96%;
+  margin-left: 1%;
+  background: rgba(255,255,255,1);
+  border-radius: 0px 0px 30px 30px;
 }
 
 #header_wrap{
-  padding: 0px;
+  padding: 10px;
   margin: 0px;
-  height: 100px;
-  background: rgba(255,255,255,0.5);
+  height: 80px;
+  text-align:center;
+  background: rgba(0,128,0,1);
+  border-radius: 0px 0px 30px 30px;
 }
 
 #user_wrap{
 }
 
 #nav_wrap{
-  width: 20%;
+  margin-top:25px;
+  padding-top:25px;
+  margin-bottom:25px;
+  width: 15%;
   float:left;
   text-align:center;
+  background: rgba(0,128,0,0.75);
+  border-radius: 30px 30px 30px 30px;
 }
 
 #navlinks>a{
@@ -63,9 +76,13 @@ td{
 }
 
 #content_wrap{
-  width: 78%;
+  width: 82%;
   padding: 1%;
+  margin-top: 25px;
+  margin-bottom: 25px;
   float:right;
+  background: rgba(0,128,0,0.50);
+  border-radius: 30px 30px 30px 30px;
 }
 
 #items_wrap{
@@ -155,3 +172,7 @@ td{
   border: 3px solid #000000;
   font-weight: 900;
 }
+
+a:link {  color: #00ff00; }
+a:visited {  color: #00ff00; }
+a:hover {  color: #00ff00; }
