@@ -12,7 +12,8 @@
       <%- include('parts/header', {}); %>
       <%- include('parts/nav', {}); %>
       <div id="content_wrap" class="float_right">
-      <div id="color_cycle"></div>
+      
+        
         
         <div id="pricing_input">
           <h3>Price an item:</h3>
@@ -23,8 +24,12 @@
             <option value="unit">unit</option>
           </select>
           <select id="price_select"></select>
-          <select id="count_select"></select>
+          <select id="count_select"></select><br><br>
+          
           <input id="submit_item" type="button" value="Submit New Item(s)" ><br><br>
+          
+          <div id="color_cycle"></div>
+          
         </div>
         
         
@@ -37,6 +42,7 @@
       </div>
     </div>
     <script src="vanilla/js/json_tools.js"></script>
+    <script src="vanilla/js/color_cycle.js"></script>
     <script src="vanilla/js/client_pricing.js"></script>
   </body>
 </html>

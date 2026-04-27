@@ -7,23 +7,24 @@
     <link rel="icon" href="./favicon.ico" type="image/x-icon">
   </head>
   <body>
-  
     <div id="main_wrap">
       <%- include('parts/header', {}); %>
       <%- include('parts/nav', {}); %>
-      
-     
-      
       <div id="content_wrap" class="float_right">
-      
-      <div>
-         <h3> test links: </h3>
-         <a href="/json?mode=items&ds=20260401">items 20260401 to today </a>
-      </div>
-      
+        <br>
+        <div>
+          <h3> Test links: </h3>
+          <a href="/json?mode=items&ds=20260401">items 20260401 to today </a>
+          <br><br>
+        </div>
+        <div>
+          <h3>Current Color Cycle Status: </h3>
+          <div id="color_cycle"></div>
+        </div>
       </div>
     </div>
     <script src="vanilla/js/json_tools.js"></script>
+    <script src="vanilla/js/color_cycle.js"></script>
     <script src="vanilla/js/client.js"></script>
   </body>
 </html>

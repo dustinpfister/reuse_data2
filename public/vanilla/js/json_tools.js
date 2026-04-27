@@ -6,6 +6,16 @@ const to_date_str = ( date = new Date() ) => {
     return date.getFullYear() + m + d;
 };
 
+
+json_tools.get_config = () => {
+  return fetch('/json?mode=config', {
+    method: "GET"
+  })
+  .then((data)=>{ 
+    return data.json()
+  })
+};
+
 json_tools.get_items_page = (start = new Date(), end = new Date()) => {
   const ds = to_date_str(start);
   const de = to_date_str(end);

@@ -81,7 +81,7 @@ td{
 }
 
 #content_wrap{
-  width: 82%;
+  width: 80%;
   padding: 1%;
   margin-top: 25px;
   margin-bottom: 25px;
@@ -99,6 +99,7 @@ td{
   padding:1%;
   border: 3px solid #000000;
   border-radius: 5px 5px 5px 5px;
+  background-color:#ffffff;
 }
 
 #color_cycle{

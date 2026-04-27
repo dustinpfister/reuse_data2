@@ -2,7 +2,7 @@ const el_ds = document.querySelector("#dept_select");
 const el_ptype = document.getElementById('ptype_select');
 const el_ps = document.querySelector("#price_select");
 const el_cs = document.querySelector("#count_select");
-const el_color_cycle = document.querySelector("#color_cycle");
+//const el_color_cycle = document.querySelector("#color_cycle");
 const el_submit_item = document.querySelector("#submit_item");
 
 const CONFIG = {
@@ -62,6 +62,7 @@ const del_items = ( rec_nums=[] )=> {
   })
 };
 
+/*
 const get_config = () => {
   return fetch('/json?mode=config', {
     method: "GET"
@@ -70,6 +71,7 @@ const get_config = () => {
     return data.json()
   })
 };
+*/
 
 const create_header_tr = (item={}) => {
     const tr = document.createElement('tr');
@@ -153,9 +155,17 @@ const print_items = ( opt = {} ) => {
     });
 };
 
-get_config()
+json_tools.get_config()
 .then((config)=>{
 
+
+  Object.assign(CONFIG, config);
+  
+  const conf = CONFIG.COLOR_CONF;
+  const stat = CONFIG.color_status;
+  const color_setting = conf.array[ stat.i_array ];
+  const color_print = color_setting.data[ stat.i_print ];
+  CONFIG.print_color = color_print.desc.toLowerCase();
 
   const el_date_start = document.getElementById('items_date_start');
   const el_date_end = document.getElementById('items_date_end');
@@ -174,9 +184,6 @@ get_config()
   el_date_start.addEventListener('change', update_pages);
   el_date_end.addEventListener('change', update_pages);
 
-
-  Object.assign(CONFIG, config);
-
   CONFIG.DEPT_OPTIONS.split(',').forEach( (dept_str, i) => {
     const opt = document.createElement('option');
     opt.value = i;
@@ -187,7 +194,7 @@ get_config()
   CONFIG.PRICE_OPTIONS.split(',').forEach( (price_str, i) => {
     const opt = document.createElement('option');
     opt.value = i;
-    opt.innerText = i + ') ' + price_str;
+    opt.innerText = i + ') $' + price_str + '';
     el_ps.appendChild(opt)
   });
   
@@ -198,46 +205,39 @@ get_config()
     el_cs.appendChild(opt)
   });
   
-  
-  const conf = CONFIG.COLOR_CONF;
-const stat = CONFIG.color_status;
-const color_setting = conf.array[ stat.i_array ];
-const color_print = color_setting.data[ stat.i_print ];
-const color_cull = color_setting.data[ stat.i_cull ];
-const color_disc = stat.disc.map( (arr)=> {  return { off: arr[0], color:  color_setting.data[ arr[1] ] } });
-CONFIG.print_color = color_print.desc.toLowerCase(); 
-
-[
-  { color: color_print, off: 'PRINT', title: 'PRINT NEW ITEMS', mess: 'NEW<br> ITEMS<br> ARE<br> THIS<br> TAG' },
-  { color: color_cull, off: 'CULL', title: 'CULL ITEMS', mess: 'CULL<br> OR<br> REPRICE<br> THIS<br> TAG' },
-    { color: color_disc[0].color, off: color_disc[0].off + '%', title: 'COLOR TAG DISCOUNT' },
-  { color: color_disc[1].color, off: color_disc[1].off + '%', title: 'COLOR TAG DISCOUNT' }
-].forEach((a)=>{
-  el_tag = document.createElement('div');
-  el_tag.className = 'tag';
-  el_tag.style.background = a.color.web;
-  [ 
-    ['tag_title', a.title],
-    ['tag_percent', a.off],
-    ['tag_mess_text', a.mess || 'ALL<br> ITEMS<br> WITH<br> THIS<br> TAG'],
-    ['tag_color_text', a.color.desc]
-  ].forEach((b)=>{
-    const el_child = document.createElement('div');
-    el_child.className = b[0];
-    el_child.innerHTML = b[1];
-    el_tag.appendChild(el_child);
-  });
-  el_color_cycle.appendChild(el_tag);
-});
-
-  
-  
   el_submit_item.addEventListener('click', ( ) => {
     post_item(el_ds.value, el_ps.value, el_cs.value)
     .then(()=>{
       return print_items();
     })
   });
+  
+  const el_pricing = document.getElementById('ptype_select');
+  const el_pinput = document.getElementById('pricing_input');
+  const el_color_cycle = document.getElementById('color_cycle');
+  
+  const set_pricing_style = () => {
+  
+      el_pinput.style.background='white';
+      el_color_cycle.style.display = 'none';
+      if(el_pricing.value === 'color'){
+          const cc = CONFIG.COLOR_CONF;
+          const cs = CONFIG.color_status;
+          
+          //console.log(cc, cs)
+          
+          const color = cc.array[ cs.i_array ].data[ cs.i_print ];
+          
+          console.log( color.web)
+          
+          el_pinput.style.background = color.web;
+          el_color_cycle.style.display = 'block';
+      }
+  };
+  
+  el_pricing.addEventListener('change', set_pricing_style);
+  
+  set_pricing_style();
   
   print_items();
   
