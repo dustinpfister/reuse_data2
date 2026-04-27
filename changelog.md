@@ -29,6 +29,7 @@ As for authentication 'passport.js' is being used, however thus far only with th
   * start a nav ejs part and use that for root and department paths
   * sub folders in views to support more than one client system option by calling the current view 'vanilla'
   * started a common json_tools.js file for vanilla client system
+  * vanilla client system can be used to set a date range for pages in pricing
 * /app.js 
   * have a /json path that will respond to GET requests for database, and config data for the client system
   * the /json path can also handle POST requests for sending data to the sever form the client system
@@ -66,48 +67,14 @@ As for authentication 'passport.js' is being used, however thus far only with th
   * started a /routes/pricing.js file, and with it separate client javascript for root and pricing paths
   * updated pricing client system so that pages of items can be explored
 
-<!-- /public, /views : pricing item pages  -->
+<!-- Pending -->
 
-* continue work on json tools with more methods
-* can set the date range for a pages in pricing
-* delete items from older dates
+<!-- new item num system delete older items-->
+* update item num system to make use of a main count used in conf.json
+* delete items from older dates in vanilla client system
 
-<!-- /routes/settings.js -->
-* start a settings.js route path to be used to create a settings path
-* start ejs files for vanilla client system for settings path
-* can use settings path for
-
-<!-- /routes/departments.js -->
-* started a /routes/departments.js file
-* update conf.json for setting up departments and pricing options
-
-<!-- /routes -->
-* can use /json?mode=users&username=username to display info about a user
-* can get a list of all users by using /json?mode=userlist query string
-
-
-<!-- * /html, /views -->
-* start a /conf path that can be used to configure conf.json and user settings
-* can update user settings such as password, and location for the current user
-* can change aspects of the theme by way of location setting
-* can update color tag settings for conf.json
-* can add and remove locations to the conf.json file
-* can set what a default location for a user is in the conf.json file
-* have a color tag outlook view for the last month, current month, and next month in root
-
-<!-- lib/fs_etcher -->
-* start a new lib that has to do with creating rather than just walking a file system tree
-
-<!-- bin/db_gendata -->
-* new bin root folder that starts with a tool that can be used to generate a .data2 folder with fake test data
-
-<!-- /bin -->
-* start a /bin folder to hold all cli tools for the data2 project
-* start a /bin/db_csv cli tool converting db.json files to db.csv files
-
-<!-- lib/db -->
-* have a db method for creating new items that is called from json root, and accepts a date argument
-* the date info for an items.json file will be just year, month, and day alone
+<!-- Settings in vanilla client system -->
+* There is a settings route that can be used to update conf.json
 
 ## () - R1 - QR codes, Printing price tags, main nodejs lib folder
 

@@ -7,6 +7,47 @@ Planned Features:
 * theme changes per location and department to help reduce data input errors
 * customization on per department level ( housewares unit pricing displayed when housewares selected )
 
+
+## OLD R0 Plans
+
+<!-- /routes/settings.js -->
+* start a settings.js route path to be used to create a settings path
+* start ejs files for vanilla client system for settings path
+* can use settings path for
+
+<!-- /routes/departments.js -->
+* started a /routes/departments.js file
+* update conf.json for setting up departments and pricing options
+
+<!-- /routes -->
+* can use /json?mode=users&username=username to display info about a user
+* can get a list of all users by using /json?mode=userlist query string
+
+
+<!-- * /html, /views -->
+* start a /conf path that can be used to configure conf.json and user settings
+* can update user settings such as password, and location for the current user
+* can change aspects of the theme by way of location setting
+* can update color tag settings for conf.json
+* can add and remove locations to the conf.json file
+* can set what a default location for a user is in the conf.json file
+* have a color tag outlook view for the last month, current month, and next month in root
+
+<!-- lib/fs_etcher -->
+* start a new lib that has to do with creating rather than just walking a file system tree
+
+<!-- bin/db_gendata -->
+* new bin root folder that starts with a tool that can be used to generate a .data2 folder with fake test data
+
+<!-- /bin -->
+* start a /bin folder to hold all cli tools for the data2 project
+* start a /bin/db_csv cli tool converting db.json files to db.csv files
+
+<!-- lib/db -->
+* have a db method for creating new items that is called from json root, and accepts a date argument
+* the date info for an items.json file will be just year, month, and day alone
+
+
 ## RX - edit items
 
 It might be nice to be able to edit an item in place rather than delete and add back again

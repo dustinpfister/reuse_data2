@@ -87,13 +87,19 @@ const create_header_tr = (item={}) => {
     return tr;
 };
 
-const print_items = () => {
+const PRINT_OPT_DEFAULT = {
+   start: new Date(),
+   end: new Date()
+};
+
+const print_items = ( opt = {} ) => {
+    opt = Object.assign( {}, PRINT_OPT_DEFAULT, opt );
     const now = new Date();
-    return json_tools.get_items_page()
+    return json_tools.get_items_page( opt.start, opt.end)
     .then ( ( result ) => {
         let total_grand = 0;
-            const container = document.querySelector('#items_wrap');
-            container.innerHTML = '';
+        const container = document.querySelector('#items_page');
+        container.innerHTML = '';
         if(result.pages.length === 0){
             return;
         }
@@ -149,6 +155,25 @@ const print_items = () => {
 
 get_config()
 .then((config)=>{
+
+
+  const el_date_start = document.getElementById('items_date_start');
+  const el_date_end = document.getElementById('items_date_end');
+  const now = new Date();
+  
+  el_date_start.value = now.toISOString().substr(0, 10);
+  el_date_end.value = now.toISOString().substr(0, 10);
+
+  const update_pages = (e)=> {
+      const ms_adjust = 1000 * 60 * 60 * 4;
+      const d_start = new Date( el_date_start.valueAsNumber + ms_adjust );
+      const d_end = new Date( el_date_end.valueAsNumber + ms_adjust );
+      print_items({ start: d_start, end: d_end });
+  };
+
+  el_date_start.addEventListener('change', update_pages);
+  el_date_end.addEventListener('change', update_pages);
+
 
   Object.assign(CONFIG, config);
 
