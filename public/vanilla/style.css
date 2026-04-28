@@ -98,8 +98,7 @@ td{
 #pricing_input{
   padding:1%;
   border: 3px solid #000000;
-  border-radius: 5px 5px 5px 5px;
-  background-color:#ffffff;
+  border-radius: 30px 30px 30px 30px;
 }
 
 #color_cycle{

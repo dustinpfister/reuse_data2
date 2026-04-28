@@ -158,88 +158,98 @@ const print_items = ( opt = {} ) => {
 json_tools.get_config()
 .then((config)=>{
 
+    Object.assign(CONFIG, config);
+  
+    const conf = CONFIG.COLOR_CONF;
+    const stat = CONFIG.color_status;
+    const color_setting = conf.array[ stat.i_array ];
+    const color_print = color_setting.data[ stat.i_print ];
+    CONFIG.print_color = color_print.desc.toLowerCase();
 
-  Object.assign(CONFIG, config);
+    const el_date_start = document.getElementById('items_date_start');
+    const el_date_end = document.getElementById('items_date_end');
+    const now = new Date();
   
-  const conf = CONFIG.COLOR_CONF;
-  const stat = CONFIG.color_status;
-  const color_setting = conf.array[ stat.i_array ];
-  const color_print = color_setting.data[ stat.i_print ];
-  CONFIG.print_color = color_print.desc.toLowerCase();
+    el_date_start.value = now.toISOString().substr(0, 10);
+    el_date_end.value = now.toISOString().substr(0, 10);
 
-  const el_date_start = document.getElementById('items_date_start');
-  const el_date_end = document.getElementById('items_date_end');
-  const now = new Date();
-  
-  el_date_start.value = now.toISOString().substr(0, 10);
-  el_date_end.value = now.toISOString().substr(0, 10);
 
-  const update_pages = (e)=> {
-      const ms_adjust = 1000 * 60 * 60 * 4;
-      const d_start = new Date( el_date_start.valueAsNumber + ms_adjust );
-      const d_end = new Date( el_date_end.valueAsNumber + ms_adjust );
-      print_items({ start: d_start, end: d_end });
-  };
+    const convertTZ = (date = new Date(), tzString = 'UTC') => {
+        date = typeof date != 'object' ? new Date(date) : date;
+        const local_str = date.toLocaleString("en-US", {timeZone: tzString});
+        return new Date( local_str );
+    };
 
-  el_date_start.addEventListener('change', update_pages);
-  el_date_end.addEventListener('change', update_pages);
+    const update_pages = (e)=> {
+        //const d_start = new Date( el_date_start.valueAsNumber );
+        //const d_end = new Date( el_date_end.valueAsNumber );
 
-  CONFIG.DEPT_OPTIONS.split(',').forEach( (dept_str, i) => {
-    const opt = document.createElement('option');
-    opt.value = i;
-    opt.innerText = i + ') ' + dept_str;
-    el_ds.appendChild(opt)
-  });
+        //const ms_adjust = 1000 * 60 * 60 * 4;
+        //const d_start = new Date( el_date_start.valueAsNumber + ms_adjust );
+        //const d_end = new Date( el_date_end.valueAsNumber + ms_adjust );
+      
+        const d_start = convertTZ( new Date( el_date_start.valueAsNumber ), 'UTC' );
+        const d_end = convertTZ( new Date( el_date_end.valueAsNumber), 'UTC' );
+
+        console.log('dates: ');
+        console.log( d_start, d_end );
+
+        print_items({ start: d_start, end: d_end });
+    };
+
+    el_date_start.addEventListener('change', update_pages);
+    el_date_end.addEventListener('change', update_pages);
+
+    CONFIG.DEPT_OPTIONS.split(',').forEach( (dept_str, i) => {
+        const opt = document.createElement('option');
+        opt.value = i;
+        opt.innerText = i + ') ' + dept_str;
+        el_ds.appendChild(opt)
+    });
   
-  CONFIG.PRICE_OPTIONS.split(',').forEach( (price_str, i) => {
-    const opt = document.createElement('option');
-    opt.value = i;
-    opt.innerText = i + ') $' + price_str + '';
-    el_ps.appendChild(opt)
-  });
+    CONFIG.PRICE_OPTIONS.split(',').forEach( (price_str, i) => {
+        const opt = document.createElement('option');
+        opt.value = i;
+        opt.innerText = i + ') $' + price_str + '';
+        el_ps.appendChild(opt)
+    });
   
-  CONFIG.COUNT_OPTIONS.split(',').forEach( (count_str, i) => {
-    const opt = document.createElement('option');
-    opt.value = count_str;
-    opt.innerText = i + ') ' + count_str;
-    el_cs.appendChild(opt)
-  });
+    CONFIG.COUNT_OPTIONS.split(',').forEach( (count_str, i) => {
+        const opt = document.createElement('option');
+        opt.value = count_str;
+        opt.innerText = i + ') ' + count_str;
+        el_cs.appendChild(opt)
+    });
   
-  el_submit_item.addEventListener('click', ( ) => {
-    post_item(el_ds.value, el_ps.value, el_cs.value)
-    .then(()=>{
-      return print_items();
-    })
-  });
+    el_submit_item.addEventListener('click', ( ) => {
+        post_item(el_ds.value, el_ps.value, el_cs.value)
+        .then(()=>{
+            return print_items();
+        })
+    });
   
-  const el_pricing = document.getElementById('ptype_select');
-  const el_pinput = document.getElementById('pricing_input');
-  const el_color_cycle = document.getElementById('color_cycle');
+    const el_pricing = document.getElementById('ptype_select');
+    const el_pinput = document.getElementById('pricing_input');
+    const el_color_cycle = document.getElementById('color_cycle');
   
-  const set_pricing_style = () => {
+    const set_pricing_style = () => {
   
-      el_pinput.style.background='white';
-      el_color_cycle.style.display = 'none';
-      if(el_pricing.value === 'color'){
-          const cc = CONFIG.COLOR_CONF;
-          const cs = CONFIG.color_status;
+        el_pinput.style.background='white';
+        el_color_cycle.style.display = 'none';
+        if(el_pricing.value === 'color'){
+            const cc = CONFIG.COLOR_CONF;
+            const cs = CONFIG.color_status;
           
-          //console.log(cc, cs)
+            const color = cc.array[ cs.i_array ].data[ cs.i_print ];
           
-          const color = cc.array[ cs.i_array ].data[ cs.i_print ];
-          
-          console.log( color.web)
-          
-          el_pinput.style.background = color.web;
-          el_color_cycle.style.display = 'block';
-      }
-  };
+            el_pinput.style.background = color.web + '90';
+            //el_pinput.style.opacity = 0.25;
+            el_color_cycle.style.display = 'block';
+        }
+    };
   
-  el_pricing.addEventListener('change', set_pricing_style);
-  
-  set_pricing_style();
-  
-  print_items();
-  
+    el_pricing.addEventListener('change', set_pricing_style);
+    set_pricing_style();
+    print_items();
 });
 
