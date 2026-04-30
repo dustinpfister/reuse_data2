@@ -178,7 +178,9 @@ td{
   border: 3px solid #000000;
   font-weight: 900;
 }
-
+a{
+  text-shadow: 2px 2px 3px #000000;
+}
 a:link {  color: #00ff00; }
 a:visited {  color: #00ff00; }
-a:hover {  color: #00ff00; }
+a:hover {  color: #ffffff; }

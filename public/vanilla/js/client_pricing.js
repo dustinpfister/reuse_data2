@@ -239,11 +239,8 @@ json_tools.get_config()
         if(el_pricing.value === 'color'){
             const cc = CONFIG.COLOR_CONF;
             const cs = CONFIG.color_status;
-          
             const color = cc.array[ cs.i_array ].data[ cs.i_print ];
-          
             el_pinput.style.background = color.web + '90';
-            //el_pinput.style.opacity = 0.25;
             el_color_cycle.style.display = 'block';
         }
     };

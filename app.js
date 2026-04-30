@@ -8,8 +8,9 @@ import session from 'express-session';
 
 import { router_auth } from './routes/auth.js';
 import { router_index } from './routes/index.js';
-import { router_pricing } from './routes/pricing.js';
 import { router_json } from './routes/json.js';
+import { router_pricing } from './routes/pricing.js';
+import { router_settings } from './routes/settings.js';
 
 // parse options
 const args = parseArgs({
@@ -45,8 +46,10 @@ app.use( bodyParser.json() )
 
 app.use('/', router_auth );
 app.use('/', router_index );
-app.use('/', router_pricing );
 app.use('/', router_json );
+app.use('/', router_pricing );
+app.use('/', router_settings );
+
 
 // 404
 // this can be used as a way to catch any get request for a url that is not resolved by 

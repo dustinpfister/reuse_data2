@@ -30,6 +30,7 @@ As for authentication 'passport.js' is being used, however thus far only with th
   * sub folders in views to support more than one client system option by calling the current view 'vanilla'
   * started a common json_tools.js file for vanilla client system
   * vanilla client system can be used to set a date range for pages in pricing
+  * started a settings route that will be used to update the main conf.json
 * /app.js 
   * have a /json path that will respond to GET requests for database, and config data for the client system
   * the /json path can also handle POST requests for sending data to the sever form the client system
@@ -69,12 +70,19 @@ As for authentication 'passport.js' is being used, however thus far only with th
 
 <!-- Pending -->
 
+<!-- Settings in vanilla client system -->
+* can view current color cycle status in settings
+* can create a new color cycle object in settings
+* An outlook color cycle features that shows what the outlook is for the color cycle for any month
+
+<!-- index.ejs  -->
+* make it so that index.ejs is used for all page requests and the current page is a part of the local object
+
 <!-- new item num system delete older items-->
 * update item num system to make use of a main count used in conf.json
 * delete items from older dates in vanilla client system
 
-<!-- Settings in vanilla client system -->
-* There is a settings route that can be used to update conf.json
+
 
 ## () - R1 - QR codes, Printing price tags, main nodejs lib folder
 
