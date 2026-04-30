@@ -31,6 +31,7 @@ As for authentication 'passport.js' is being used, however thus far only with th
   * started a common json_tools.js file for vanilla client system
   * vanilla client system can be used to set a date range for pages in pricing
   * started a settings route that will be used to update the main conf.json
+  * can view current color cycle status in settings
 * /app.js 
   * have a /json path that will respond to GET requests for database, and config data for the client system
   * the /json path can also handle POST requests for sending data to the sever form the client system
@@ -71,7 +72,6 @@ As for authentication 'passport.js' is being used, however thus far only with th
 <!-- Pending -->
 
 <!-- Settings in vanilla client system -->
-* can view current color cycle status in settings
 * can create a new color cycle object in settings
 * An outlook color cycle features that shows what the outlook is for the color cycle for any month
 

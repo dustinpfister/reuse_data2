@@ -37,6 +37,10 @@ td{
   padding: 0px;
 }
 
+.active_row {
+    background-color: yellow;
+}
+
 #main_wrap{
   padding-left:1%;
   padding-right:1%;
