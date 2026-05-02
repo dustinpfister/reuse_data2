@@ -14,6 +14,47 @@ const json_tools = ( function() {
         })
         .then((data)=>{ 
             return data.json();
+        });
+    };
+    
+    const DEFAULT_CONF = {
+  "color_tags": {
+    "automatic": true,
+    "manual": {
+      "i_array": 0,
+      "i_color": 0
+    },
+    "array": [
+      {
+        "first_tuesday": "2025-09-09T04:00:00.000Z",
+        "first_index": 0,
+        "ascending": true,
+        "discounts": [ [ 25, 3 ], [ 50, 2 ] ],
+        "cull": 1,
+        "data": [
+          { "i": 0, "short": "G", "desc": "Green", "web": "#00dd00" },
+          { "i": 1, "short": "B", "desc": "Blue", "web": "#dd0000" },
+          { "i": 2, "short": "Y", "desc": "Yellow", "web": "#dddd00" },
+          { "i": 3, "short": "O", "desc": "Orange", "web": "#dd5500" },
+          { "i": 4, "short": "R", "desc": "Red", "web": "#ffdd00" }
+        ]
+      }
+    ]
+  }
+}
+    
+    
+    api.update_config = (conf = DEFAULT_CONF ) => {
+        return fetch('/json?mode=config', {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                mode: 'conf_update',
+                conf: conf
+            })
         })
     };
 

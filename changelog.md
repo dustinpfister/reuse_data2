@@ -72,8 +72,12 @@ As for authentication 'passport.js' is being used, however thus far only with th
 <!-- Pending -->
 
 <!-- Settings in vanilla client system -->
-* can create a new color cycle object in settings
-* An outlook color cycle features that shows what the outlook is for the color cycle for any month
+* can create a new color cycle object in in settings and post it to the server
+* display color status object info as relative positioned dives rather than a table
+
+<!-- color cycle outlook -->
+* started an outlook color cycle feature that shows what the outlook is for any month
+* using color cycle outlook feature on the home page, and in settings
 
 <!-- index.ejs  -->
 * make it so that index.ejs is used for all page requests and the current page is a part of the local object
@@ -84,42 +88,4 @@ As for authentication 'passport.js' is being used, however thus far only with th
 
 
 
-## () - R1 - QR codes, Printing price tags, main nodejs lib folder
-
-<!-- lib/db -->
-* have a ~/.data2/dates/yyyy/mm/dd/donation_ticks.json file
-
-<!-- lib/fs_walker -->
-* (      ) - walk method that will return a promise
-
-<!-- do not use memory store -->
-* (      ) - connect lowdb for session store https://www.npmjs.com/package/connect-lowdb
-* (      ) - have a db_session.json file to store all current user sessions
-
-<!-- login, signup, and auth -->
-* (      ) - using crypto.pbkdf2Sync with 64-bit sha-512 digest for hashing passwords
-* (      ) - inform the user as to what went wrong if a mistake is made when signing up
-
-<!-- server side sanitation -->
-* (      ) - post request body values need to be subject to sanitation
-* (      ) - the json response should contain a mess the explains why sanitation fails 
-* (      ) - valid values for price_type are unit, white, and color any other posted will result in an error
-
-<!-- qr codes -->
-```
-https://github.com/soldair/node-qrcode/tree/master
-```
-
-<!-- printing  -->
-* (     ) - when adding items to db, have the option to print
-```js
-//https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Media_queries/Printing
-document.getElementById("print_external").addEventListener("click", () => {
-  const hideFrame = document.createElement("iframe");
-  hideFrame.onload = setPrint;
-  hideFrame.style.display = "none"; // hide iframe
-  hideFrame.src = "external-page.html";
-  document.body.appendChild(hideFrame);
-});
-```
 

@@ -32,11 +32,10 @@ const update_cs_array_wrap = (color_conf, status) => {
     el.appendChild(html);
 }
 
+// update the color status html
 json_tools.get_config()
 .then( (conf) => {
-
-    console.log(conf);
-    
     update_cs_array_wrap(conf.COLOR_CONF, conf.color_status)
-
 });
+
+

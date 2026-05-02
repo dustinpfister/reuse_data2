@@ -141,6 +141,23 @@ router_json.post('/json', async (req, res, next) => {
         await db_items.write();
         res.end();
     }
+    
+    if(mode === 'conf_update'){
+        const db_conf = await get_db_conf();
+        console.log( 'conf_update post request:' );
+        //!!! very crude, but for now ( R0 ) might still work okay
+        // at some point there should of course be sanitation and so forth
+        if(req.body.conf){
+            db_conf.data = req.body.conf;
+            console.log( 'conf updated:'  );
+            console.log( req.body );
+        }
+        
+        
+        await db_conf.write();
+        res.end();
+    }
+    
     if(mode === 'post_item'){
         const db_items = await get_db_items( new Date() );
         const t = (new Date()).getTime();
