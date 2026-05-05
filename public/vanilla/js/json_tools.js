@@ -22,33 +22,51 @@ const json_tools = ( function() {
     // is given, and the blanks should be filled in there.
     
     const DEFAULT_CONF = {
-  "color_tags": {
-    "automatic": true,
-    "manual": {
-      "i_array": 0,
-      "i_color": 0
-    },
-    "array": [
-      {
-        "first_tuesday": "2025-09-09T04:00:00.000Z",
-        "first_index": 0,
-        "ascending": true,
-        "discounts": [ [ 25, 3 ], [ 50, 2 ] ],
-        "cull": 1,
-        "data": [
-          { "i": 0, "desc": "Green", "web": "#00dd00" },
-          { "i": 1, "desc": "Blue", "web": "#dd0000" },
-          { "i": 2, "desc": "Yellow", "web": "#dddd00" },
-          { "i": 3, "desc": "Orange", "web": "#dd5500" },
-          { "i": 4, "desc": "Red", "web": "#ffdd00" }
-        ]
-      }
-    ]
-  }
-}
+        color_tags: {
+            automatic: true,
+            manual: {
+                i_array: 0,
+                i_color: 0
+            },
+            array: [
+                {
+                    first_tuesday: "2025-09-09T04:00:00.000Z",
+                    first_index: 0,
+                    ascending: true,
+                    discounts: [ [ 25, 3 ], [ 50, 2 ] ],
+                    cull: 1,
+                    data: [
+                        { i: 0, desc: "Green", web: "#00dd00" },
+                        { i: 1, desc: "Blue", web: "#dd0000" },
+                        { i: 2, desc: "Yellow", web: "#dddd00" },
+                        { i: 3, desc: "Orange", web: "#dd5500" },
+                        { i: 4, desc: "Red", web: "#ffdd00" }
+                    ]
+                }
+            ]
+        }
+    }
     
     
-    api.update_config = (conf = DEFAULT_CONF ) => {
+    api.push_new_color_status = (color_status) => {
+        color_status = Object.assign({}, DEFAULT_CONF.color_tags.array[0], color_status );
+        return json_tools.get_config()
+        .then( (conf ) => {
+        
+        console.log(conf)
+        
+            conf.COLOR_CONF.array.push( color_status );
+            return json_tools.update_config({
+                color_tags: conf.COLOR_CONF
+            })
+        });
+    }
+    
+    
+    api.update_config = ( conf = {} ) => {
+    
+        conf = Object.assign({}, DEFAULT_CONF, conf);
+    
         return fetch('/json?mode=config', {
             method: "POST",
             headers: {
