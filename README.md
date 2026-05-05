@@ -1,15 +1,14 @@
 # Reuse Data2 Pricing System
 
-The aim here is to create a 'data2' pricing system as an alternative backup/replacement option to the aging 'data1' system that is in use at Finger lakes Reuse. 
+The aim here is to create a 'data2' pricing system as an alternative software option to the aging 'data1' system that is in use at Finger lakes Reuse. Although data1 is still working okay, there are a few known issues, and the system is not being actively maintained. Two general ways of addressing these concerns are to refactor the data1 source code that is already in place, or start over from the ground up. With that said data2 is a total rebuild rather than starting to support a fork of data1.
 
-Although data1 is still working okay for what we have been using it for, there is a list of known issues, and the system is not being actively maintained. Two general ways of addressing these concerns are to refactor the data1 source code that is already in place, or start over from the ground up. With that said data2 is a total rebuild rather than a hack job of what is already in place.
+Working Features in place thus far as of R0 :
 
-Working Features in place thus far :
-
+* working on top of nodejs and express.js when it comes to the back end system.
+* support for more than one front end system starting with the 'vanilla' system
 * Authentication by way of passport.js local strategy
 * In house database solution that stores data as json files in nested folders at ~/.data2
 * Future proofed color tag system that allows for seamless changes
-* support for more than one client system starting with 'vanilla' system
 
 ## Database
 

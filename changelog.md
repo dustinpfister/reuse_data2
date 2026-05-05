@@ -79,6 +79,10 @@ As for authentication 'passport.js' is being used, however thus far only with th
 * started an outlook color cycle feature that shows what the outlook is for any month
 * using color cycle outlook feature on the home page, and in settings
 
+<!-- server side validation of color status objects -->
+* have server side validation of posted color status objects
+* remove front end DEFAULT\_CONF in json tools file of vanilla system
+
 <!-- index.ejs  -->
 * make it so that index.ejs is used for all page requests and the current page is a part of the local object
 

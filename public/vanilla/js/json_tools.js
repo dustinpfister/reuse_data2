@@ -17,6 +17,10 @@ const json_tools = ( function() {
         });
     };
     
+    
+    //!!! this should not be here, in place of having this here there should be server side handing of any data that
+    // is given, and the blanks should be filled in there.
+    
     const DEFAULT_CONF = {
   "color_tags": {
     "automatic": true,
@@ -32,11 +36,11 @@ const json_tools = ( function() {
         "discounts": [ [ 25, 3 ], [ 50, 2 ] ],
         "cull": 1,
         "data": [
-          { "i": 0, "short": "G", "desc": "Green", "web": "#00dd00" },
-          { "i": 1, "short": "B", "desc": "Blue", "web": "#dd0000" },
-          { "i": 2, "short": "Y", "desc": "Yellow", "web": "#dddd00" },
-          { "i": 3, "short": "O", "desc": "Orange", "web": "#dd5500" },
-          { "i": 4, "short": "R", "desc": "Red", "web": "#ffdd00" }
+          { "i": 0, "desc": "Green", "web": "#00dd00" },
+          { "i": 1, "desc": "Blue", "web": "#dd0000" },
+          { "i": 2, "desc": "Yellow", "web": "#dddd00" },
+          { "i": 3, "desc": "Orange", "web": "#dd5500" },
+          { "i": 4, "desc": "Red", "web": "#ffdd00" }
         ]
       }
     ]
