@@ -6,6 +6,7 @@ const append_td = (tr, content='', active) => {
     tr.appendChild(td);
 };
 
+/*
 const update_cs_array_wrap = (color_conf, status) => {
     const el = document.getElementById('cs_array_wrap');
     const html = document.createElement('table');
@@ -31,6 +32,43 @@ const update_cs_array_wrap = (color_conf, status) => {
     });
     el.appendChild(html);
 }
+*/
+
+const update_cs_array_wrap = (color_conf, status) => {
+    const el = document.getElementById('cs_array_wrap');
+    const container = document.createElement('form');
+    color_conf.array.forEach( ( color_obj, i ) => {
+        const active = i === status.i_array;
+        
+        const form_cc = document.createElement('form');
+        
+        Object.keys(color_obj).forEach( (key) => {
+            const content = color_obj[key];
+            let feild = null;
+            
+            feild = document.createElement('p');
+            feild.innerText = key + content;
+            
+            if(key === 'data'){
+                 content.forEach(( color_data ) => {
+                     const in_cd = document.createElement('input');
+                     in_cd.type = 'text';
+                     in_cd.value = color_data.desc;
+                     form_cc.appendChild(in_cd);
+                     const in_web = document.createElement('input');
+                     in_web.type = 'color';
+                     in_web.value = color_data.web;
+                     form_cc.appendChild(in_web);
+                     form_cc.appendChild( document.createElement('br') )
+                 });
+            }
+            
+            
+        });
+        container.appendChild(form_cc);
+    });
+    el.appendChild(container);
+};
 
 // update the color status html
 json_tools.get_config()
