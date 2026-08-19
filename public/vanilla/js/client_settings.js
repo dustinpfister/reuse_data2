@@ -6,51 +6,35 @@ const append_td = (tr, content='', active) => {
     tr.appendChild(td);
 };
 
-/*
-const update_cs_array_wrap = (color_conf, status) => {
-    const el = document.getElementById('cs_array_wrap');
-    const html = document.createElement('table');
-    const tr = document.createElement('tr');
-    tr.innerHTML = '<th>index</th>' + 
-        Object.keys(color_conf.array[0]).map((key)=>{ return '<th>' + key + '</th>'}).join('') + 
-        '<th>actions</th>';
-    html.appendChild(tr);
-    color_conf.array.forEach( ( color_obj, i ) => {
-        const tr = document.createElement('tr');
-        const active = i === status.i_array;
-        append_td(tr, i, active);
-        Object.keys(color_obj).forEach( (key) => {
-            const td = document.createElement('td');
-            let content = color_obj[key];
-            if(key === 'data'){
-                content = JSON.stringify(color_obj[key]);
-            }
-            append_td(tr, content, active);
-        });
-        append_td(tr, 'actions', active);
-        html.appendChild(tr);
-    });
-    el.appendChild(html);
-}
-*/
-
-const update_cs_array_wrap = (color_conf, status) => {
+const render_cs_array_wrap = (color_conf, status) => {
     const el = document.getElementById('cs_array_wrap');
     const container = document.createElement('form');
+    
+    console.log(color_conf)
+    
     color_conf.array.forEach( ( color_obj, i ) => {
         const active = i === status.i_array;
-        
         const form_cc = document.createElement('form');
-        
         Object.keys(color_obj).forEach( (key) => {
             const content = color_obj[key];
             let feild = null;
-            
             feild = document.createElement('p');
-            feild.innerText = key + content;
-            
+            feild.innerText = key + content;         
+            if(key === 'first_tuesday'){
+                console.log(content)
+                //<input type="date" id="cs_start_date" name="trip-start" value="2018-07-22" min="2018-01-01" max="2018-12-31" />
+                const el = document.createElement('input');
+                const d = new Date( content );
+                el.type='date';
+                el.value = d.getFullYear() + "-" + 
+                  String( d.getMonth() + 1 ).padStart(2, '0') + "-" + 
+                  String( d.getDate() ).padStart(2, '0') ;
+                form_cc.appendChild(el);
+                form_cc.appendChild( document.createElement('br') )    
+            }
+            // the 'data' key contains a info for each color, the order of this matters!
             if(key === 'data'){
-                 content.forEach(( color_data ) => {
+                 content.forEach(( color_data ) => {               
                      const in_cd = document.createElement('input');
                      in_cd.type = 'text';
                      in_cd.value = color_data.desc;
@@ -62,8 +46,6 @@ const update_cs_array_wrap = (color_conf, status) => {
                      form_cc.appendChild( document.createElement('br') )
                  });
             }
-            
-            
         });
         container.appendChild(form_cc);
     });
@@ -73,7 +55,7 @@ const update_cs_array_wrap = (color_conf, status) => {
 // update the color status html
 json_tools.get_config()
 .then( (conf) => {
-    update_cs_array_wrap(conf.COLOR_CONF, conf.color_status)
+    render_cs_array_wrap(conf.COLOR_CONF, conf.color_status)
 });
 
 

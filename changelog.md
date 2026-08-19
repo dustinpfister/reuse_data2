@@ -15,9 +15,18 @@ As for authentication 'passport.js' is being used, however thus far only with th
 
 <!-- pending changes -->
 
-<!-- Settings in vanilla client system -->
-* can create a new color cycle object in in settings and post it to the server
-* display color status object info as relative positioned dives rather than a table
+<!-- create a new color status object -->
+* have a 'new color status' form that is used to start a new status object
+* when things look good, have a way to push in the new color status object
+
+<!-- display color cycle status -->
+* color cycle status area should be used to just display the current status of the color cycle system
+* there should be a way to delete a color status object
+* rename first tuesday to key to a start date key
+
+<!-- color cycle outlook -->
+* started an outlook color cycle feature that shows what the outlook is for any month
+* using color cycle outlook feature on the home page, and in settings
 
 <!-- server side validation of color status objects -->
 * have server side validation of posted color status objects
