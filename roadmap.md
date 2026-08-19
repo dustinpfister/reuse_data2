@@ -7,7 +7,14 @@ Planned Features:
 * theme changes per location and department to help reduce data input errors
 * customization on per department level ( housewares unit pricing displayed when housewares selected )
 
-## () - R1 - QR codes, Printing price tags, main nodejs lib folder
+## () - RX - Color Cycle outlook
+
+<!-- color cycle outlook -->
+* started an outlook color cycle feature that shows what the outlook is for any month
+* using color cycle outlook feature on the home page, and in settings
+
+
+## () - R2 - QR codes, Printing price tags
 
 <!-- lib/db -->
 * have a ~/.data2/dates/yyyy/mm/dd/donation_ticks.json file

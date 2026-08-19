@@ -1,5 +1,10 @@
 # Reuse Data2 Pricing System changelog
 
+## () R1 - 
+
+<!-- Pending -->
+
+
 ## () R0 - Starting with node.js, express.js, passport.js, lowdb, and R7 Color Tag Fix Code
 
 The main thing I would like to get up and running right away will be reusing the code that I worked out for the data1 color tag fix as the color tag system for data2. This patch has all ready proven itself in production, and as such should work well as the color cycle system for the data2 backend. Additional changes can be made right off the bat to help address any future changes with the color cycle. This was something that I was all ready working on with the latest revision of the color tag patch anyway.
@@ -7,6 +12,19 @@ The main thing I would like to get up and running right away will be reusing the
 After the color tag system another important aspect is the database software and design. For now I am going to start off with a simple in house database solution that works on top of something called 'lowdb'. This in house database solution is a bit of a place holder while I do more research on database software as there is a lot to take it with that. So for now all production data, user info, and configuration settings are all stored as json files off of a '.data' folder that is stored in the home folder of the posix system user account in which data2 runs. If this database solution actually does work okay in production, great, otherwise a more professional SQL or non-SQL solution will be used in future revisions.
 
 As for authentication 'passport.js' is being used, however thus far only with the local authentication strategy in place. With this strategy User credentials are then stored in the '.data2' home folder along with all other local data. Authentication by way of a google account, or any OAuth provider for that matter is another matter that may be addressed in future revisions.
+
+<!-- pending changes -->
+
+<!-- Settings in vanilla client system -->
+* can create a new color cycle object in in settings and post it to the server
+* display color status object info as relative positioned dives rather than a table
+
+<!-- server side validation of color status objects -->
+* have server side validation of posted color status objects
+* remove front end DEFAULT\_CONF in json tools file of vanilla system
+
+<!-- index.ejs  -->
+* make it so that index.ejs is used for all page requests and the current page is a part of the local object
 
 <!-- Done -->
 * global
@@ -68,28 +86,3 @@ As for authentication 'passport.js' is being used, however thus far only with th
   * can use /json?mode=items&au=true&ds=20260325&&de=20260325&ipp=10 to get items in date range for all users
   * started a /routes/pricing.js file, and with it separate client javascript for root and pricing paths
   * updated pricing client system so that pages of items can be explored
-
-<!-- Pending -->
-
-<!-- Settings in vanilla client system -->
-* can create a new color cycle object in in settings and post it to the server
-* display color status object info as relative positioned dives rather than a table
-
-<!-- color cycle outlook -->
-* started an outlook color cycle feature that shows what the outlook is for any month
-* using color cycle outlook feature on the home page, and in settings
-
-<!-- server side validation of color status objects -->
-* have server side validation of posted color status objects
-* remove front end DEFAULT\_CONF in json tools file of vanilla system
-
-<!-- index.ejs  -->
-* make it so that index.ejs is used for all page requests and the current page is a part of the local object
-
-<!-- new item num system delete older items-->
-* update item num system to make use of a main count used in conf.json
-* delete items from older dates in vanilla client system
-
-
-
-
